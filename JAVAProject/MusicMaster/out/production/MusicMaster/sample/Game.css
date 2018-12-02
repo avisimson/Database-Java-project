@@ -1,0 +1,19 @@
+.root {
+	-fx-background-image: url("background.png")
+}
+.label {
+-fx-font-size: 12px;
+-fx-font-weight: bold;
+-fx-text-fill: white;
+}
+.button {
+ -fx-text-fill: white;
+ -fx-font-weight: bold;
+ -fx-background-color: linear-gradient(#3123b1, #2A5058);
+}
+#ChooseQuestion{
+-fx-text-fill: white;
+-fx-font-size: 32px;
+-fx-font-family: Arial;
+-fx-fill: rgb(85,87,83);
+}

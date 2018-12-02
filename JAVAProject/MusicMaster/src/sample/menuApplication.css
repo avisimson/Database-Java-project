@@ -1,0 +1,19 @@
+.root {
+	-fx-background-image: url("background.png")
+}
+.label {
+-fx-font-size: 12px;
+-fx-font-weight: bold;
+-fx-text-fill: white;
+}
+.button {
+ -fx-font-size: 12px;
+ -fx-text-fill: white;
+ -fx-font-weight: bold;
+ -fx-background-color: linear-gradient(#3123b1, #2A3258);
+}
+#WelcomeToMusicMaster{
+-fx-font-size: 15px;
+-fx-font-family: Arial;
+-fx-fill: rgb(0,0,0);
+}

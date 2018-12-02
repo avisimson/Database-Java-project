@@ -1,0 +1,4 @@
+8
+BLACK
+BLUE
+player 1
