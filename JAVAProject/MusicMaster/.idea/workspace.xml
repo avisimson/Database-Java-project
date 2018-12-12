@@ -2,46 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea2e25cd-915a-4299-8a39-d9192ebad1c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MusicMaster.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MusicMaster.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/sample/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MusicMaster/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/ChooseGenre.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Game.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Game.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/GameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Genre.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Genre.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/GenreController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/MenuController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/menu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MusicMaster/sample/menuApplication.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ChooseGenre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/ChooseGenre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Genre.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Genre.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Genre.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Genre.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/GenreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/GenreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/menu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/menuApplication.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/UInterface/menuApplication.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$USER_HOME$/Desktop/cs-biu-3a/Database workshops/lectures/הרצאה 02 - גישה למסדי נתונים מהקוד-20181125/jdbcexample/JDBCExample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            <state relative-caret-position="405">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -135,7 +96,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544620124324" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544621110497" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -311,8 +272,8 @@
     </entry>
     <entry file="file://$USER_HOME$/Desktop/cs-biu-3a/Database workshops/lectures/הרצאה 02 - גישה למסדי נתונים מהקוד-20181125/jdbcexample/JDBCExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        <state relative-caret-position="405">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
