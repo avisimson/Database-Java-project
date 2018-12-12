@@ -1,4 +1,4 @@
-package sample;
+package sample.UInterface;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
