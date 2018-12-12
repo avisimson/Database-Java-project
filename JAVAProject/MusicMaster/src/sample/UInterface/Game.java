@@ -13,7 +13,7 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            GridPane root = (GridPane) FXMLLoader.load(getClass().getResource("sample/UInterface/Game.fxml"));
+            GridPane root = (GridPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
             Scene scene = new Scene(root, 544, 366);
             scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
             primaryStage.setTitle("Game");
