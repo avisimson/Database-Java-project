@@ -14,7 +14,7 @@ public class Menu extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             GridPane root = (GridPane) FXMLLoader.load(getClass().getResource("menu.fxml"));
-            Scene scene = new Scene(root, 544, 366);
+            Scene scene = new Scene(root,613,407);
             scene.getStylesheets().add(getClass().getResource("menuApplication.css").toExternalForm());
             primaryStage.setTitle("Menu");
             primaryStage.setScene(scene);

@@ -2,6 +2,7 @@ package sample.UInterface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -14,8 +15,8 @@ public class ChooseGenre extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         try {
-            GridPane root = (GridPane) load(getClass().getResource("Genre.fxml"));
-            Scene scene = new Scene(root,544,366);
+            AnchorPane root = (AnchorPane) load(getClass().getResource("Genre.fxml"));
+            Scene scene = new Scene(root,613,407);
             scene.getStylesheets().add(getClass().getResource("genre.css").toExternalForm());
             primaryStage.setTitle("Choose Genre");
             primaryStage.setScene(scene);

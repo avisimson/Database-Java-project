@@ -14,7 +14,7 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             GridPane root = (GridPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
-            Scene scene = new Scene(root, 544, 366);
+            Scene scene = new Scene(root,613,407);
             scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
             primaryStage.setTitle("Game");
             primaryStage.setScene(scene);
