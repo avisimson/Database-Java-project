@@ -1,5 +1,6 @@
 package sample.UInterface;
 
+import DataBase.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -19,6 +20,8 @@ public class MenuController {
     @FXML
     protected void startGame() {
         ChooseGenre chooseGenre = new ChooseGenre();
+        Connect conn = new Connect();
+        conn.openConnection();
         Stage stage = (Stage) startButton.getScene().getWindow();
         try {
             chooseGenre.start(stage);
