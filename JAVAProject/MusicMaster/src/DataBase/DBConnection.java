@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Connect {
-    Connection conn; // DB connection
+public class DBConnection {
+    java.sql.Connection conn; // DB connection
 
     /**
      *
@@ -31,5 +31,18 @@ public class Connect {
         }
         System.out.println("Connected!");
         return true;
+    }
+
+    /**
+     * close the connection
+     */
+    public void closeConnection() {
+        // closing the connection
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Unable to close the connection - " + e.getMessage());
+        }
+
     }
 }
