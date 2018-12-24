@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UInterface.ChooseGenre">
+   <children>
+      <CheckBox layoutX="224.0" layoutY="89.0" mnemonicParsing="false" text="chill-out" />
+      <CheckBox layoutX="129.0" layoutY="89.0" mnemonicParsing="false" text="house" />
+      <CheckBox layoutX="41.0" layoutY="89.0" mnemonicParsing="false" text="hip hop" />
+      <CheckBox layoutX="129.0" layoutY="143.0" mnemonicParsing="false" text="jazz" />
+      <CheckBox layoutX="41.0" layoutY="143.0" mnemonicParsing="false" text="rock" />
+      <CheckBox layoutX="129.0" layoutY="192.0" mnemonicParsing="false" text="rap" />
+      <CheckBox layoutX="41.0" layoutY="192.0" mnemonicParsing="false" text="ccm" />
+      <CheckBox layoutX="224.0" layoutY="143.0" mnemonicParsing="false" text="metal" />
+      <CheckBox layoutX="224.0" layoutY="192.0" mnemonicParsing="false" text="dance" />
+      <CheckBox layoutX="41.0" layoutY="234.0" mnemonicParsing="false" text="post-grunge" />
+      <CheckBox layoutX="129.0" layoutY="234.0" mnemonicParsing="false" text="reggae" />
+      <CheckBox layoutX="224.0" layoutY="234.0" mnemonicParsing="false" text="funk" />
+      <CheckBox layoutX="41.0" layoutY="271.0" mnemonicParsing="false" text="pop" />
+      <CheckBox layoutX="224.0" layoutY="271.0" mnemonicParsing="false" text="trance" />
+      <CheckBox layoutX="129.0" layoutY="271.0" mnemonicParsing="false" text="salsa" />
+      <CheckBox layoutX="311.0" layoutY="192.0" mnemonicParsing="false" text="honky tonk" />
+      <CheckBox layoutX="311.0" layoutY="143.0" mnemonicParsing="false" text="track" />
+      <CheckBox layoutX="311.0" layoutY="89.0" mnemonicParsing="false" text="gospel" />
+      <CheckBox layoutX="398.0" layoutY="234.0" mnemonicParsing="false" text="chinese" />
+      <CheckBox layoutX="311.0" layoutY="271.0" mnemonicParsing="false" text="disco" />
+      <CheckBox layoutX="311.0" layoutY="234.0" mnemonicParsing="false" text="dubstep" />
+      <CheckBox layoutX="398.0" layoutY="192.0" mnemonicParsing="false" text="trip hop" />
+      <CheckBox layoutX="398.0" layoutY="143.0" mnemonicParsing="false" text="blues" />
+      <CheckBox layoutX="398.0" layoutY="89.0" mnemonicParsing="false" text="meditation" />
+      <CheckBox layoutX="398.0" layoutY="271.0" mnemonicParsing="false" text="flamenco" />
+      <CheckBox layoutX="485.0" layoutY="271.0" mnemonicParsing="false" text="jungle" />
+      <CheckBox layoutX="485.0" layoutY="234.0" mnemonicParsing="false" text="wave" />
+      <CheckBox layoutX="485.0" layoutY="192.0" mnemonicParsing="false" text="samba" />
+      <CheckBox layoutX="485.0" layoutY="143.0" mnemonicParsing="false" text="ballad" />
+      <CheckBox layoutX="485.0" layoutY="89.0" mnemonicParsing="false" text="stand-up" />
+      <Label layoutX="205.0" layoutY="27.0" prefHeight="40.0" prefWidth="185.0" text="Choose Genre">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="OkButton" layoutX="262.0" layoutY="317.0" mnemonicParsing="false" text="Ok">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
