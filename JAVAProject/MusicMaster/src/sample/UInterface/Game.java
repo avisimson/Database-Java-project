@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+
 public class Game extends Application {
 
     @FXML
@@ -18,7 +19,11 @@ public class Game extends Application {
             scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
             primaryStage.setTitle("Game");
             primaryStage.setScene(scene);
+            Thread gameThread = new GameThread();
+            gameThread.start();
             primaryStage.show();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

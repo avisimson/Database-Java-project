@@ -108,9 +108,9 @@ public class GenreController {
     protected void ok() throws IOException  {
         Game game= new Game();
         Stage stage = (Stage) OkButton.getScene().getWindow();
-
         try {
             game.start(stage);
+
         } catch (Exception e) {
 
         }
