@@ -147,11 +147,9 @@ public class GameController {
         Random rand = new Random();
         while(life > 0) {
             correctAnswer = rand.nextInt(4)+1;
-
             System.out.println("a");
         }
         System.out.println("game over");
-
         //game over
         GameOver gameOver= new GameOver();
         Stage stage = (Stage) answer1.getScene().getWindow();

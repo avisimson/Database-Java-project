@@ -20,8 +20,6 @@ public class MenuController {
     @FXML
     protected void startGame() {
         ChooseGenre chooseGenre = new ChooseGenre();
-        DBConnection conn = new DBConnection();
-        conn.openConnection();
         Stage stage = (Stage) startButton.getScene().getWindow();
         try {
             chooseGenre.start(stage);

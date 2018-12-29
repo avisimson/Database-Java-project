@@ -48,7 +48,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></CheckBox>
-      <CheckBox fx:id="raggae" layoutX="129.0" layoutY="234.0" mnemonicParsing="false" text="reggae" textFill="WHITE" >
+      <CheckBox fx:id="raggae" layoutX="129.0" layoutY="234.0" mnemonicParsing="false" text="reggae" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></CheckBox>
@@ -133,7 +133,7 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Button fx:id="OkButton" onAction="#ok" layoutX="262.0" layoutY="317.0" mnemonicParsing="false" text="Ok">
+      <Button fx:id="OkButton" layoutX="262.0" layoutY="317.0" mnemonicParsing="false" onAction="#ok" text="Ok">
       </Button>
    </children>
 </AnchorPane>

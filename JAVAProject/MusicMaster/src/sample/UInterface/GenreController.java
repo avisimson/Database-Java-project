@@ -2,16 +2,21 @@ package sample.UInterface;
 /**
  * Created by Yakir Pinchas and Avi Simson on 08/01/18.
  */
+import DataBase.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.scene.control.CheckBox;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-public class GenreController {
+public class GenreController implements Initializable {
     @FXML
     private Button OkButton;
     @FXML
@@ -31,7 +36,7 @@ public class GenreController {
     @FXML
     private CheckBox rap;
     @FXML
-    private CheckBox reggae;
+    private CheckBox raggae;
     @FXML
     private CheckBox salsa;
     @FXML
@@ -75,42 +80,59 @@ public class GenreController {
     @FXML
     private CheckBox jungle;
     @FXML
-    private CheckBox GenreArray[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,reggae,salsa,chill_out,
-            metal,dance,funk,trance,gospel,track,honky_tonk,dubstep,disco,meditation,blues,trip_hop,chinese,flamenco,
-            stand_up,ballad,samba, wave,jungle};
-
-    private ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
-        private int activeCount = 0;
-        public void changed(ObservableValue<? extends Boolean> o, Boolean oldValue, Boolean newValue) {
-            if (newValue) {
-                System.out.println(activeCount);
-                activeCount++;
-                if (activeCount == 3) {
-                    // disable unselected CheckBoxes
-                    for (CheckBox cb : GenreArray) {
-                        if (!cb.isSelected()) {
-                            cb.setDisable(true);
+    private String GenreChoose[] = new String[3];
+    DBConnection con = new DBConnection();
+    public void initialize(URL location, ResourceBundle resources) {
+        con.openConnection();
+        CheckBox GenreArray[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
+                metal,dance,funk,trance,gospel,track,honky_tonk,dubstep,disco,meditation,blues,trip_hop,chinese,flamenco,
+                stand_up,ballad,samba, wave,jungle};
+        //CheckBox GenreArray [] = con.GenreList();
+        final CheckBox[] checkBoxes = new CheckBox[GenreArray.length];
+        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+            private int activeCount = 0;
+            private int i = 0;
+            public void changed(ObservableValue<? extends Boolean> o, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    activeCount++;
+                    if (activeCount == 3) {
+                        // disable unselected CheckBoxes
+                        for (CheckBox cb : checkBoxes) {
+                            if (!cb.isSelected()) {
+                                cb.setDisable(true);
+                            } else {
+                                GenreChoose[i] = cb.getId();
+                                i++;
+                            }
                         }
                     }
-                }
-            } else {
-                if (activeCount == 3) {
-                    // reenable CheckBoxes
-                    for (CheckBox cb : GenreArray) {
-                        cb.setDisable(false);
+                } else {
+                    if (activeCount == 3) {
+                        // reenable CheckBoxes
+                        for (CheckBox cb : checkBoxes) {
+                            cb.setDisable(false);
+                        }
                     }
+                    activeCount--;
                 }
-                activeCount--;
             }
+        };
+
+        for (int i = 0; i < GenreArray.length; i++) {
+            CheckBox cb = GenreArray[i];
+            cb.selectedProperty().addListener(listener);
+            checkBoxes[i] = cb;
         }
-    };
+    }
     @FXML
     protected void ok() throws IOException  {
+        //need to run the query ..
+        con.GenreQuery(GenreChoose);
+        String bla = con.FilterSong();
         Game game= new Game();
         Stage stage = (Stage) OkButton.getScene().getWindow();
         try {
             game.start(stage);
-
         } catch (Exception e) {
 
         }
