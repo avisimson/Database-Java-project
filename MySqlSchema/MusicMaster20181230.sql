@@ -81,7 +81,7 @@ CREATE TABLE `genre` (
 
 LOCK TABLES `genre` WRITE;
 /*!40000 ALTER TABLE `genre` DISABLE KEYS */;
-INSERT INTO `genre` VALUES (1,'hip hop'),(2,'rock'),(3,'ccm'),(4,'post-grunge'),(5,'pop'),(6,'house'),(7,'jazz'),(8,'rap'),(9,'reggae'),(10,'salsa'),(11,'chill-out'),(12,'metal'),(13,'dance'),(14,'funk'),(15,'trance'),(16,'gospel'),(17,'track'),(18,'honky tonk'),(19,'dubstep'),(20,'disco'),(21,'meditation'),(22,'blues'),(23,'trip hop'),(24,'chinese'),(25,'flamenco'),(26,'stand-up'),(27,'ballad'),(28,'samba'),(29,'wave'),(30,'jungle');
+INSERT INTO `genre` VALUES (1,'hip_hop'),(2,'rock'),(3,'ccm'),(4,'post_grunge'),(5,'pop'),(6,'house'),(7,'jazz'),(8,'rap'),(9,'reggae'),(10,'salsa'),(11,'chill_out'),(12,'metal'),(13,'dance'),(14,'funk'),(15,'trance'),(16,'gospel'),(17,'track'),(18,'honky_tonk'),(19,'dubstep'),(20,'disco'),(21,'meditation'),(22,'blues'),(23,'trip_hop'),(24,'chinese'),(25,'flamenco'),(26,'stand_up'),(27,'ballad'),(28,'samba'),(29,'wave'),(30,'jungle');
 /*!40000 ALTER TABLE `genre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-16 13:13:08
+-- Dump completed on 2018-12-30  1:12:18
