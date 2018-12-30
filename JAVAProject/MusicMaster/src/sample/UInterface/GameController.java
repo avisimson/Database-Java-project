@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.util.Timer;
 import java.util.Random;
 import javafx.animation.Timeline;
@@ -45,19 +47,36 @@ public class GameController {
     @FXML
     private Label countDownLabel;
     @FXML
-    private Button answer1;
+    private Button btnAnswer1;
     @FXML
-    private Button answer2;
+    private Button btnAnswer2;
     @FXML
-    private Button answer3;
+    private Button btnAnswer3;
     @FXML
-    private Button answer4;
+    private Button btnAnswer4;
     @FXML
     private WebView youTubePlayer;
 
+    /**
+     * constructor
+     */
+    public GameController(){
+
+    }
+
+
     @FXML
-    protected void answer1() {
-        if(correctAnswer == 1) {
+    /**
+     * This function is activated when the
+     * user has pressed the answer button
+     */
+    protected void answer(ActionEvent e) {
+        String id =((Button)e.getSource()).getId();
+        System.out.println("press answer " + id);
+        String correctId = "btnAnswer" + correctAnswer;
+
+        if(correctId.equals(id)) {
+            System.out.println("correct answer");
             combo++;
             if(combo == comboOfcorrectAnswersForExtraLife) {
                 life++;
@@ -69,64 +88,20 @@ public class GameController {
             lifeLabel.setText("Life = " + life);
         }
     }
-    @FXML
-    private void answer2() {
-        if(correctAnswer == 2) {
-            combo++;
-            if(combo == comboOfcorrectAnswersForExtraLife) {
-                life++;
-                lifeLabel.setText("Life = " + life);
-                combo = 0;
-            }
-        } else {
-            life--;
-            lifeLabel.setText("Life = " + life);
-        }
-    }
-    @FXML
-    protected void answer3() {
-        if(correctAnswer == 3) {
-            combo++;
-            if(combo == comboOfcorrectAnswersForExtraLife) {
-                life++;
-                lifeLabel.setText("Life = " + life);
-                combo = 0;
-            }
 
-        } else {
-            life--;
-            lifeLabel.setText("Life = " + life);
-        }
-
-    }
-    @FXML
-    protected void answer4() {
-        if(correctAnswer == 4) {
-            combo++;
-            if(combo == comboOfcorrectAnswersForExtraLife) {
-                life++;
-                lifeLabel.setText("Life = " + life);
-
-                combo = 0;
-            }
-        } else {
-            life--;
-            lifeLabel.setText("Life = " + life);
-        }
-
-    }
-
+    /**
+     * start the game
+     */
     public void startGame() {
         //COUNTDOWN BEFORE GAME
 
-
-
         //disable buttons.
         progressBar.setVisible(false);
-        answer1.setDisable(true);
-        answer2.setDisable(true);
-        answer3.setDisable(true);
-        answer4.setDisable(true);
+        btnAnswer1.setDisable(true);
+        btnAnswer2.setDisable(true);
+        btnAnswer3.setDisable(true);
+        btnAnswer4.setDisable(true);
+
         //show 3-2-1 timer.
         countDownLabel.setVisible(true);
         time.setCycleCount(Timeline.INDEFINITE);
@@ -146,14 +121,11 @@ public class GameController {
 
         //enable buttons
         progressBar.setVisible(true);
-        answer1.setDisable(false);
-        answer2.setDisable(false);
-        answer3.setDisable(false);
-        answer4.setDisable(false);
+        btnAnswer1.setDisable(false);
+        btnAnswer2.setDisable(false);
+        btnAnswer3.setDisable(false);
+        btnAnswer4.setDisable(false);
 
-
-        //pick random correct answer.
-        Random rand = new Random();
 
         System.out.println("game over");
 
@@ -193,13 +165,13 @@ public class GameController {
 
     }
 
-    public GameController(){
-        System.out.println("in constructor");
-    }
 
     @FXML
     public void initialize() {
-        System.out.println("in initialize");
+        btnAnswer1.setOnAction(e->answer(e));
+        btnAnswer2.setOnAction(e->answer(e));
+        btnAnswer3.setOnAction(e->answer(e));
+        btnAnswer4.setOnAction(e->answer(e));
         startGame();
     }
 }
