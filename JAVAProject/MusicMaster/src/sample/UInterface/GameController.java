@@ -116,13 +116,14 @@ public class GameController {
 
         //disable buttons.
         progressBar.setVisible(false);
-        answer1.setDisable(false);
-        answer2.setDisable(false);
-        answer3.setDisable(false);
-        answer4.setDisable(false);
+        answer1.setDisable(true);
+        answer2.setDisable(true);
+        answer3.setDisable(true);
+        answer4.setDisable(true);
         //show 3-2-1 timer.
         countDownLabel.setVisible(true);
         time.setCycleCount(Timeline.INDEFINITE);
+
         KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -138,10 +139,11 @@ public class GameController {
 
         //enable buttons
         progressBar.setVisible(true);
-        answer1.setDisable(true);
-        answer2.setDisable(true);
-        answer3.setDisable(true);
-        answer4.setDisable(true);
+        answer1.setDisable(false);
+        answer2.setDisable(false);
+        answer3.setDisable(false);
+        answer4.setDisable(false);
+
 
         //pick random correct answer.
         Random rand = new Random();
@@ -150,15 +152,41 @@ public class GameController {
             System.out.println("a");
         }
         System.out.println("game over");
+
+        playOneTurn();
+
+        //System.out.println("game over");
+
+
         //game over
-        GameOver gameOver= new GameOver();
+        /*GameOver gameOver= new GameOver();
         Stage stage = (Stage) answer1.getScene().getWindow();
         try {
             gameOver.start(stage);
 
         } catch (Exception e) {
 
-        }
+        }*/
 
+    }
+
+    private void playOneTurn(){
+        System.out.println("playOneTurn");
+
+        //pick random correct answer.
+        Random rand = new Random();
+        correctAnswer = rand.nextInt(4)+1;
+        System.out.println("correctAnswer is: " + correctAnswer);
+
+    }
+
+    public GameController(){
+        System.out.println("in constructor");
+    }
+
+    @FXML
+    public void initialize() {
+        System.out.println("in initialize");
+        startGame();
     }
 }

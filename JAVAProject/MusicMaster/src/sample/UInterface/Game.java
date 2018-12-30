@@ -19,8 +19,8 @@ public class Game extends Application {
             scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
             primaryStage.setTitle("Game");
             primaryStage.setScene(scene);
-            Thread gameThread = new GameThread();
-            gameThread.start();
+            //Thread gameThread = new GameThread();
+            //gameThread.start();
             primaryStage.show();
 
 
