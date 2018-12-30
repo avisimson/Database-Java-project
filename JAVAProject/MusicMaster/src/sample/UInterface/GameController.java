@@ -147,10 +147,7 @@ public class GameController {
 
         //pick random correct answer.
         Random rand = new Random();
-        while(life > 0) {
-            correctAnswer = rand.nextInt(4)+1;
-            System.out.println("a");
-        }
+
         System.out.println("game over");
 
         playOneTurn();
