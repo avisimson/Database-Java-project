@@ -1,4 +1,5 @@
 package sample.UInterface;
+import DataBase.Search;
 import javafx.animation.KeyFrame;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import java.util.Timer;
 import java.util.Random;
@@ -31,6 +34,7 @@ public class GameController {
     int life = 3;
     int correctAnswer = 0;
     int combo = 0;
+    Search search = new Search();
 
     @FXML
     private ProgressBar progressBar;
@@ -48,6 +52,9 @@ public class GameController {
     private Button answer3;
     @FXML
     private Button answer4;
+    @FXML
+    private WebView youTubePlayer;
+
     @FXML
     protected void answer1() {
         if(correctAnswer == 1) {
@@ -174,6 +181,15 @@ public class GameController {
         Random rand = new Random();
         correctAnswer = rand.nextInt(4)+1;
         System.out.println("correctAnswer is: " + correctAnswer);
+        String songId;
+        songId = search.searchSong("omer adam");
+        if(songId != null) {
+            youTubePlayer.getEngine().load(
+                    "http://www.youtube.com/watch/"+ songId + "?autoplay=1"
+            );
+        } else {
+            // search for different song
+        }
 
     }
 
