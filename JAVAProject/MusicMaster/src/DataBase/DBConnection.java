@@ -22,7 +22,7 @@ public class DBConnection {
         String port = "3306";
         String schema = "musicmaster";
         String user = "root"; //username
-        String password = ""; //password to mysql
+        String password = "316958560"; //password to mysql
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema, user, password);

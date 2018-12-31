@@ -10,16 +10,19 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class Menu extends Application {
+public class Main extends Application {
 
     @FXML
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            GridPane root = (GridPane) FXMLLoader.load(getClass().getResource("menu.fxml"));
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
+            GridPane root = myLoader.load();
+            MenuController menuController = myLoader.getController();
+            menuController.setPrevStage(primaryStage);
             Scene scene = new Scene(root,613,407);
             scene.getStylesheets().add(getClass().getResource("menuApplication.css").toExternalForm());
-            primaryStage.setTitle("Menu");
+            primaryStage.setTitle("MusicMaster");
             primaryStage.setScene(scene);
             primaryStage.show();
 

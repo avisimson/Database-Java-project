@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -15,6 +17,8 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.Random;
 import javafx.animation.Timeline;
@@ -37,6 +41,7 @@ public class GameController {
     int correctAnswer = 0;
     int combo = 0;
     Search search = new Search();
+    Stage prevStage;
 
     @FXML
     private ProgressBar progressBar;
@@ -64,6 +69,10 @@ public class GameController {
 
     }
 
+
+    public void setPrevStage(Stage stage){
+        this.prevStage = stage;
+    }
 
     @FXML
     /**
@@ -146,6 +155,19 @@ public class GameController {
 
     }
 
+    private void gameOver(){
+        try {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
+            AnchorPane root = myLoader.load();
+            GameOverController gameOverController = myLoader.getController();
+            gameOverController.setPrevStage(prevStage);
+            Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
+            scene.getStylesheets().add(getClass().getResource("GameOver.css").toExternalForm());
+            prevStage.setScene(scene);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void playOneTurn(){
         System.out.println("playOneTurn");
 
@@ -162,7 +184,6 @@ public class GameController {
         } else {
             // search for different song
         }
-
     }
 
 
@@ -172,6 +193,6 @@ public class GameController {
         btnAnswer2.setOnAction(e->answer(e));
         btnAnswer3.setOnAction(e->answer(e));
         btnAnswer4.setOnAction(e->answer(e));
-        startGame();
+       // startGame();
     }
 }

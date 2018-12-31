@@ -6,8 +6,11 @@ import DataBase.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +20,8 @@ import javafx.scene.control.CheckBox;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 public class GenreController implements Initializable {
+
+    Stage prevStage;
     @FXML
     private Button OkButton;
     @FXML
@@ -82,6 +87,7 @@ public class GenreController implements Initializable {
     @FXML
     private String GenreChoose[] = new String[3];
     DBConnection con = new DBConnection();
+
     public void initialize(URL location, ResourceBundle resources) {
         con.openConnection();
         CheckBox GenreArray[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
@@ -129,12 +135,22 @@ public class GenreController implements Initializable {
         //need to run the query ..
         con.GenreQuery(GenreChoose);
         String bla = con.FilterSong();
-        Game game= new Game();
-        Stage stage = (Stage) OkButton.getScene().getWindow();
-        try {
-            game.start(stage);
-        } catch (Exception e) {
 
+        try {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
+            GridPane root =  myLoader.load();
+            GameController gameController = myLoader.getController();
+            gameController.setPrevStage(prevStage);
+            Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
+            scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
+            prevStage.setScene(scene);
+            gameController.startGame();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+    public void setPrevStage(Stage stage){
+        this.prevStage = stage;
     }
 }
