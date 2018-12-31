@@ -87,12 +87,13 @@ public class GenreController implements Initializable {
     @FXML
     private String GenreChoose[] = new String[3];
     DBConnection con = new DBConnection();
-
+    private CheckBox GenreArray[];
     public void initialize(URL location, ResourceBundle resources) {
         con.openConnection();
-        CheckBox GenreArray[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
+        CheckBox temp[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
                 metal,dance,funk,trance,gospel,track,honky_tonk,dubstep,disco,meditation,blues,trip_hop,chinese,flamenco,
                 stand_up,ballad,samba, wave,jungle};
+        GenreArray = temp;
         //CheckBox GenreArray [] = con.GenreList();
         final CheckBox[] checkBoxes = new CheckBox[GenreArray.length];
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
@@ -107,8 +108,7 @@ public class GenreController implements Initializable {
                             if (!cb.isSelected()) {
                                 cb.setDisable(true);
                             } else {
-                                GenreChoose[i] = cb.getId();
-                                i++;
+
                             }
                         }
                     }
@@ -117,9 +117,11 @@ public class GenreController implements Initializable {
                         // reenable CheckBoxes
                         for (CheckBox cb : checkBoxes) {
                             cb.setDisable(false);
+
                         }
                     }
                     activeCount--;
+                    System.out.println(activeCount);
                 }
             }
         };
@@ -132,10 +134,19 @@ public class GenreController implements Initializable {
     }
     @FXML
     protected void ok() throws IOException  {
+        int j = 0;
+        for (int i = 0; i < GenreArray.length; i++) {
+            CheckBox cb = GenreArray[i];
+            if(cb.isSelected()) {
+                GenreChoose[j] = cb.getId();
+                System.out.println(GenreChoose[j]);
+                j++;
+            }
+        }
         //need to run the query ..
         con.GenreQuery(GenreChoose);
         String bla = con.FilterSong();
-
+        con.closeConnection();
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
             GridPane root =  myLoader.load();
