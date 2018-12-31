@@ -22,7 +22,7 @@ public class DBConnection {
         String port = "3306";
         String schema = "musicmaster";
         String user = "root"; //username
-        String password = "316958560"; //password to mysql
+        String password = "LINOY1234c"; //password to mysql
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema, user, password);
@@ -53,20 +53,12 @@ public class DBConnection {
     public void GenreQuery(String[] GenreName) {
         int i = 0;
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select distinct (l1.ArtistName) from " +
-                        "(select ArtistName from artists,genre,genreartists where genre.GenreID = genreartists.GenreID " +
-                        "and artists.ArtistID = genreartists.ArtistID and GenreName = \"" + GenreName[0]+"\") as l1" +
-                        ",(select ArtistName from artists,genre,genreartists where genre.GenreID = genreartists.GenreID " +
-                        "and artists.ArtistID = genreartists.ArtistID and GenreName = \"" + GenreName[1]+"\") as l2," +
-                        "(select ArtistName from artists,genre,genreartists where genre.GenreID = genreartists.GenreID " +
-                        "and artists.ArtistID = genreartists.ArtistID and GenreName = \"" + GenreName[2]+"\") as l3 " +
-                        "where l1.ArtistName = l2.ArtistName and l2.ArtistName = l3.ArtistName; ")) {
-
+                ("select distinct(ArtistName) from artists,genre,genreartists " +
+                        "where artists.ArtistID = genreArtists.ArtistID and genreartists.GenreID = genre.GenreID and " +
+                        "(GenreName = \""+GenreName[0]+"\" or GenreName = \""+GenreName[1]+"\" " +
+                        "or GenreName = \""+GenreName[2]+"\") limit 15;  ")) {
             while ((rs.next() == true) && (i < 15))  {
                 ArtistFilter[i] = rs.getString("ArtistName");
-              //  System.out.print(rs.getString("ArtistName"));
-              //  System.out.print("\t");
-              //  System.out.println();
                 i++;
             }
             for(i = 0; i < ArtistFilter.length; i++){
@@ -98,6 +90,10 @@ public class DBConnection {
         Random rand = new Random();
         int i = 0;
         int artistFilter = rand.nextInt(ArtistFilter.length - 1);
+        //  while(ArtistFilter[artistFilter] == null){
+        //      System.out.println("HELP");
+        //      artistFilter = rand.nextInt(ArtistFilter.length - 1);
+        //  }
         System.out.println(artistFilter);
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select Title from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
