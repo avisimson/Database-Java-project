@@ -7,8 +7,22 @@ import java.util.Random;
 
 public class DBConnection {
     java.sql.Connection conn; // DB connection
+    private static DBConnection instance;
     String ArtistFilter[] = new String[15];
     String SongFilter [] = new String[5];
+    /**
+     *
+     * @return
+     */
+    public static DBConnection getInstance() {
+        if (instance == null) {
+            instance = new DBConnection();
+        }
+        return instance;
+    }
+    public java.sql.Connection getConnection() {
+        return conn;
+    }
     /**
      *
      * @return true if the connection was successfully set
@@ -86,14 +100,11 @@ public class DBConnection {
         }
         return GenreList;
     }
+
     public String FilterSong() {
         Random rand = new Random();
         int i = 0;
         int artistFilter = rand.nextInt(ArtistFilter.length - 1);
-        //  while(ArtistFilter[artistFilter] == null){
-        //      System.out.println("HELP");
-        //      artistFilter = rand.nextInt(ArtistFilter.length - 1);
-        //  }
         System.out.println(artistFilter);
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select Title from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +

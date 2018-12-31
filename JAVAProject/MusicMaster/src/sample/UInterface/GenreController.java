@@ -2,6 +2,7 @@ package sample.UInterface;
 /**
  * Created by Yakir Pinchas and Avi Simson on 08/01/18.
  */
+import DataBase.DBArtists;
 import DataBase.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,7 +87,9 @@ public class GenreController implements Initializable {
     private CheckBox jungle;
     @FXML
     private String GenreChoose[] = new String[3];
+    private String artistList[] = new String[15];
     DBConnection con = new DBConnection();
+    DBArtists conA = new DBArtists();
     private CheckBox GenreArray[];
     public void initialize(URL location, ResourceBundle resources) {
         con.openConnection();
@@ -135,6 +138,7 @@ public class GenreController implements Initializable {
     @FXML
     protected void ok() throws IOException  {
         int j = 0;
+        //loop for get the selected genre
         for (int i = 0; i < GenreArray.length; i++) {
             CheckBox cb = GenreArray[i];
             if(cb.isSelected()) {
@@ -144,9 +148,11 @@ public class GenreController implements Initializable {
             }
         }
         //need to run the query ..
-        con.GenreQuery(GenreChoose);
-        String bla = con.FilterSong();
-        con.closeConnection();
+         con.GenreQuery(GenreChoose);
+        // String bla = con.FilterSong();
+        //con.closeConnection();
+       // conA.openConnection();
+       // artistList = conA.FilterArtistByGenre(GenreChoose);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
             GridPane root =  myLoader.load();
