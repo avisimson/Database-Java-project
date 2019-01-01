@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 public class DBSimilarArtists {
     private String confusionAns [] = new String[10];
-    private java.sql.Connection con = DBConnection.getInstance().conn;
+    private java.sql.Connection con = DBConnection.getInstance().getConnection();
     /**
      * function that return the id of artist
      * @param artistName is the name of the artist of the current song in run

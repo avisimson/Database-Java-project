@@ -6,10 +6,13 @@ import java.sql.*;
 import java.util.Random;
 
 public class DBConnection {
-    java.sql.Connection conn; // DB connection
+    private java.sql.Connection conn; // DB connection
     private static DBConnection instance;
-    String ArtistFilter[] = new String[15];
-    String SongFilter [] = new String[5];
+    private String ArtistFilter[] = new String[15];
+    private String SongFilter [] = new String[5];
+
+    private DBConnection() { }
+
     /**
      *
      * @return

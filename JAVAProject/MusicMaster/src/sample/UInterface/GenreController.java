@@ -4,6 +4,8 @@ package sample.UInterface;
  */
 import DataBase.DBArtists;
 import DataBase.DBConnection;
+import DataBase.DBGenre;
+import Logic.Genre;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.CheckBox;
@@ -23,7 +28,7 @@ import javafx.beans.value.ObservableValue;
 public class GenreController implements Initializable {
 
     Stage prevStage;
-    @FXML
+   /* @FXML
     private Button OkButton;
     @FXML
     private CheckBox hip_hop;
@@ -84,23 +89,27 @@ public class GenreController implements Initializable {
     @FXML
     private CheckBox wave;
     @FXML
-    private CheckBox jungle;
+    private CheckBox jungle;*/
+    @FXML
+    private AnchorPane anchorPane;
     @FXML
     private String GenreChoose[] = new String[3];
     private String artistList[] = new String[15];
+    private List<Genre> genreList = new LinkedList<>();
 
-   // DBConnection con = new DBConnection();
     DBArtists conA = new DBArtists();
+    DBGenre conG = new DBGenre();
 
     private CheckBox GenreArray[];
     public void initialize(URL location, ResourceBundle resources) {
-       // con.openConnection();
-        CheckBox temp[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
+       /* CheckBox temp[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
                 metal,dance,funk,trance,gospel,track,honky_tonk,dubstep,disco,meditation,blues,trip_hop,chinese,flamenco,
                 stand_up,ballad,samba, wave,jungle};
-        GenreArray = temp;
+        GenreArray = temp;*/
+        genreList = conG.GenreList();
         //CheckBox GenreArray [] = con.GenreList();
-        final CheckBox[] checkBoxes = new CheckBox[GenreArray.length];
+       // final CheckBox[] checkBoxes = new CheckBox[GenreArray.length];
+        final CheckBox[] checkBoxes = new CheckBox[genreList.size()];
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             private int activeCount = 0;
             private int i = 0;
@@ -131,11 +140,21 @@ public class GenreController implements Initializable {
             }
         };
 
-        for (int i = 0; i < GenreArray.length; i++) {
+       /* for (int i = 0; i < GenreArray.length; i++) {
             CheckBox cb = GenreArray[i];
             cb.selectedProperty().addListener(listener);
             checkBoxes[i] = cb;
-        }
+        }*/
+       //int j =0 ;
+       for(int i = 0; i < genreList.size(); i++) {
+           CheckBox cb = new CheckBox(genreList.get(i).getGenreName());
+           cb.selectedProperty().addListener(listener);
+           checkBoxes[i] = cb;
+           anchorPane.getChildren().add(i,cb);
+           //anchorPane.getChildren().get(i).setLayoutX(20 + i*20);
+          // anchorPane.getChildren().get(i).setLayoutY(20 +j*20);
+           //j++;
+       }
     }
     @FXML
     protected void ok() throws IOException  {

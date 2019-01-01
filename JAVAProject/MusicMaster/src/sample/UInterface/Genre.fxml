@@ -6,8 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UInterface.GenreController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UInterface.GenreController">
    <children>
+      <!--
       <CheckBox fx:id="chill_out" layoutX="224.0" layoutY="89.0" mnemonicParsing="false" text="chill_out" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -132,7 +133,7 @@
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
-      </Label>
+      </Label>-->
       <Button fx:id="OkButton" layoutX="262.0" layoutY="317.0" mnemonicParsing="false" onAction="#ok" text="Ok">
       </Button>
    </children>

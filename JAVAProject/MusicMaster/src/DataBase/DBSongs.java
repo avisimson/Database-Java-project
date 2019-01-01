@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class DBSongs {
     private String SongFilter [] = new String[5];
-    private java.sql.Connection con = DBConnection.getInstance().conn;
+    private java.sql.Connection con = DBConnection.getInstance().getConnection();
     /**
      * function that return songs of random Artist.
      * @param ArtistFilter is array of artists.
