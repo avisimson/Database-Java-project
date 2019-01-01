@@ -92,15 +92,13 @@ public class GenreController implements Initializable {
     private CheckBox jungle;*/
     @FXML
     private AnchorPane anchorPane;
-    @FXML
-    private String GenreChoose[] = new String[3];
     private String artistList[] = new String[15];
     private List<Genre> genreList = new LinkedList<>();
 
     DBArtists conA = new DBArtists();
     DBGenre conG = new DBGenre();
 
-    private CheckBox GenreArray[];
+    private CheckBox checkBoxes[];
     public void initialize(URL location, ResourceBundle resources) {
        /* CheckBox temp[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
                 metal,dance,funk,trance,gospel,track,honky_tonk,dubstep,disco,meditation,blues,trip_hop,chinese,flamenco,
@@ -109,7 +107,8 @@ public class GenreController implements Initializable {
         genreList = conG.GenreList();
         //CheckBox GenreArray [] = con.GenreList();
        // final CheckBox[] checkBoxes = new CheckBox[GenreArray.length];
-        final CheckBox[] checkBoxes = new CheckBox[genreList.size()];
+        checkBoxes = new CheckBox[genreList.size()];
+
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             private int activeCount = 0;
             private int i = 0;
@@ -146,33 +145,44 @@ public class GenreController implements Initializable {
             checkBoxes[i] = cb;
         }*/
        //int j =0 ;
+        int col = 45;
+        int row = 0;
        for(int i = 0; i < genreList.size(); i++) {
            CheckBox cb = new CheckBox(genreList.get(i).getGenreName());
            cb.selectedProperty().addListener(listener);
            checkBoxes[i] = cb;
+           cb.setMnemonicParsing(false);
            anchorPane.getChildren().add(i,cb);
+           anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12px;" +
+                   "-fx-font-weight: bold;" +
+                   "-fx-text-fill: white;");
+           anchorPane.getChildren().get(i).setLayoutX(20 + row*35);
+           anchorPane.getChildren().get(i).setLayoutY(20 + col);
+
+           row = row + 3;
+           if ((i % 5 == 0) && (i!= 0))
+           {
+               row = 0;
+               col = col + 50;
+           }
            //anchorPane.getChildren().get(i).setLayoutX(20 + i*20);
           // anchorPane.getChildren().get(i).setLayoutY(20 +j*20);
            //j++;
        }
     }
     @FXML
-    protected void ok() throws IOException  {
+    protected void ok() {
+        String GenreChoose[] = new String[3];
         int j = 0;
         //loop for get the selected genre
-        for (int i = 0; i < GenreArray.length; i++) {
-            CheckBox cb = GenreArray[i];
+        for (int i = 0; i < genreList.size(); i++) {
+            CheckBox cb = checkBoxes[i];
             if(cb.isSelected()) {
-                GenreChoose[j] = cb.getId();
+                GenreChoose[j] = cb.getText();
                 System.out.println(GenreChoose[j]);
                 j++;
             }
         }
-        //need to run the query ..
-        // con.GenreQuery(GenreChoose);
-        // String bla = con.FilterSong();
-        //con.closeConnection();
-       // conA.openConnection();
         artistList = conA.FilterArtistByGenre(GenreChoose);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
