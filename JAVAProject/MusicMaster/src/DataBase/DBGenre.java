@@ -20,7 +20,6 @@ public class DBGenre {
                 ("select GenreName from genre")) {
 
             while (rs.next() == true){
-               // GenreList[i] = new CheckBox(rs.getString("GenreName"));
                 genreList.add(new Genre(-1, rs.getString("GenreName")));
                 i++;
             }
