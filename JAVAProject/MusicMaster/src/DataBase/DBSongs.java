@@ -1,19 +1,24 @@
 package DataBase;
 
+import Logic.Artist;
+import Logic.Song;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class DBSongs {
-    private String SongFilter [] = new String[5];
+    private List<Song> songFilter = new LinkedList<>();
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
     /**
      * function that return songs of random Artist.
      * @param ArtistFilter is array of artists.
      * @return the songs of random Artist.
      */
-    public String[] FilterSong(String[] ArtistFilter) {
+    public List<Song> FilterSong(String[] ArtistFilter) {
         Random rand = new Random();
         int i = 0;
         //choose random artist from the list.
@@ -23,14 +28,15 @@ public class DBSongs {
                 ("select Title from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
                         "artists.ArtistName = \"" + ArtistFilter[artistFilter] + "\"")) {
             while ((rs.next() == true) && (i < 5)) {
-                SongFilter[i] = rs.getString("Title");
-                System.out.println(SongFilter[i]);
+                songFilter.add(i,new Song(-1,rs.getString("Title"),-1,
+                        1,-1,2019,-1));
+                System.out.println(songFilter.get(i).getTitle());
                 i++;
             }
         } catch (SQLException e) {
             System.out.println("ERROR executeQuery - " + e.getMessage());
         }
-        return SongFilter;
+        return songFilter;
     }
     /**
      * function that return specific song of artist in order to play in background
@@ -39,13 +45,13 @@ public class DBSongs {
     public String FilterSpesificSong() {
         Random rand = new Random();
         //choose random song from the list.
-        int songFilter = rand.nextInt(SongFilter.length - 1);
+        int songNumFilter = rand.nextInt(songFilter.size() - 1);
         //check if exist this num song , else return the second song
-        if (SongFilter[songFilter] == null) {
+        if (songFilter.get(songNumFilter).getTitle() == null) {
             //if to current artist don't enough songs
-            songFilter = 1;
+            songNumFilter = 1;
             System.out.println("HELP");
         }
-        return SongFilter[songFilter];
+        return songFilter.get(songNumFilter).getTitle();
     }
 }
