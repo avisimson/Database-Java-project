@@ -88,11 +88,13 @@ public class GenreController implements Initializable {
     @FXML
     private String GenreChoose[] = new String[3];
     private String artistList[] = new String[15];
-    DBConnection con = new DBConnection();
+
+   // DBConnection con = new DBConnection();
     DBArtists conA = new DBArtists();
+
     private CheckBox GenreArray[];
     public void initialize(URL location, ResourceBundle resources) {
-        con.openConnection();
+       // con.openConnection();
         CheckBox temp[] = {hip_hop,rock,ccm,post_grunge,pop,house,jazz,rap,raggae,salsa,chill_out,
                 metal,dance,funk,trance,gospel,track,honky_tonk,dubstep,disco,meditation,blues,trip_hop,chinese,flamenco,
                 stand_up,ballad,samba, wave,jungle};
@@ -148,11 +150,11 @@ public class GenreController implements Initializable {
             }
         }
         //need to run the query ..
-         con.GenreQuery(GenreChoose);
+        // con.GenreQuery(GenreChoose);
         // String bla = con.FilterSong();
         //con.closeConnection();
        // conA.openConnection();
-       // artistList = conA.FilterArtistByGenre(GenreChoose);
+        artistList = conA.FilterArtistByGenre(GenreChoose);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
             GridPane root =  myLoader.load();

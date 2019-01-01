@@ -17,6 +17,7 @@ public class DBConnection {
     public static DBConnection getInstance() {
         if (instance == null) {
             instance = new DBConnection();
+            instance.openConnection();
         }
         return instance;
     }
@@ -36,7 +37,7 @@ public class DBConnection {
         String port = "3306";
         String schema = "musicmaster";
         String user = "root"; //username
-        String password = "Rkehat19"; //password to mysql
+        String password = ""; //password to mysql
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema, user, password);
