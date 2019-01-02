@@ -2,13 +2,13 @@ package Logic;
 
 public class Song {
 
-    int songId;
-    String title;
-    int albumId;
-    int artistId;
-    double songHotess;
-    int year;
-    float endOfFadeIn;
+    private int songId;
+    private String title;
+    private int albumId;
+    private int artistId;
+    private double songHotess;
+    private int year;
+    private float endOfFadeIn;
 
     public Song(int songId, String title, int albumId, int artistId, double songHotess, int year, float endOfFadeIn) {
         this.songId = songId;

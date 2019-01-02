@@ -24,11 +24,11 @@ public class DBSongs {
         //query that return the 5 songs of random artist
         System.out.println("---SongsLists----");
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select Title from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
+                ("select Title,EndOfFadeIn from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
                         "artists.ArtistName = \"" + artistName + "\"")) {
             while ((rs.next() == true) && (i < 5)) {
                 songFilter.add(i,new Song(-1,rs.getString("Title"),-1,
-                        1,-1,2019,-1));
+                        1,-1,2019,rs.getFloat("EndOfFadeIn")));
                 System.out.println(songFilter.get(i).getTitle());
                 i++;
             }
@@ -41,7 +41,7 @@ public class DBSongs {
      * function that return specific song of artist in order to play in background
      * @return random song.
      */
-    public String FilterSpesificSong(List<Song> Songs) {
+    public Song FilterSpecificSong(List<Song> Songs) {
         Random rand = new Random();
         //choose random song from the list.
         int songNumFilter = rand.nextInt(Songs.size() - 1);
@@ -53,6 +53,6 @@ public class DBSongs {
         }
         System.out.println("---------The Song----------");
         System.out.println(Songs.get(songNumFilter).getTitle());
-        return Songs.get(songNumFilter).getTitle();
+        return Songs.get(songNumFilter);
     }
 }

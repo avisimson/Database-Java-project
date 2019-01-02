@@ -25,7 +25,7 @@ public class GenreLogic {
 
     public List<Song> getFilterSong(String oneArtist) {return conS.FilterSong(oneArtist);}
 
-    public String getFilterSpesificSong(List<Song> songsList) {return conS.FilterSpesificSong(songsList);}
+    public Song getFilterSpecificSong(List<Song> songsList) {return conS.FilterSpecificSong(songsList);}
 
     public String[] getThreeConfusionAns (String artistName) {
         List<Artist> confusionArtists = conA.CreateConfusionAns(artistName);
@@ -67,18 +67,19 @@ public class GenreLogic {
     public Questions[] Create20Questions(List<Artist> artistFilter) {
         Questions questionsForGame[] = new Questions[20];
         String wrongAnswer[];
-        String Q , CAns;
+        String CAns;
+        Song Q;
         int i = 0;
 
         for (i = 0;i < 20;i++) {
             CAns = getFilterOneArtist(artistFilter);
             System.out.println("------------CANS---------");
             System.out.println(CAns);
-            Q = getFilterSpesificSong(getFilterSong(CAns));
+            Q = getFilterSpecificSong(getFilterSong(CAns));
             System.out.println("----------Q-------------");
-            System.out.println(Q);
+            System.out.println(Q.getTitle());
             wrongAnswer = getThreeConfusionAns(CAns);
-            questionsForGame[i] = new Questions(Q, CAns,wrongAnswer[0],wrongAnswer[1],wrongAnswer[2]);
+            questionsForGame[i] = new Questions(Q.getTitle(), CAns,wrongAnswer[0],wrongAnswer[1],wrongAnswer[2]);
             System.out.println("------------Question numbar =" + i);
             System.out.println(questionsForGame[i].getSongName());
             System.out.println(questionsForGame[i].getCurrentAnswer());
