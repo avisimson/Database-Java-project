@@ -1,7 +1,6 @@
 package DataBase;
 
 import javafx.scene.control.CheckBox;
-
 import java.sql.*;
 import java.util.Random;
 
@@ -12,7 +11,6 @@ public class DBConnection {
     private String SongFilter [] = new String[5];
 
     private DBConnection() { }
-
     /**
      *
      * @return
@@ -40,7 +38,7 @@ public class DBConnection {
         String port = "3306";
         String schema = "musicmaster";
         String user = "root"; //username
-        String password = ""; //password to mysql
+        String password = "Rkehat19"; //password to mysql
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema, user, password);

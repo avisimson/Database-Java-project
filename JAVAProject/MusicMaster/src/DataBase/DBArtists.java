@@ -8,11 +8,40 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class DBArtists {
     private List<Artist> artistFilter = new LinkedList<>();
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
     private List<Artist> confusionArtist = new LinkedList<>();
+
+
+    public String FilterArtistDifferent(String nameAritst1, String nameArtist2, String nameArtist3) {
+        String completeLastAns = "";
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
+                ("select ArtistName from artists where ArtistID != \""+ nameAritst1 + "\" " +
+                        "and ArtistID != \"" + nameArtist2 + "\" and ArtistID != \"" + nameArtist3 + "\" limit 1")) {
+            while (rs.next() == true){
+                completeLastAns = rs.getString("ArtistName");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR executeQuery - " + e.getMessage());
+        }
+        return completeLastAns;
+    }
+    public String FilterArtistDifferentTwice(String nameArtist1,String nameArtist2) {
+        String completeLastAns = "";
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
+                ("select ArtistName from artists where ArtistID != \""+ nameArtist1 + "\" " +
+                        "and ArtistID != \"" + nameArtist2 + "\" limit 1")) {
+            while (rs.next() == true){
+                completeLastAns = rs.getString("ArtistName");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR executeQuery - " + e.getMessage());
+        }
+        return completeLastAns;
+    }
     /**
      * function that execute query that return list of artist in this genres
      *
@@ -21,10 +50,20 @@ public class DBArtists {
      */
     public List<Artist> FilterArtistByGenre(List<Genre> genreNames) {
         for(int i = 0; i < genreNames.size(); i++) {
-            System.out.println(genreNames.get(i).getGenreName());
+         //   System.out.println(genreNames.get(i).getGenreName());
         }
         FilterByGenre(genreNames);
         return artistFilter;
+    }
+
+    public String FilterOneArtist(List<Artist> artistFilter) {
+        Random rand = new Random();
+        int i = 0;
+        //choose random artist from the list.
+        int artistNumFilter = rand.nextInt(artistFilter.size() - 1);
+       // System.out.println("-------The Artist-----------");
+       // System.out.println(artistFilter.get(artistNumFilter).getArtistName());
+        return artistFilter.get(artistNumFilter).getArtistName();
     }
     /**
      * function that return the artists that song in selected genre
@@ -50,8 +89,9 @@ public class DBArtists {
                 artistFilter.add(i, new Artist(-1,rs.getString("ArtistName"), -1));
                 i++;
             }
+         //   System.out.println("-----ArtistList------");
             for (i = 0; i < artistFilter.size(); i++) {
-                System.out.println(artistFilter.get(i).getArtistName());
+           //     System.out.println(artistFilter.get(i).getArtistName());
             }
         } catch (SQLException e) {
             System.out.println("ERROR executeQuery - " + e.getMessage());
@@ -81,14 +121,17 @@ public class DBArtists {
      */
     public List<Artist> CreateConfusionAns (String artistName) {
         int idAnswer = IDRightArtist(artistName);
+       // System.out.println(idAnswer);
         int j = 0;
+        //System.out.println("--------------ConfuseAns---------------");
         //search in 1 col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select ArtistName from similarartists,artists " +
-                        "where artists.ArtistID = similarArtists.ArtistID and ArtistID =" + idAnswer)) {
+                        "where artists.ArtistID = similarArtists.similarToArtistID " +
+                        "and similarArtists.ArtistID =" + idAnswer)) {
             while ((rs.next() == true)&&(j < 10)){
                 confusionArtist.add(j, new Artist(-1,rs.getString("ArtistName"), -1));
-                System.out.println(confusionArtist.get(j).getArtistName());
+             //   System.out.println(confusionArtist.get(j).getArtistName());
                 j++;
 
             }
@@ -101,7 +144,7 @@ public class DBArtists {
                         "where artists.ArtistID = similarArtists.ArtistID and similarToArtistID =" + idAnswer)) {
             while ((rs.next() == true)&&(j < 10)){
                 confusionArtist.add(j, new Artist(-1,rs.getString("ArtistName"), -1));
-                System.out.println(confusionArtist.get(j).getArtistName());
+          //      System.out.println(confusionArtist.get(j).getArtistName());
                 j++;
 
             }

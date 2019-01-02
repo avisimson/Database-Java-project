@@ -1,8 +1,6 @@
 package sample.UInterface;
 
-import Logic.Artist;
-import Logic.Genre;
-import Logic.GenreLogic;
+import Logic.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,10 +23,15 @@ public class GenreController implements Initializable {
 
     Stage prevStage;
     private List<Artist> artistList = new LinkedList<>();
+    private List<Song> songsList = new LinkedList<>();
     private List<Genre> genreList = new LinkedList<>();
+    private String threeConfusionAns[] = new String[3];
+
     private GenreLogic genreLogic = new GenreLogic();
     private CheckBox checkBoxes[];
-
+    private String specificSong;
+    private String specificArtist;
+    private Questions[] questions = new Questions[20];
     public void initialize(URL location, ResourceBundle resources) {
         genreList = genreLogic.getListOfGenres();
         checkBoxes = new CheckBox[genreList.size()];
@@ -56,7 +59,7 @@ public class GenreController implements Initializable {
                         }
                     }
                     activeCount--;
-                    System.out.println(activeCount);
+                   // System.out.println(activeCount);
                 }
             }
         };
@@ -94,13 +97,18 @@ public class GenreController implements Initializable {
                 for(Genre g : genreList) {
                     if(g.getGenreName().equals(cb.getText())) {
                         genreChoose.add(j,g);
-                        System.out.println(genreChoose.get(j).getGenreName());
+                      //  System.out.println(genreChoose.get(j).getGenreName());
                         j++;
                     }
                 }
             }
         }
         artistList = genreLogic.getArtistsByGenre(genreChoose);
+       // specificArtist = genreLogic.getFilterOneArtist(artistList);
+       // songsList = genreLogic.getFilterSong(specificArtist);
+       // specificSong = genreLogic.getFilterSpesificSong(songsList);
+       // threeConfusionAns = genreLogic.getThreeConfusionAns(specificArtist);
+        questions = genreLogic.Create20Questions(artistList);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
             GridPane root =  myLoader.load();
