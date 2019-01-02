@@ -20,7 +20,7 @@ public class Main extends Application {
             GridPane root = myLoader.load();
             MenuController menuController = myLoader.getController();
             menuController.setPrevStage(primaryStage);
-            Scene scene = new Scene(root,613,407);
+            Scene scene = new Scene(root,600,400);
             scene.getStylesheets().add(getClass().getResource("menuApplication.css").toExternalForm());
             primaryStage.setTitle("MusicMaster");
             primaryStage.setScene(scene);

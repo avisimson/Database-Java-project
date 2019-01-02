@@ -1,19 +1,27 @@
 .root {
-	-fx-background-image: url("background.jpeg")
+	-fx-background-image: url("gameBackground.jpg");
+    -fx-background-size: cover;
 }
 .label {
 -fx-font-size: 14px;
 -fx-font-weight: bold;
--fx-text-fill: white;
+-fx-text-fill: black;
 }
 .button {
- -fx-text-fill: white;
+ -fx-font-size: 15px;
+ -fx-text-fill: black;
  -fx-font-weight: bold;
- -fx-background-color: linear-gradient(#3123b1, #2A5058);
+ -fx-border-color: black;
+  -fx-border-radius: 3;
+  -fx-border-width: 1px;
+-fx-background-color: linear-gradient(#86ccd8, #507c84);
 }
 #ChooseQuestion{
 -fx-text-fill: white;
 -fx-font-size: 32px;
 -fx-font-family: Arial;
 -fx-fill: rgb(85,87,83);
+}
+#question{
+-fx-font-size: 20px;
 }

@@ -72,17 +72,17 @@ public class GenreController implements Initializable {
            checkBoxes[i] = cb;
            cb.setMnemonicParsing(false);
            anchorPane.getChildren().add(i,cb);
-           anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12px;" +
+           anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12.5px;" +
                    "-fx-font-weight: bold;" +
-                   "-fx-text-fill: white;");
-           anchorPane.getChildren().get(i).setLayoutX(20 + row*35);
-           anchorPane.getChildren().get(i).setLayoutY(20 + col);
+                   "-fx-text-fill: black;");
+           anchorPane.getChildren().get(i).setLayoutX(38 + row*38);
+           anchorPane.getChildren().get(i).setLayoutY(30 + col);
 
            row = row + 3;
            if (((i +1) % 5 == 0))
            {
                row = 0;
-               col = col + 50;
+               col = col + 40;
            }
        }
     }

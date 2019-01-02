@@ -45,10 +45,10 @@
     </rowConstraints>
     <children>
         <WebView fx:id="youTubePlayer" maxHeight="0" prefHeight="0" prefWidth="0"/>
-        <Label fx:id="lifeLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Life = 3" GridPane.columnIndex="9" GridPane.columnSpan="4" />
-        <Label fx:id="scoreLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Score = 0" GridPane.columnIndex="0" GridPane.columnSpan="4" />
-        <Label id="question" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" text="the question" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2" />
-        <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+        <Label fx:id="lifeLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Life = 3" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" />
+        <Label fx:id="scoreLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Score = 0" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4" />
+        <Label fx:id="question" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" text="Who is singing?" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+        <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="btnAnswer1" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="60.0" prefWidth="130.0" text="answer1">
                <HBox.margin>
@@ -56,9 +56,25 @@
                </HBox.margin></Button>
             </children>
         </HBox>
-        <HBox prefHeight="100.0" prefWidth="180.0" GridPane.columnIndex="8" GridPane.rowIndex="4">
+        <HBox prefHeight="100.0" prefWidth="180.0" GridPane.columnIndex="7" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="btnAnswer2" alignment="center" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="60.0" prefWidth="130.0" text="answer2">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+            </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <children>
+                <Button fx:id="btnAnswer3" alignment="center" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="60.0" prefWidth="130.0" text="answer3">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+            </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="7" GridPane.rowIndex="6">
+            <children>
+                <Button fx:id="btnAnswer4" alignment="center" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="60.0" prefWidth="130.0" text="answer4">
                <HBox.margin>
                   <Insets />
                </HBox.margin></Button>
@@ -69,21 +85,5 @@
                 <Font size="48.0" />
             </font></Label>
         <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="220.0" GridPane.columnIndex="9" GridPane.columnSpan="10" GridPane.rowIndex="2" />
-        <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
-            <children>
-                <Button fx:id="btnAnswer3" alignment="center" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="60.0" prefWidth="130.0" text="answer3">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Button>
-            </children>
-        </HBox>
-        <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="8" GridPane.rowIndex="6">
-            <children>
-                <Button fx:id="btnAnswer4" alignment="center" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"  prefHeight="60.0" prefWidth="130.0" text="answer4">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Button>
-            </children>
-        </HBox>
     </children>
 </GridPane>
