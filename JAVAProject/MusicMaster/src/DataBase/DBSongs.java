@@ -19,16 +19,17 @@ public class DBSongs {
      * @return the songs of random Artist.
      */
     public List<Song> FilterSong(String artistName) {
+        songFilter.clear();
         int i = 0;
         //query that return the 5 songs of random artist
-       // System.out.println("---SongsLists----");
+        System.out.println("---SongsLists----");
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select Title from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
                         "artists.ArtistName = \"" + artistName + "\"")) {
             while ((rs.next() == true) && (i < 5)) {
                 songFilter.add(i,new Song(-1,rs.getString("Title"),-1,
                         1,-1,2019,-1));
-             //   System.out.println(songFilter.get(i).getTitle());
+                System.out.println(songFilter.get(i).getTitle());
                 i++;
             }
         } catch (SQLException e) {
@@ -50,8 +51,8 @@ public class DBSongs {
             songNumFilter = 1;
             System.out.println("HELP");
         }
-       // System.out.println("---------The Song----------");
-       // System.out.println(Songs.get(songNumFilter).getTitle());
+        System.out.println("---------The Song----------");
+        System.out.println(Songs.get(songNumFilter).getTitle());
         return Songs.get(songNumFilter).getTitle();
     }
 }
