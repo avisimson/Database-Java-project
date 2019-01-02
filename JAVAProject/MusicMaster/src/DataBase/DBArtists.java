@@ -71,7 +71,7 @@ public class DBArtists {
      */
     public void FilterByGenre(List<Genre> genreChoice) {
         int i = 0;
-        String genreNumberQuery = "";
+        String genreNumberQuery = "(";
         for (int j = 0; j < genreChoice.size(); j++) {
             if (j != 0) {
                 genreNumberQuery += " or ";
@@ -80,6 +80,7 @@ public class DBArtists {
             genreNumberQuery += genreChoice.get(j).getGenreName();
             genreNumberQuery += "\"";
         }
+        genreNumberQuery += ")";
         //query genre
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select distinct(ArtistName) from artists,genre,genreartists " +
