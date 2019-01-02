@@ -44,7 +44,7 @@ public class DBSongs {
     public Song FilterSpecificSong(List<Song> Songs) {
         Random rand = new Random();
         //choose random song from the list.
-        int songNumFilter = rand.nextInt(Songs.size() - 1);
+        int songNumFilter = rand.nextInt(Songs.size());
         //check if exist this num song , else return the second song
         if (Songs.get(songNumFilter).getTitle() == null) {
             //if to current artist don't enough songs

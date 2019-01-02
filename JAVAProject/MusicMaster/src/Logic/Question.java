@@ -1,20 +1,20 @@
 package Logic;
 
-public class Questions {
-    String songName;
+public class Question {
+    Song song;
     String currentAnswer;
     String confAns1;
     String confAns2;
     String confAns3;
-    public Questions(String songName,String currentAnswer,String confAns1,String confAns2, String confAns3) {
-        this.songName = songName;
+    public Question(Song song, String currentAnswer, String confAns1, String confAns2, String confAns3) {
+        this.song = song;
         this.currentAnswer = currentAnswer;
         this.confAns1 = confAns1;
         this.confAns2 = confAns2;
         this.confAns3 = confAns3;
     }
 
-    public String getSongName(){ return this.songName;}
+    public Song getSongName(){ return this.song;}
 
     public String getCurrentAnswer() {return this.currentAnswer;}
 
@@ -24,7 +24,7 @@ public class Questions {
 
     public String getConfAns3() { return this.confAns3; }
 
-    public void setSongName (String songName) {this.songName = songName;}
+    public void setSongName (Song song) {this.song = song;}
 
     public void setCurrentAnswer (String currentAnswer) {this.currentAnswer = currentAnswer;}
 

@@ -1,13 +1,10 @@
 package Logic;
 
 import DataBase.Search;
-import javafx.animation.Timeline;
 
-import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Random;
-import java.util.Timer;
+import java.util.*;
 
 public class GameLogic {
     private final PropertyChangeSupport support;
@@ -18,8 +15,10 @@ public class GameLogic {
     private int life = 3;
     private int correctAnswer = 0;
     private int combo = 0;
-    private String songId;
     private Search search = new Search();
+    private Question[] questions;
+    private String[] answers = new String[4];
+    private Song song;
 
     public GameLogic(){
         this.support = new PropertyChangeSupport(this);
@@ -28,7 +27,8 @@ public class GameLogic {
     /**
      * start the game
      */
-    public void startGame() {
+    public void startGame(Question[] questions) {
+        this.questions = questions;
         playOneTurn();
     }
 
@@ -57,13 +57,37 @@ public class GameLogic {
     private void playOneTurn(){
         System.out.println("playOneTurn");
 
+        for (int i=0;i< answers.length;i++){
+            answers[i] = null;
+        }
         //pick random correct answer.
         Random rand = new Random();
-        correctAnswer = rand.nextInt(4)+1;
+        correctAnswer = rand.nextInt(4);
+
         System.out.println("correctAnswer is: " + correctAnswer);
-        String songId =search.searchSong("omer adam");
-        System.out.println("songId is in game logic: " + songId);
-        setSongId(songId);
+
+        //get current questions
+        Question currentQuestion =  questions[0];
+        this.song = currentQuestion.song;
+
+        //create array of answers
+        answers[correctAnswer] = currentQuestion.currentAnswer;
+        Stack<String> stack = new Stack<>();
+        stack.push(currentQuestion.confAns1);
+        stack.push(currentQuestion.confAns2);
+        stack.push(currentQuestion.confAns3);
+
+        for (int i=0;i< answers.length;i++){
+            if (answers[i] == null)
+                answers[i] = stack.pop();
+        }
+        setAnswers(answers);
+
+        //get song youtube id
+        String forSearch = currentQuestion.song.getTitle() + " " + currentQuestion.currentAnswer;
+        String songId = search.searchSong(forSearch);
+        this.song.setSongYoutubeId(songId);
+        setSong(this.song);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -74,20 +98,22 @@ public class GameLogic {
     }
 
     public void setScore(int value) {
-        int oldValue = this.score;
         this.score = value;
-        support.firePropertyChange("score", oldValue, this.score);
+        support.firePropertyChange("score", null, this.score);
     }
 
     public void setLife(int value) {
-        int oldValue = this.life;
         this.life = value;
-        support.firePropertyChange("life", oldValue, this.life);
+        support.firePropertyChange("life", null, this.life);
     }
 
-    public void setSongId(String value) {
-        String oldValue = this.songId;
-        this.songId = value;
-        support.firePropertyChange("songId", oldValue, this.songId);
+    public void setSong(Song value) {
+        this.song = value;
+        support.firePropertyChange("song", null, this.song);
+    }
+
+    public void setAnswers(String[] value) {
+        this.answers = value;
+        support.firePropertyChange("answers", null, this.answers);
     }
 }

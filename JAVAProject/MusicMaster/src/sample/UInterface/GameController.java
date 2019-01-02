@@ -1,32 +1,20 @@
 package sample.UInterface;
-import DataBase.Search;
 import Logic.GameLogic;
-import javafx.animation.KeyFrame;
-import javafx.application.Platform;
+import Logic.Question;
+import Logic.Song;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import java.awt.*;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.Random;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import java.lang.Thread;
-
 
 
 import static javafx.fxml.FXMLLoader.load;
@@ -63,8 +51,8 @@ public class GameController implements PropertyChangeListener{
         gameLogic.addPropertyChangeListener(this);
     }
 
-    public void startGame(){
-        this.gameLogic.startGame();
+    public void startGame(Question[] questions){
+        this.gameLogic.startGame(questions);
     }
 
 
@@ -119,18 +107,29 @@ public class GameController implements PropertyChangeListener{
             lifeLabel.setText(String.valueOf("life = " +  newValue));
             System.out.println("propertyChanged lifeLabel :");
         }
-        else if("songId".equals(propertyName)){
+        else if("song".equals(propertyName)){
 
-            String songId = newValue;
+            Song song = (Song)e.getNewValue();
+            String songId = song.getSongYoutubeId();
+            float endOfFadeIn = song.getEndOfFadeIn();
+            int minutes = (int)endOfFadeIn;
+            double seconds = endOfFadeIn - Math.floor(endOfFadeIn);
+            seconds = seconds + 60 * minutes;
             System.out.println("song id in game controoler: " +songId);
             System.out.println("in function songId: " + "http://www.youtube.com/watch/"+ songId + "?autoplay=1");
             if(songId != null) {
-                youTubePlayer.getEngine().load(
-                        "http://www.youtube.com/watch/"+ songId + "?autoplay=1"
-                );
+                String url = "https://www.youtube.com/watch?v="+ songId + "&autoplay=1" + "&t=" +seconds + "s";
+                System.out.println("url is: " + url);
+                youTubePlayer.getEngine().load(url);
             } else {
                 // search for different song
             }
+        } else if ("answers".equals(propertyName)){
+            String[] answers = (String[])e.getNewValue();
+            btnAnswer1.setText(answers[0]);
+            btnAnswer2.setText(answers[1]);
+            btnAnswer3.setText(answers[2]);
+            btnAnswer4.setText(answers[3]);
         }
     }
 }

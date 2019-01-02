@@ -31,7 +31,13 @@ public class GenreLogic {
         List<Artist> confusionArtists = conA.CreateConfusionAns(artistName);
         String ans[] = new String[3];
         System.out.println("--------------The Selected CAns---------------");
-        if (confusionArtists.size() == 1)
+        System.out.println("confusionArtists.size() :" + confusionArtists.size());
+        if (confusionArtists.size() == 0) {
+            ans[0] = conA.FilterArtistDifferentTwice(artistName,null);
+            ans[1] = conA.FilterArtistDifferentTwice(artistName,ans[0]);
+            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]);
+        }
+        else if (confusionArtists.size() == 1)
         {
        //     System.out.println("--------------HELP1---------------");
             ans[0] = confusionArtists.get(0).getArtistName();
@@ -43,19 +49,20 @@ public class GenreLogic {
             ans[1] = confusionArtists.get(1).getArtistName();
             ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]);
         } else {
+            System.out.println("linoy in");
 
             Random rand = new Random();
-            int x = rand.nextInt(confusionArtists.size()- 1);
+            int x = rand.nextInt(confusionArtists.size());
             while(confusionArtists.get(x).getArtistName() == null)
-                x = rand.nextInt(confusionArtists.size() - 1);
+                x = rand.nextInt(confusionArtists.size());
             ans[0] = confusionArtists.get(x).getArtistName();
-            int y = rand.nextInt(confusionArtists.size() - 1);
+            int y = rand.nextInt(confusionArtists.size());
             while((x == y) || ((confusionArtists.get(y).getArtistName() == null)))
-                y = rand.nextInt(confusionArtists.size() - 1);
+                y = rand.nextInt(confusionArtists.size());
             ans[1] = confusionArtists.get(y).getArtistName();
-            int z = rand.nextInt(confusionArtists.size() - 1);
+            int z = rand.nextInt(confusionArtists.size());
             while((z == y) ||(z == x) || (confusionArtists.get(z).getArtistName() == null))
-                z = rand.nextInt(confusionArtists.size() - 1);
+                z = rand.nextInt(confusionArtists.size());
             ans[2] = confusionArtists.get(z).getArtistName();
         }
         System.out.println(ans[0]);
@@ -64,8 +71,8 @@ public class GenreLogic {
         return ans;
     }
 
-    public Questions[] Create20Questions(List<Artist> artistFilter) {
-        Questions questionsForGame[] = new Questions[20];
+    public Question[] Create20Questions(List<Artist> artistFilter) {
+        Question questionsForGame[] = new Question[20];
         String wrongAnswer[];
         String CAns;
         Song Q;
@@ -79,7 +86,7 @@ public class GenreLogic {
             System.out.println("----------Q-------------");
             System.out.println(Q.getTitle());
             wrongAnswer = getThreeConfusionAns(CAns);
-            questionsForGame[i] = new Questions(Q.getTitle(), CAns,wrongAnswer[0],wrongAnswer[1],wrongAnswer[2]);
+            questionsForGame[i] = new Question(Q, CAns,wrongAnswer[0],wrongAnswer[1],wrongAnswer[2]);
             System.out.println("------------Question numbar =" + i);
             System.out.println(questionsForGame[i].getSongName());
             System.out.println(questionsForGame[i].getCurrentAnswer());

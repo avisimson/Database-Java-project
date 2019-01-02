@@ -9,6 +9,7 @@ public class Song {
     private double songHotess;
     private int year;
     private float endOfFadeIn;
+    private String songYoutubeId;
 
     public Song(int songId, String title, int albumId, int artistId, double songHotess, int year, float endOfFadeIn) {
         this.songId = songId;
@@ -47,4 +48,13 @@ public class Song {
     public float getEndOfFadeIn() {
         return endOfFadeIn;
     }
+
+    public String getSongYoutubeId() {
+        return songYoutubeId;
+    }
+
+    public void setSongYoutubeId(String value) {
+        this.songYoutubeId = value;
+    }
+
 }

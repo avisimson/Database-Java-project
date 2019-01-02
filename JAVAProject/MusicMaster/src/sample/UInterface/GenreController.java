@@ -31,7 +31,7 @@ public class GenreController implements Initializable {
     private CheckBox checkBoxes[];
     private String specificSong;
     private String specificArtist;
-    private Questions[] questions = new Questions[20];
+    private Question[] questions = new Question[20];
     public void initialize(URL location, ResourceBundle resources) {
         genreList = genreLogic.getListOfGenres();
         checkBoxes = new CheckBox[genreList.size()];
@@ -117,7 +117,7 @@ public class GenreController implements Initializable {
             Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
             scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
             prevStage.setScene(scene);
-            gameController.startGame();
+            gameController.startGame(questions);
 
         } catch (Exception e) {
             e.printStackTrace();
