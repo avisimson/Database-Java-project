@@ -1,6 +1,6 @@
 .root {
 	-fx-background-image: url("mainBackgroundOpacity.jpg");
-    -fx-background-size: cover;
+    -fx-background-size: stretch;
 }
 .label {
 -fx-font-size: 12px;

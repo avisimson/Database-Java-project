@@ -1,6 +1,6 @@
 .root {
 	-fx-background-image: url("gameBackground.jpg");
-    -fx-background-size: cover;
+    -fx-background-size: stretch;
 }
 .button {
      -fx-text-fill: black;
