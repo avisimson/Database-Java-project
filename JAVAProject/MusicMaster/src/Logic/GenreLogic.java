@@ -3,7 +3,6 @@ package Logic;
 import DataBase.DBArtists;
 import DataBase.DBGenre;
 import DataBase.DBSongs;
-
 import java.util.List;
 import java.util.Random;
 
@@ -71,7 +70,7 @@ public class GenreLogic {
         String Q , CAns;
         int i = 0;
 
-        for (i = 0;i < 5;i++) {
+        for (i = 0;i < 20;i++) {
             CAns = getFilterOneArtist(artistFilter);
             System.out.println("------------CANS---------");
             System.out.println(CAns);
