@@ -67,6 +67,7 @@ public class GameLogic {
         System.out.println("correct answer");
         combo++;
         setScore(score + timeLeft);
+        sendResultAnswer(true);
         if(combo == comboOfcorrectAnswersForExtraLife) {
             //User reached combo of correct answers in a row- life increments.
             setLife(life + 1);
@@ -79,6 +80,7 @@ public class GameLogic {
         if(score > 0) {
             setScore(score - 1);
         }
+        sendResultAnswer(false);
         setLife(life - 1);
         if(life <= 0) {
             //no more life - Game Over.
@@ -99,6 +101,10 @@ public class GameLogic {
         correctAnswer = rand.nextInt(4);
 
         //get current questions
+        if(turnNumber == questions.length) {
+            informGameOver();
+            return;
+        }
         Question currentQuestion =  questions[turnNumber];
 
 
@@ -215,7 +221,20 @@ public class GameLogic {
         support.firePropertyChange("game-over", "", gameOver);
     }
 
+    /**
+     * send event of inform about show answer correct or not.
+     */
+    public void sendResultAnswer(boolean correct) {
+        String msg = "false";
+        if(correct) { msg = "true"; }
+        support.firePropertyChange("AnswerResult", "", msg);
+    }
+
     public int getTimeOfTurn(){
         return this.timeOfTurn;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 }

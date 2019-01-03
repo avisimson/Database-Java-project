@@ -3,12 +3,12 @@
     -fx-background-size: stretch;
 }
 .label {
--fx-font-size: 14px;
+-fx-font-size: 10px;
 -fx-font-weight: bold;
 -fx-text-fill: black;
 }
 .button {
- -fx-font-size: 15px;
+ -fx-font-size: 8px;
  -fx-text-fill: black;
  -fx-font-weight: bold;
  -fx-border-color: black;

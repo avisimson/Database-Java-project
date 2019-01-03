@@ -17,3 +17,10 @@
  -fx-background-color: linear-gradient(#86ccd8, #507c84);
  -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.3) , 3, 0.3 , 1.7 , 2.5);
 }
+
+#score {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.3 , 1.6 , 3 );
+}

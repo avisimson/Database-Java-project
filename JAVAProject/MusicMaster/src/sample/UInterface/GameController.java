@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -21,7 +22,6 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class GameController implements PropertyChangeListener{
     private GameLogic gameLogic;
-    private final int timeOfTurn = 15;
     Stage prevStage;
 
     @FXML
@@ -33,7 +33,7 @@ public class GameController implements PropertyChangeListener{
     @FXML
     private Label lifeLabel;
     @FXML
-    private Label countDownLabel;
+    private Label answerResult;
     @FXML
     private Button btnAnswer1;
     @FXML
@@ -92,6 +92,7 @@ public class GameController implements PropertyChangeListener{
             AnchorPane root = myLoader.load();
             GameOverController gameOverController = myLoader.getController();
             gameOverController.setPrevStage(prevStage);
+            gameOverController.setGameScore(gameLogic.getScore());
             Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
             scene.getStylesheets().add(getClass().getResource("GameOver.css").toExternalForm());
             prevStage.setScene(scene);
@@ -154,22 +155,35 @@ public class GameController implements PropertyChangeListener{
             }
             case "timer": {
                 timeLeft.setText("Time: " + newValue);
-                progressBar.setProgress(Double.valueOf(newValue)/(double)gameLogic.getTimeOfTurn());
+                double timeOfTurn = (double)gameLogic.getTimeOfTurn();
+                progressBar.setProgress(Double.valueOf(newValue)/timeOfTurn);
+                if(((int)timeOfTurn) - 3 == Integer.parseInt(newValue)) {
+                    answerResult.setText("");
+                }
                 break;
             }
-            case "answers":{
+            case "answers": {
                 String[] answers = (String[])e.getNewValue();
                 btnAnswer1.setText(answers[0]);
                 btnAnswer2.setText(answers[1]);
                 btnAnswer3.setText(answers[2]);
                 btnAnswer4.setText(answers[3]);
+                break;
+            }
+            case "AnswerResult": {
+                if(newValue.equals("true")) {
+                    answerResult.setText("Correct Answer !");
+                    answerResult.setTextFill(Paint.valueOf("green"));
+                } else {
+                    answerResult.setText("Wrong Answer ");
+                    answerResult.setTextFill(Paint.valueOf("red"));
+
+                }
+                break;
             }
             default: break;
 
         }
     }
 
-    public int getTimeOfTurn(){
-        return this.timeOfTurn;
-    }
 }
