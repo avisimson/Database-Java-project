@@ -114,9 +114,15 @@ public class Search {
             SearchListResponse searchResponse = search.execute();
             List<SearchResult> searchResultList = searchResponse.getItems();
             if (searchResultList != null) {
-                prettyPrint(searchResultList.iterator(), songName);
+                if(searchResultList.size() > 0) {
+                    return searchResultList.get(0).getId().getVideoId();
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
             }
-            return searchResultList.get(0).getId().getVideoId();
+
         } catch (GoogleJsonResponseException e) {
             System.err.println("There was a service error: " + e.getDetails().getCode() + " : "
                     + e.getDetails().getMessage() + e.getDetails().getErrors());

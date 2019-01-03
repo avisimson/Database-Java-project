@@ -126,6 +126,11 @@ public class GameLogic {
         //get song youtube id
         String forSearch = currentQuestion.song.getTitle() + " " + currentQuestion.currentAnswer;
         String songId = search.searchSong(forSearch);
+        if (songId == null) {
+            turnNumber++;
+            playOneTurn();
+            return;
+        }
         this.song.setSongYoutubeId(songId);
         setSong(this.song);
         System.out.println("correctAnswer is: " + currentQuestion.currentAnswer);

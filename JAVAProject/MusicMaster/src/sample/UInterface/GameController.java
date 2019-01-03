@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -22,7 +23,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class GameController implements PropertyChangeListener{
     private GameLogic gameLogic;
-    Stage prevStage;
+    private Stage prevStage;
 
     @FXML
     private Label timeLeft;
@@ -138,18 +139,16 @@ public class GameController implements PropertyChangeListener{
                 int minutes = (int)endOfFadeIn;
                 double seconds = endOfFadeIn - Math.floor(endOfFadeIn);
                 seconds = seconds + 60 * minutes;
+
                 System.out.println("song id in game controoler: " +songId);
-                System.out.println("in function songId: " + "http://www.youtube.com/watch/"+ songId + "?autoplay=1");
-                if(songId != null) {
-                    String url = "https://www.youtube.com/watch?v="+ songId + "&autoplay=1" + "&t=" +seconds + "s";
-                    System.out.println("url is: " + url);
-                    youTubePlayer.getEngine().load(url);
-                } else {
-                    // search for different song
-                }
+
+                String url = "https://www.youtube.com/watch?v="+ songId + "&autoplay=1" + "&t=" +seconds + "s";
+                System.out.println("url is: " + url);
+                youTubePlayer.getEngine().load(url);
                 break;
             }
             case "game-over": {
+                youTubePlayer.getEngine().load("");
                 gameOver();
                 break;
             }

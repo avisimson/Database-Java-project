@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -20,8 +21,10 @@ public class GenreController implements Initializable {
 
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private Label error;
 
-    Stage prevStage;
+    private Stage prevStage;
     private List<Artist> artistList = new LinkedList<>();
     private List<Genre> genreList = new LinkedList<>();
 
@@ -29,16 +32,17 @@ public class GenreController implements Initializable {
     private CheckBox checkBoxes[];
 
     private Question[] questions = new Question[20];
+
     public void initialize(URL location, ResourceBundle resources) {
         genreList = genreLogic.getListOfGenres();
         checkBoxes = new CheckBox[genreList.size()];
 
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             private int activeCount = 0;
-            private int i = 0;
             public void changed(ObservableValue<? extends Boolean> o, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
                     activeCount++;
+                    error.setText("");
                     if (activeCount == 3) {
                         // disable unselected CheckBoxes
                         for (CheckBox cb : checkBoxes) {
@@ -56,7 +60,6 @@ public class GenreController implements Initializable {
                         }
                     }
                     activeCount--;
-                    // System.out.println(activeCount);
                 }
             }
         };
@@ -94,11 +97,14 @@ public class GenreController implements Initializable {
                 for(Genre g : genreList) {
                     if(g.getGenreName().equals(cb.getText())) {
                         genreChoose.add(j,g);
-                        //  System.out.println(genreChoose.get(j).getGenreName());
                         j++;
                     }
                 }
             }
+        }
+        if(genreChoose.size() == 0) {
+            error.setText("Please choose at least one genre");
+            return;
         }
         artistList = genreLogic.getArtistsByGenre(genreChoose);
         questions = genreLogic.Create20Questions(artistList);

@@ -1,19 +1,16 @@
 package sample.UInterface;
 
-import DataBase.DBConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import static javafx.fxml.FXMLLoader.load;
 
 public class MenuController {
 
-    Stage prevStage;
+    private Stage prevStage;
 
     @FXML
     private Button settingsButton;

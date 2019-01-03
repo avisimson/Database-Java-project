@@ -3,7 +3,6 @@ package sample.UInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.GridPane;
@@ -12,10 +11,8 @@ import javafx.stage.Stage;
 public class GameOverController {
 
     @FXML
-    private Button backToMenu;
-    @FXML
     private Label score;
-    Stage prevStage;
+    private Stage prevStage;
 
 
     @FXML
@@ -26,7 +23,7 @@ public class GameOverController {
             MenuController menuController = myLoader.getController();
             menuController.setPrevStage(prevStage);
             Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
-            scene.getStylesheets().add(getClass().getResource("menuApplication.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("menu.css").toExternalForm());
             prevStage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();

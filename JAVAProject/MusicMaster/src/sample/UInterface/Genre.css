@@ -18,3 +18,10 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.3 , 1.6 , 3 );
 }
+#error {
+    -fx-text-fill: black;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+
+}

@@ -14,14 +14,14 @@ public class Main extends Application {
 
     @FXML
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
             GridPane root = myLoader.load();
             MenuController menuController = myLoader.getController();
             menuController.setPrevStage(primaryStage);
             Scene scene = new Scene(root,600,400);
-            scene.getStylesheets().add(getClass().getResource("menuApplication.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("menu.css").toExternalForm());
             primaryStage.setTitle("MusicMaster");
             primaryStage.setScene(scene);
             primaryStage.show();
