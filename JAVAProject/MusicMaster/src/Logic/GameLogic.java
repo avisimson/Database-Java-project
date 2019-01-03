@@ -48,7 +48,7 @@ public class GameLogic {
      */
     public void answer(String id) {
         timerTask.cancel();
-        String correctId = "btnAnswer" + correctAnswer;
+        String correctId = "btnAnswer" + (correctAnswer+1);
 
         if(correctId.equals(id)) {
             correctAnswer();
@@ -98,10 +98,10 @@ public class GameLogic {
         Random rand = new Random();
         correctAnswer = rand.nextInt(4);
 
-        System.out.println("correctAnswer is: " + correctAnswer);
-
         //get current questions
         Question currentQuestion =  questions[turnNumber];
+
+
         this.song = currentQuestion.song;
 
         //create array of answers
@@ -122,7 +122,8 @@ public class GameLogic {
         String songId = search.searchSong(forSearch);
         this.song.setSongYoutubeId(songId);
         setSong(this.song);
-
+        System.out.println("correctAnswer is: " + currentQuestion.currentAnswer);
+        System.out.println("correctAnswer is: " + correctAnswer);
 
         //set timer for turn.
         timeLeft = timeOfTurn;
