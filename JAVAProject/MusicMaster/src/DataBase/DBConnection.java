@@ -7,8 +7,6 @@ import java.util.Random;
 public class DBConnection {
     private java.sql.Connection conn; // DB connection
     private static DBConnection instance;
-    private String ArtistFilter[] = new String[15];
-    private String SongFilter [] = new String[5];
 
     private DBConnection() { }
     /**
@@ -36,9 +34,9 @@ public class DBConnection {
         // creating the connection. Parameters should be taken from config file.
         String host = "localhost";
         String port = "3306";
-        String schema = "musicmaster";
+        String schema = "mm";
         String user = "root"; //username
-        String password = "azsxdcA!1"; //password to mysql
+        String password = "Rkehat19"; //password to mysql
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + schema, user, password);

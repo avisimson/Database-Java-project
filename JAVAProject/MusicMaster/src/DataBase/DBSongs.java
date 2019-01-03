@@ -22,14 +22,12 @@ public class DBSongs {
         songFilter.clear();
         int i = 0;
         //query that return the 5 songs of random artist
-        System.out.println("---SongsLists----");
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select Title,EndOfFadeIn from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
                         "artists.ArtistName = \"" + artistName + "\"")) {
             while ((rs.next() == true) && (i < 5)) {
                 songFilter.add(i,new Song(-1,rs.getString("Title"),-1,
                         1,-1,2019,rs.getFloat("EndOfFadeIn")));
-                System.out.println(songFilter.get(i).getTitle());
                 i++;
             }
         } catch (SQLException e) {
@@ -49,10 +47,7 @@ public class DBSongs {
         if (Songs.get(songNumFilter).getTitle() == null) {
             //if to current artist don't enough songs
             songNumFilter = 1;
-            System.out.println("HELP");
         }
-        System.out.println("---------The Song----------");
-        System.out.println(Songs.get(songNumFilter).getTitle());
         return Songs.get(songNumFilter);
     }
 }

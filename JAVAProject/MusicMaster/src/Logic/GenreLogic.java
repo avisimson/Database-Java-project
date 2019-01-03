@@ -30,8 +30,6 @@ public class GenreLogic {
     public String[] getThreeConfusionAns (String artistName) {
         List<Artist> confusionArtists = conA.CreateConfusionAns(artistName);
         String ans[] = new String[3];
-        System.out.println("--------------The Selected CAns---------------");
-        System.out.println("confusionArtists.size() :" + confusionArtists.size());
         if (confusionArtists.size() == 0) {
             ans[0] = conA.FilterArtistDifferent(artistName,null, null).getArtistName();
             ans[1] = conA.FilterArtistDifferent(artistName,ans[0],null).getArtistName();
@@ -49,7 +47,6 @@ public class GenreLogic {
             ans[1] = confusionArtists.get(1).getArtistName();
             ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]).getArtistName();
         } else {
-            System.out.println("linoy in");
 
             Random rand = new Random();
             int x = rand.nextInt(confusionArtists.size());
@@ -65,9 +62,6 @@ public class GenreLogic {
                 z = rand.nextInt(confusionArtists.size());
             ans[2] = confusionArtists.get(z).getArtistName();
         }
-        System.out.println(ans[0]);
-        System.out.println(ans[1]);
-        System.out.println(ans[2]);
         return ans;
     }
 
@@ -80,19 +74,9 @@ public class GenreLogic {
 
         for (i = 0;i < 20;i++) {
             CAns = getFilterOneArtist(artistFilter).getArtistName();
-            System.out.println("------------CANS---------");
-            System.out.println(CAns);
             Q = getFilterSpecificSong(getFilterSong(CAns));
-            System.out.println("----------Q-------------");
-            System.out.println(Q.getTitle());
             wrongAnswer = getThreeConfusionAns(CAns);
             questionsForGame[i] = new Question(Q, CAns,wrongAnswer[0],wrongAnswer[1],wrongAnswer[2]);
-            System.out.println("------------Question numbar =" + i);
-            System.out.println(questionsForGame[i].getSongName().getTitle());
-            System.out.println(questionsForGame[i].getCurrentAnswer());
-            System.out.println(questionsForGame[i].getConfAns1());
-            System.out.println(questionsForGame[i].getConfAns2());
-            System.out.println(questionsForGame[i].getConfAns3());
         }
         return questionsForGame;
     }

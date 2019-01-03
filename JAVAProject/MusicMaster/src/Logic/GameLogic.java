@@ -217,7 +217,6 @@ public class GameLogic {
         String oldValue = String.valueOf(temp);
         support.firePropertyChange("timer", oldValue, value);
     }
-
     /**
      * send event of inform about Game Over to listeners.
      */
@@ -225,7 +224,6 @@ public class GameLogic {
         String gameOver = "Game Over";
         support.firePropertyChange("game-over", "", gameOver);
     }
-
     /**
      * send event of inform about show answer correct or not.
      */
