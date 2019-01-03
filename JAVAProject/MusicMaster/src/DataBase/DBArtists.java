@@ -104,7 +104,7 @@ public class DBArtists {
                 ("select ArtistID,ArtistName from artists where ArtistName = \""+ artistName + "\"")) {
             while (rs.next() == true){
                 correctArtist = new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")
-                ,-1);
+                        ,-1);
             }
         } catch (SQLException e) {
             System.out.println("ERROR executeQuery - " + e.getMessage());

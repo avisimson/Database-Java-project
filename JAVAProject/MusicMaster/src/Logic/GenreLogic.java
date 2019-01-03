@@ -39,12 +39,12 @@ public class GenreLogic {
         }
         else if (confusionArtists.size() == 1)
         {
-       //     System.out.println("--------------HELP1---------------");
+            //     System.out.println("--------------HELP1---------------");
             ans[0] = confusionArtists.get(0).getArtistName();
             ans[1] = conA.FilterArtistDifferent(artistName,ans[0],null).getArtistName();
             ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]).getArtistName();
         } else if(confusionArtists.size() == 2) {
-        //    System.out.println("--------------HELP2---------------");
+            //    System.out.println("--------------HELP2---------------");
             ans[0] = confusionArtists.get(0).getArtistName();
             ans[1] = confusionArtists.get(1).getArtistName();
             ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]).getArtistName();

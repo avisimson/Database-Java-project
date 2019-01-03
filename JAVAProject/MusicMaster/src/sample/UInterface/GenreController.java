@@ -56,32 +56,32 @@ public class GenreController implements Initializable {
                         }
                     }
                     activeCount--;
-                   // System.out.println(activeCount);
+                    // System.out.println(activeCount);
                 }
             }
         };
 
         int col = 45;
         int row = 0;
-       for(int i = 0; i < genreList.size(); i++) {
-           CheckBox cb = new CheckBox(genreList.get(i).getGenreName());
-           cb.selectedProperty().addListener(listener);
-           checkBoxes[i] = cb;
-           cb.setMnemonicParsing(false);
-           anchorPane.getChildren().add(i,cb);
-           anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12.5px;" +
-                   "-fx-font-weight: bold;" +
-                   "-fx-text-fill: black;");
-           anchorPane.getChildren().get(i).setLayoutX(38 + row*38);
-           anchorPane.getChildren().get(i).setLayoutY(30 + col);
+        for(int i = 0; i < genreList.size(); i++) {
+            CheckBox cb = new CheckBox(genreList.get(i).getGenreName());
+            cb.selectedProperty().addListener(listener);
+            checkBoxes[i] = cb;
+            cb.setMnemonicParsing(false);
+            anchorPane.getChildren().add(i,cb);
+            anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12.5px;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: black;");
+            anchorPane.getChildren().get(i).setLayoutX(38 + row*38);
+            anchorPane.getChildren().get(i).setLayoutY(30 + col);
 
-           row = row + 3;
-           if (((i +1) % 5 == 0))
-           {
-               row = 0;
-               col = col + 40;
-           }
-       }
+            row = row + 3;
+            if (((i +1) % 5 == 0))
+            {
+                row = 0;
+                col = col + 40;
+            }
+        }
     }
     @FXML
     protected void ok() {
@@ -94,7 +94,7 @@ public class GenreController implements Initializable {
                 for(Genre g : genreList) {
                     if(g.getGenreName().equals(cb.getText())) {
                         genreChoose.add(j,g);
-                      //  System.out.println(genreChoose.get(j).getGenreName());
+                        //  System.out.println(genreChoose.get(j).getGenreName());
                         j++;
                     }
                 }
