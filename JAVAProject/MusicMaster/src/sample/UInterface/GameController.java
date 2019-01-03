@@ -21,9 +21,11 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class GameController implements PropertyChangeListener{
     private GameLogic gameLogic;
-    public static final int timeOfTurn = 15;
+    private final int timeOfTurn = 15;
     Stage prevStage;
 
+    @FXML
+    private Label timeLeft;
     @FXML
     private ProgressBar progressBar;
     @FXML
@@ -49,13 +51,22 @@ public class GameController implements PropertyChangeListener{
     public GameController(){
         gameLogic = new GameLogic();
         gameLogic.addPropertyChangeListener(this);
+        progressBar = new ProgressBar(0);
     }
 
+    /**
+     * starts the game from game logic.
+     * @param questions
+     */
     public void startGame(Question[] questions){
         this.gameLogic.startGame(questions);
     }
 
 
+    /**
+     * set stage of game screen on previous stage.
+     * @param stage
+     */
     public void setPrevStage(Stage stage){
         this.prevStage = stage;
     }
@@ -72,7 +83,10 @@ public class GameController implements PropertyChangeListener{
     }
 
 
-    private void gameOver(){
+    /**
+     when life is gone- go to game over screen.
+     */
+    private void gameOver() {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
             AnchorPane root = myLoader.load();
@@ -88,6 +102,9 @@ public class GameController implements PropertyChangeListener{
 
 
     @FXML
+    /**
+     * initialize buttons actions.
+     */
     public void initialize() {
         btnAnswer1.setOnAction(e->answer(e));
         btnAnswer2.setOnAction(e->answer(e));
@@ -96,40 +113,63 @@ public class GameController implements PropertyChangeListener{
     }
 
     @Override
+    /**
+     * function excecutes when property changes in logic, and change screen accordingly.
+     * @param e is the event that happened.
+     */
     public void propertyChange(PropertyChangeEvent e) {
         String propertyName = e.getPropertyName();
         String newValue = String.valueOf(e.getNewValue());
 
-        if ("score".equals(propertyName)){
-            scoreLabel.setText(String.valueOf("Score = " +  newValue));
-
-        } else if ("life".equals(propertyName)){
-            lifeLabel.setText(String.valueOf("life = " +  newValue));
-            System.out.println("propertyChanged lifeLabel :");
-        }
-        else if("song".equals(propertyName)){
-
-            Song song = (Song)e.getNewValue();
-            String songId = song.getSongYoutubeId();
-            float endOfFadeIn = song.getEndOfFadeIn();
-            int minutes = (int)endOfFadeIn;
-            double seconds = endOfFadeIn - Math.floor(endOfFadeIn);
-            seconds = seconds + 60 * minutes;
-            System.out.println("song id in game controoler: " +songId);
-            System.out.println("in function songId: " + "http://www.youtube.com/watch/"+ songId + "?autoplay=1");
-            if(songId != null) {
-                String url = "https://www.youtube.com/watch?v="+ songId + "&autoplay=1" + "&t=" +seconds + "s";
-                System.out.println("url is: " + url);
-                youTubePlayer.getEngine().load(url);
-            } else {
-                // search for different song
+        switch(propertyName) {
+            case "score": {
+                scoreLabel.setText("Score = " +  newValue);
+                break;
             }
-        } else if ("answers".equals(propertyName)){
-            String[] answers = (String[])e.getNewValue();
-            btnAnswer1.setText(answers[0]);
-            btnAnswer2.setText(answers[1]);
-            btnAnswer3.setText(answers[2]);
-            btnAnswer4.setText(answers[3]);
+            case "life": {
+                lifeLabel.setText("Life = " +  newValue);
+                break;
+            }
+            case "song": {
+                Song song = (Song)e.getNewValue();
+                String songId = song.getSongYoutubeId();
+                float endOfFadeIn = song.getEndOfFadeIn();
+                int minutes = (int)endOfFadeIn;
+                double seconds = endOfFadeIn - Math.floor(endOfFadeIn);
+                seconds = seconds + 60 * minutes;
+                System.out.println("song id in game controoler: " +songId);
+                System.out.println("in function songId: " + "http://www.youtube.com/watch/"+ songId + "?autoplay=1");
+                if(songId != null) {
+                    String url = "https://www.youtube.com/watch?v="+ songId + "&autoplay=1" + "&t=" +seconds + "s";
+                    System.out.println("url is: " + url);
+                    youTubePlayer.getEngine().load(url);
+                } else {
+                    // search for different song
+                }
+                break;
+            }
+            case "game-over": {
+                gameOver();
+                break;
+            }
+            case "timer": {
+                timeLeft.setText("Time: " + newValue);
+                progressBar.setProgress(Double.valueOf(newValue)/(double)gameLogic.getTimeOfTurn());
+                break;
+            }
+            case "answers":{
+                String[] answers = (String[])e.getNewValue();
+                btnAnswer1.setText(answers[0]);
+                btnAnswer2.setText(answers[1]);
+                btnAnswer3.setText(answers[2]);
+                btnAnswer4.setText(answers[3]);
+            }
+            default: break;
+
         }
+    }
+
+    public int getTimeOfTurn(){
+        return this.timeOfTurn;
     }
 }

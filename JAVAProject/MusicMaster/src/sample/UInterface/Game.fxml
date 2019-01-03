@@ -45,6 +45,7 @@
     </rowConstraints>
     <children>
         <WebView fx:id="youTubePlayer" maxHeight="0" prefHeight="0" prefWidth="0"/>
+        <Label fx:id="timeLeft" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Time = 0" GridPane.columnIndex="9" GridPane.rowIndex="1" GridPane.columnSpan="4" />
         <Label fx:id="lifeLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Life = 3" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="4" />
         <Label fx:id="scoreLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Score = 0" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="4" />
         <Label fx:id="question" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" text="Who is singing?" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="1" />
