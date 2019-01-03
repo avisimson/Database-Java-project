@@ -21,7 +21,7 @@ public class GenreLogic {
     }
 
     //for the game , can be change
-    public String getFilterOneArtist(List<Artist> artistFilter) {return conA.FilterOneArtist(artistFilter);}
+    public Artist getFilterOneArtist(List<Artist> artistFilter) {return conA.FilterOneArtist(artistFilter);}
 
     public List<Song> getFilterSong(String oneArtist) {return conS.FilterSong(oneArtist);}
 
@@ -33,21 +33,21 @@ public class GenreLogic {
         System.out.println("--------------The Selected CAns---------------");
         System.out.println("confusionArtists.size() :" + confusionArtists.size());
         if (confusionArtists.size() == 0) {
-            ans[0] = conA.FilterArtistDifferentTwice(artistName,null);
-            ans[1] = conA.FilterArtistDifferentTwice(artistName,ans[0]);
-            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]);
+            ans[0] = conA.FilterArtistDifferent(artistName,null, null).getArtistName();
+            ans[1] = conA.FilterArtistDifferent(artistName,ans[0],null).getArtistName();
+            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]).getArtistName();
         }
         else if (confusionArtists.size() == 1)
         {
        //     System.out.println("--------------HELP1---------------");
             ans[0] = confusionArtists.get(0).getArtistName();
-            ans[1] = conA.FilterArtistDifferentTwice(artistName,ans[0]);
-            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]);
+            ans[1] = conA.FilterArtistDifferent(artistName,ans[0],null).getArtistName();
+            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]).getArtistName();
         } else if(confusionArtists.size() == 2) {
         //    System.out.println("--------------HELP2---------------");
             ans[0] = confusionArtists.get(0).getArtistName();
             ans[1] = confusionArtists.get(1).getArtistName();
-            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]);
+            ans[2] = conA.FilterArtistDifferent(artistName,ans[0],ans[1]).getArtistName();
         } else {
             System.out.println("linoy in");
 
@@ -79,7 +79,7 @@ public class GenreLogic {
         int i = 0;
 
         for (i = 0;i < 20;i++) {
-            CAns = getFilterOneArtist(artistFilter);
+            CAns = getFilterOneArtist(artistFilter).getArtistName();
             System.out.println("------------CANS---------");
             System.out.println(CAns);
             Q = getFilterSpecificSong(getFilterSong(CAns));
@@ -88,7 +88,7 @@ public class GenreLogic {
             wrongAnswer = getThreeConfusionAns(CAns);
             questionsForGame[i] = new Question(Q, CAns,wrongAnswer[0],wrongAnswer[1],wrongAnswer[2]);
             System.out.println("------------Question numbar =" + i);
-            System.out.println(questionsForGame[i].getSongName());
+            System.out.println(questionsForGame[i].getSongName().getTitle());
             System.out.println(questionsForGame[i].getCurrentAnswer());
             System.out.println(questionsForGame[i].getConfAns1());
             System.out.println(questionsForGame[i].getConfAns2());

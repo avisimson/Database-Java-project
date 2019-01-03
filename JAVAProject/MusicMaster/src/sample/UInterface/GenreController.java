@@ -23,14 +23,11 @@ public class GenreController implements Initializable {
 
     Stage prevStage;
     private List<Artist> artistList = new LinkedList<>();
-    private List<Song> songsList = new LinkedList<>();
     private List<Genre> genreList = new LinkedList<>();
-    private String threeConfusionAns[] = new String[3];
 
     private GenreLogic genreLogic = new GenreLogic();
     private CheckBox checkBoxes[];
-    private String specificSong;
-    private String specificArtist;
+
     private Question[] questions = new Question[20];
     public void initialize(URL location, ResourceBundle resources) {
         genreList = genreLogic.getListOfGenres();
@@ -104,10 +101,6 @@ public class GenreController implements Initializable {
             }
         }
         artistList = genreLogic.getArtistsByGenre(genreChoose);
-       // specificArtist = genreLogic.getFilterOneArtist(artistList);
-       // songsList = genreLogic.getFilterSong(specificArtist);
-       // specificSong = genreLogic.getFilterSpesificSong(songsList);
-       // threeConfusionAns = genreLogic.getThreeConfusionAns(specificArtist);
         questions = genreLogic.Create20Questions(artistList);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
