@@ -15,27 +15,49 @@ public class DBArtists {
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
     private List<Artist> confusionArtist = new LinkedList<>();
 
-    /**
-     * function that return artist that not equal to exist artists in the question
-     * @param nameArtist1 is the name of first artist - can't be null
-     * @param nameArtist2 is the name of second artist - can be null
-     * @param nameArtist3 is the name of third artist - can be null
-     * @return the correct artist
-     */
-    public Artist FilterArtistDifferent(Artist nameArtist1, Artist nameArtist2, Artist nameArtist3) {
-        Artist correctArtist = null;
+
+    public List<Artist> FilterArtistDifferent(Artist artist,List<Artist> artists,List<Genre> genres) {
+        List<Artist> list =  new LinkedList<>();
+        String artistsId = "";
+        String genresId = "";
+        String artistId = String.valueOf(artist.getArtistId());
+
+        for(int j = 0; j < genres.size(); j++) {
+            if ( j != 0 ){
+                genresId += ",";
+            }
+            genresId += genres.get(j).getGenreId();
+        }
+
+        //create string
+        for(int j = 0; j < artists.size(); j++) {
+
+            if ( j != 0 ){
+                artistsId += ",";
+            }
+            artistsId += artists.get(j).getArtistId();
+        }
+        String str = "where artistid not in("+artistsId+")";
+        if(artists.size() == 0 ){
+            str = "";
+        }
+
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select distinct ArtistID,ArtistName from artists where ArtistID != \""+ nameArtist1.getArtistId() + "\" " +
-                        "and ArtistID != \"" + nameArtist2.getArtistId() + "\" and ArtistID != \"" + nameArtist3.getArtistId() + "\" limit 1")) {
-            while (rs.next()){
-                correctArtist = new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")
-                        ,-1) ;
+                ("select distinct artistid,ArtistName from artists,(select distinct artistid as newar from genreartists as a,"+
+                                "(select distinct genreID as newgen from genreartists  where ArtistID="+artistId+ " and " +
+                                "genreID in("+genresId+")) as b) as c " +str + "LIMIT 3")) {
+
+            while (rs.next() && list.size() <3){
+                list.add( new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")
+                        ,-1)) ;
             }
         } catch (SQLException e) {
             System.out.println("ERROR executeQuery - " + e.getMessage());
         }
-        return correctArtist;
+        return list;
     }
+
+
 
     /**
      *

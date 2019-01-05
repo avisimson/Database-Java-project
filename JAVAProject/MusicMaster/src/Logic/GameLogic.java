@@ -283,36 +283,28 @@ public class GameLogic {
         List<Artist> confusionArtists = DB_artists.CreateConfusionAns(artist);
         List<Artist> ansArt = new LinkedList<>();
         String ans[] = new String[3];
-        if (confusionArtists.size() == 0) {
-            ansArt.add(0, DB_artists.FilterArtistDifferent(artist, null, null));
-            ansArt.add(1, DB_artists.FilterArtistDifferent(artist, ansArt.get(0), null));
-            ansArt.add(2, DB_artists.FilterArtistDifferent(artist, ansArt.get(0), ansArt.get(1)));
-        } else if (confusionArtists.size() == 1) {
-            //     System.out.println("--------------HELP1---------------");
-            ansArt.add(0 , confusionArtists.get(0));
-            ansArt.add(1, DB_artists.FilterArtistDifferent(artist, ansArt.get(0), null));
-            ansArt.add(2, DB_artists.FilterArtistDifferent(artist, ansArt.get(0), ansArt.get(1)));
-        } else if (confusionArtists.size() == 2) {
-            //    System.out.println("--------------HELP2---------------");
-            ansArt.add(0, confusionArtists.get(0));
-            ansArt.add(1,  confusionArtists.get(1));
-            ansArt.add(2,  DB_artists.FilterArtistDifferent(artist, ansArt.get(0), ansArt.get(1)));
-        } else {
 
-            Random rand = new Random();
-            int x = rand.nextInt(confusionArtists.size());
-            while (confusionArtists.get(x).getArtistName() == null)
-                x = rand.nextInt(confusionArtists.size());
-            ansArt.add(0,  confusionArtists.get(x));
-            int y = rand.nextInt(confusionArtists.size());
-            while ((x == y) || ((confusionArtists.get(y).getArtistName() == null)))
-                y = rand.nextInt(confusionArtists.size());
-            ansArt.add(1, confusionArtists.get(y));
-            int z = rand.nextInt(confusionArtists.size());
-            while ((z == y) || (z == x) || (confusionArtists.get(z).getArtistName() == null))
-                z = rand.nextInt(confusionArtists.size());
-            ansArt.add(2, confusionArtists.get(z));
+        if (confusionArtists.size() < 3){
+            confusionArtists = DB_artists.FilterArtistDifferent(artist,confusionArtists,genres);
         }
+
+
+        Random rand = new Random();
+        System.out.println("confusionArtists.size()" + confusionArtists.size());
+        int x = rand.nextInt(confusionArtists.size());
+        while (confusionArtists.get(x).getArtistName() == null)
+            x = rand.nextInt(confusionArtists.size());
+        ansArt.add(0,  confusionArtists.get(x));
+        int y = rand.nextInt(confusionArtists.size());
+        while ((x == y) || ((confusionArtists.get(y).getArtistName() == null)))
+            y = rand.nextInt(confusionArtists.size());
+        ansArt.add(1, confusionArtists.get(y));
+        int z = rand.nextInt(confusionArtists.size());
+        while ((z == y) || (z == x) || (confusionArtists.get(z).getArtistName() == null))
+            z = rand.nextInt(confusionArtists.size());
+        ansArt.add(2, confusionArtists.get(z));
+
+
         return ansArt;
     }
 
