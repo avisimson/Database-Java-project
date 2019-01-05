@@ -1,6 +1,7 @@
 package DataBase;
 
 import Logic.Artist;
+import Logic.Genre;
 import Logic.Song;
 
 import java.sql.ResultSet;
@@ -15,19 +16,19 @@ public class DBSongs {
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
     /**
      * function that return songs of random Artist.
-     * @param artistName is the name of artist.
+     * @param artist is the name of artist.
      * @return the songs of random Artist.
      */
-    public List<Song> FilterSong(String artistName) {
+    public List<Song> FilterSong(Artist artist) {
         songFilter.clear();
         int i = 0;
         //query that return the 5 songs of random artist
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select Title,EndOfFadeIn from songinfo,artists where artists.ArtistID = songinfo.ArtistID and " +
-                        "artists.ArtistName = \"" + artistName + "\"")) {
-            while ((rs.next() == true) && (i < 5)) {
-                songFilter.add(i,new Song(-1,rs.getString("Title"),-1,
-                        1,-1,2019,rs.getFloat("EndOfFadeIn")));
+                ("select distinct SongID,year,Title,EndOfFadeIn from songinfo" +
+                        " where ArtistID = " + artist.getArtistId() +" limit 5;")) {
+            while (rs.next()) {
+                songFilter.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
+                        artist.getArtistId(),-1,rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
                 i++;
             }
         } catch (SQLException e) {
@@ -35,19 +36,35 @@ public class DBSongs {
         }
         return songFilter;
     }
-    /**
-     * function that return specific song of artist in order to play in background
-     * @return random song.
-     */
-    public Song FilterSpecificSong(List<Song> Songs) {
-        Random rand = new Random();
-        //choose random song from the list.
-        int songNumFilter = rand.nextInt(Songs.size());
-        //check if exist this num song , else return the second song
-        if (Songs.get(songNumFilter).getTitle() == null) {
-            //if to current artist don't enough songs
-            songNumFilter = 1;
+
+    public List<Song> getListOfSimilarSongs(Song song, List<Genre> genres) {
+        List<Song> songList =  new LinkedList<>();
+        String genresId = "";
+        for(int j = 0; j < genres.size(); j++) {
+            if ( j != 0 ){
+                genresId += ",";
+            }
+            genresId += genres.get(j).getGenreId();
         }
-        return Songs.get(songNumFilter);
+        int i = 0;
+        //query that return the 5 songs of random artist
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
+                ("select distinct songid, title,year,artistid from songinfo ," +
+                        "(select distinct artistid as newar from genreartists as a" +
+                 ",(select distinct genreID as newgen from genreartists where ArtistID=" + song.getArtistId() +
+                        " and genreID in("+genresId+ ")) as b" +
+                         " where b.newgen=a.genreid) as n" +
+                          " where n.newar=songinfo.artistid and year=(select year from songinfo where" +
+                        " SongID= " + song.getSongId() +")" + " order by songid;")) {
+            while (rs.next()) {
+                songList.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
+                        rs.getInt("artistID"),-1,rs.getInt("year"),-1));
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR executeQuery - " + e.getMessage());
+        }
+        return songList;
     }
+
 }

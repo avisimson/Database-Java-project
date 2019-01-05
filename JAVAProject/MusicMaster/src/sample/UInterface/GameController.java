@@ -45,11 +45,12 @@ public class GameController implements PropertyChangeListener{
     @FXML
     private WebView youTubePlayer;
 
+
     /**
      * constructor
      */
-    public GameController( List<Artist> artistList){
-        gameLogic = new GameLogic();
+    public GameController( List<Artist> artistList, List<Genre> genres){
+        gameLogic = new GameLogic(genres);
         gameLogic.Create20Questions(artistList);
         gameLogic.addPropertyChangeListener(this);
         progressBar = new ProgressBar(0);

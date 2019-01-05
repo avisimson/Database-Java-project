@@ -2,9 +2,7 @@ package Logic;
 
 import DataBase.DBArtists;
 import DataBase.DBGenre;
-import DataBase.DBSongs;
 import java.util.List;
-import java.util.Random;
 
 public class GenreLogic {
 

@@ -2,9 +2,9 @@ package Logic;
 
 public class Artist {
 
-    int artistId;
-    String artistName;
-    double artistHotness;
+    private int artistId;
+    private String artistName;
+    private double artistHotness;
 
     public Artist(int artistId, String artistName, double artistHotness) {
         this.artistId = artistId;

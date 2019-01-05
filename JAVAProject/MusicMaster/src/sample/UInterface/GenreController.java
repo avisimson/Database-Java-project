@@ -110,7 +110,7 @@ public class GenreController implements Initializable {
         //questions = genreLogic.Create20Questions(artistList);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
-            myLoader.setController(new GameController(artistList));
+            myLoader.setController(new GameController(artistList,genreChoose));
             GridPane root =  myLoader.load();
             GameController gameController = myLoader.getController();
             gameController.setPrevStage(prevStage);

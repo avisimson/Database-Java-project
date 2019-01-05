@@ -22,12 +22,12 @@ public class DBArtists {
      * @param nameArtist3 is the name of third artist - can be null
      * @return the correct artist
      */
-    public Artist FilterArtistDifferent(String nameArtist1, String nameArtist2, String nameArtist3) {
+    public Artist FilterArtistDifferent(Artist nameArtist1, Artist nameArtist2, Artist nameArtist3) {
         Artist correctArtist = null;
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select ArtistID,ArtistName from artists where ArtistID != \""+ nameArtist1 + "\" " +
-                        "and ArtistID != \"" + nameArtist2 + "\" and ArtistID != \"" + nameArtist3 + "\" limit 1")) {
-            while (rs.next() == true){
+                ("select distinct ArtistID,ArtistName from artists where ArtistID != \""+ nameArtist1.getArtistId() + "\" " +
+                        "and ArtistID != \"" + nameArtist2.getArtistId() + "\" and ArtistID != \"" + nameArtist3.getArtistId() + "\" limit 1")) {
+            while (rs.next()){
                 correctArtist = new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")
                         ,-1) ;
             }
@@ -36,45 +36,31 @@ public class DBArtists {
         }
         return correctArtist;
     }
+
     /**
+     *
      * function that execute query that return list of artist in this genres
      *
      * @param genreNames is the array of selected genres
      * @return the list of artist that songs in this genres
      */
     public List<Artist> FilterArtistByGenre(List<Genre> genreNames) {
-        FilterByGenre(genreNames);
-        return artistFilter;
-    }
-
-    public Artist FilterOneArtist(List<Artist> artistFilter) {
-        Random rand = new Random();
-        int i = 0;
-        //choose random artist from the list.
-        int artistNumFilter = rand.nextInt(artistFilter.size());
-        return artistFilter.get(artistNumFilter);
-    }
-    /**
-     * function that return the artists that song in selected genre
-     * @param genreChoice is the array of selected genre
-     */
-    public void FilterByGenre(List<Genre> genreChoice) {
         int i = 0;
         String genreNumberQuery = "(";
-        for (int j = 0; j < genreChoice.size(); j++) {
+        for (int j = 0; j < genreNames.size(); j++) {
             if (j != 0) {
                 genreNumberQuery += " or ";
             }
             genreNumberQuery += "GenreName = \"";
-            genreNumberQuery += genreChoice.get(j).getGenreName();
+            genreNumberQuery += genreNames.get(j).getGenreName();
             genreNumberQuery += "\"";
         }
         genreNumberQuery += ")";
         //query genre
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select distinct(ArtistName),artists.ArtistID from artists,genre,genreartists " +
+                ("select distinct artists.ArtistID, ArtistName from artists,genre,genreartists " +
                         "where artists.ArtistID = genreArtists.ArtistID and genreartists.GenreID = genre.GenreID and " +
-                        genreNumberQuery + "limit 15;")) {
+                        genreNumberQuery + "limit 50;")) {
             while (rs.next()) {
                 artistFilter.add(i, new Artist(rs.getInt("ArtistID")
                         ,rs.getString("ArtistName"), -1));
@@ -83,7 +69,10 @@ public class DBArtists {
         } catch (SQLException e) {
             System.out.println("ERROR executeQuery - " + e.getMessage());
         }
+        return artistFilter;
     }
+
+
     /**
      * function that return the id of artist
      * @param artistName is the name of the artist of the current song in run
@@ -104,22 +93,22 @@ public class DBArtists {
     }
     /**
      * function that create list of  different confusion ans (according to table "SimilarArtists"
-     * @param artistName is the artist of this song
+     * @param artist is the artist of this song
      * @return the list of artist that similar to artist of this song
      */
-    public List<Artist> CreateConfusionAns (String artistName) {
+    public List<Artist> CreateConfusionAns (Artist artist) {
         confusionArtist.clear();
-        int idAnswer = IDRightArtist(artistName).getArtistId();
+        int idAnswer = artist.getArtistId();
         System.out.println(idAnswer);
         int j = 0;
         System.out.println("--------------ConfuseAns---------------");
         //search in 1 col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select ArtistName from similarartists,artists " +
+                ("select  artists.ArtistID, ArtistName from similarartists,artists " +
                         "where artists.ArtistID = similarArtists.similarToArtistID " +
-                        "and similarArtists.ArtistID =" + idAnswer)) {
-            while ((rs.next() == true)&&(j < 10)){
-                confusionArtist.add(j, new Artist(-1,rs.getString("ArtistName"), -1));
+                        "and similarArtists.ArtistID =" + artist.getArtistId() +" limit 10")) {
+            while (rs.next()){
+                confusionArtist.add(j, new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"), -1));
                 j++;
 
             }
@@ -128,10 +117,11 @@ public class DBArtists {
         }
         //search in 2 col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select ArtistName from similarartists,artists " +
-                        "where artists.ArtistID = similarArtists.ArtistID and similarToArtistID =" + idAnswer)) {
-            while ((rs.next() == true)&&(j < 10)){
-                confusionArtist.add(j, new Artist(-1,rs.getString("ArtistName"), -1));
+                ("select artists.ArtistID, ArtistName from similarartists,artists " +
+                        "where artists.ArtistID = similarArtists.ArtistID " +
+                        "and similarToArtistID =" + artist.getArtistId() +" limit 10")) {
+            while (rs.next()){
+                confusionArtist.add(j, new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"), -1));
                 j++;
 
             }
