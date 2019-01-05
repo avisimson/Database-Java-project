@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.UInterface.HighScoreController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+    <Label fx:id="highscores" layoutX="200.0" layoutY="19.0" prefHeight="40.0" prefWidth="285.0" text="High Score Table">
+        <font>
+            <Font name="System Bold" size="28.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place" layoutX="100.0" layoutY="60.0" prefHeight="40.0" prefWidth="285.0" text="Place">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place1" layoutX="110.0" layoutY="90.0" prefHeight="40.0" prefWidth="285.0" text="1">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place2" layoutX="110.0" layoutY="120.0" prefHeight="40.0" prefWidth="285.0" text="2">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place3" layoutX="110.0" layoutY="150.0" prefHeight="40.0" prefWidth="285.0" text="3">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place4" layoutX="110.0" layoutY="180.0" prefHeight="40.0" prefWidth="285.0" text="4">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place5" layoutX="110.0" layoutY="210.0" prefHeight="40.0" prefWidth="285.0" text="5">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place6" layoutX="110.0" layoutY="240.0" prefHeight="40.0" prefWidth="285.0" text="6">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place7" layoutX="110.0" layoutY="270.0" prefHeight="40.0" prefWidth="285.0" text="7">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place8" layoutX="110.0" layoutY="300.0" prefHeight="40.0" prefWidth="285.0" text="8">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place9" layoutX="110.0" layoutY="330.0" prefHeight="40.0" prefWidth="285.0" text="9">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Place10" layoutX="110.0" layoutY="360.0" prefHeight="40.0" prefWidth="285.0" text="10">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="User" layoutX="200.0" layoutY="60.0" prefHeight="40.0" prefWidth="285.0" text="User">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Label fx:id="Score" layoutX="300.0" layoutY="60.0" prefHeight="40.0" prefWidth="285.0" text="Score">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+    <Button fx:id="backToMenu" onAction="#goToMain" layoutX="420.0" layoutY="200.0"
+            prefWidth="150" mnemonicParsing="false" text="Back To Menu" />
+    </children>
+</AnchorPane>

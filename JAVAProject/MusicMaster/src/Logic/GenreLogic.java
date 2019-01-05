@@ -1,6 +1,7 @@
 package Logic;
 
 import DataBase.DBArtists;
+import DataBase.DBConnection;
 import DataBase.DBGenre;
 import java.util.List;
 
