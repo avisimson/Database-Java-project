@@ -1,7 +1,5 @@
 package sample.UInterface;
-import Logic.GameLogic;
-import Logic.Question;
-import Logic.Song;
+import Logic.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 
 import static javafx.fxml.FXMLLoader.load;
@@ -49,18 +48,19 @@ public class GameController implements PropertyChangeListener{
     /**
      * constructor
      */
-    public GameController(){
+    public GameController( List<Artist> artistList){
         gameLogic = new GameLogic();
+        gameLogic.Create20Questions(artistList);
         gameLogic.addPropertyChangeListener(this);
         progressBar = new ProgressBar(0);
     }
 
     /**
      * starts the game from game logic.
-     * @param questions
      */
-    public void startGame(Question[] questions){
-        this.gameLogic.startGame(questions);
+    public void startGame(){
+
+        this.gameLogic.startGame();
     }
 
 

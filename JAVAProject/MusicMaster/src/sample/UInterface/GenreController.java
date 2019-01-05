@@ -107,16 +107,17 @@ public class GenreController implements Initializable {
             return;
         }
         artistList = genreLogic.getArtistsByGenre(genreChoose);
-        questions = genreLogic.Create20Questions(artistList);
+        //questions = genreLogic.Create20Questions(artistList);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
+            myLoader.setController(new GameController(artistList));
             GridPane root =  myLoader.load();
             GameController gameController = myLoader.getController();
             gameController.setPrevStage(prevStage);
             Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
             scene.getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
             prevStage.setScene(scene);
-            gameController.startGame(questions);
+            gameController.startGame();
 
         } catch (Exception e) {
             e.printStackTrace();
