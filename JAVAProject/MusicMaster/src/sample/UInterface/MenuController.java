@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MenuController implements Initializable {
+public class MenuController {
 
     private Stage prevStage;
     @FXML
@@ -28,6 +28,8 @@ public class MenuController implements Initializable {
     private Button endButton;
     @FXML
     private Label WelcomeToMusicMaster;
+    @FXML
+    private Label NoInternet;
 
     @FXML
     protected void highScoreTable() {
@@ -45,6 +47,19 @@ public class MenuController implements Initializable {
     }
     @FXML
     protected void startGame() {
+        if (netIsAvailable()) {
+            goToGenreScreen();
+            return;
+        }
+        NoInternet.setStyle("-fx-font-size: 13px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-text-fill: red;");
+        NoInternet.setVisible(true);
+
+    }
+
+    //moving into genre pick before start the game.
+    private void goToGenreScreen() {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Genre.fxml"));
             AnchorPane root = myLoader.load();
@@ -69,7 +84,7 @@ public class MenuController implements Initializable {
         this.prevStage = stage;
     }
 
-
+/*
     //try to connect to wifi, if not cannot start game.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -83,7 +98,7 @@ public class MenuController implements Initializable {
                 "-fx-text-fill: red;");
         startButton.setDisable(true);
     }
-
+*/
     //returns true if there is a network connection- false if there isn't.
     private static boolean netIsAvailable() {
         try {
