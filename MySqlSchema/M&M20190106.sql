@@ -134,6 +134,7 @@ CREATE TABLE `highscores` (
 
 LOCK TABLES `highscores` WRITE;
 /*!40000 ALTER TABLE `highscores` DISABLE KEYS */;
+INSERT INTO `highscores` VALUES ('Yakir',2500),('Yakir',2500),('yossi',150),('ben',200),('yaniv',250),('kobi',230),('ben',170),('kobi',10000),('yossi',25),('to',46),('ab',79),('nk',84),('ee',100),('tt',150),('yy',123),('uu',78),('ii',55),('ll',800),('Yakir',2500);
 /*!40000 ALTER TABLE `highscores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-05 21:53:43
+-- Dump completed on 2019-01-06 10:35:11
