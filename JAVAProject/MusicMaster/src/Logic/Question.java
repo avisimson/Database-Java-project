@@ -1,4 +1,10 @@
 package Logic;
+
+enum QuestionType
+{
+    WHO_SINGS, SONG_NAME;
+}
+
 /**
  * class of Questions object that contain the details about every Question.
  */
@@ -9,6 +15,7 @@ public class Question {
     String confAns1;
     String confAns2;
     String confAns3;
+    QuestionType type;
 
     /**
      * constructor
@@ -18,12 +25,13 @@ public class Question {
      * @param confAns2 is confuse ans 2
      * @param confAns3 is confuse ans 3
      */
-    public Question(Song song, String currentAnswer, String confAns1, String confAns2, String confAns3) {
+    public Question(Song song, String currentAnswer, String confAns1, String confAns2, String confAns3,QuestionType type) {
         this.song = song;
         this.currentAnswer = currentAnswer;
         this.confAns1 = confAns1;
         this.confAns2 = confAns2;
         this.confAns3 = confAns3;
+        this.type = type;
     }
     /**
      * function that get the name of song

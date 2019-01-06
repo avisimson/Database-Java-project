@@ -25,6 +25,8 @@ public class GameController implements PropertyChangeListener{
     private Stage prevStage;
 
     @FXML
+    private Label question;
+    @FXML
     private Label timeLeft;
     @FXML
     private ProgressBar progressBar;
@@ -168,6 +170,10 @@ public class GameController implements PropertyChangeListener{
                 btnAnswer2.setText(answers[1]);
                 btnAnswer3.setText(answers[2]);
                 btnAnswer4.setText(answers[3]);
+                break;
+            }
+            case "question": {
+                this.question.setText(newValue);
                 break;
             }
             case "AnswerResult": {

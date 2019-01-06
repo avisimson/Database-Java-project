@@ -24,6 +24,7 @@ public class GameLogic {
     private Search search = new Search();
     private Question[] questions;
     private String[] answers = new String[4];
+    private String question;
     private Song song;
     private int turnNumber;
     private DBArtists DB_artists = new DBArtists();
@@ -113,7 +114,13 @@ public class GameLogic {
             return;
         }
         Question currentQuestion =  questions[turnNumber];
-
+        if(currentQuestion.type == QuestionType.SONG_NAME){
+            this.question = "What's the name of the song?";
+        }
+        else if(currentQuestion.type == QuestionType.WHO_SINGS){
+            this.question = "Who is singing?";
+        }
+        setQuestion(this.question);
 
         this.song = currentQuestion.song;
 
@@ -201,6 +208,15 @@ public class GameLogic {
     }
 
     /**
+     * send event of change in life value to listeners.
+     * @param value
+     */
+    public void setQuestion(String value) {
+        this.question = value;
+        support.firePropertyChange("question", null, this.question);
+    }
+
+    /**
      * send event of change in song value to listeners.
      * @param value
      */
@@ -251,61 +267,105 @@ public class GameLogic {
 
     public void Create20Questions(List<Artist> artistFilter) {
         Question questionsForGame[] = new Question[20];
-        List<Artist> wrongAnswer;
-        Artist CAns;
-        Song questionSong;
-
+        Question question;
+        System.out.println("--------------ccreateQustion---------------");
         for (int i = 0;i < 20;i++) {
-            Random randA = new Random();
-            //choose random artist from the list.
-            int artistNumFilter = randA.nextInt(artistFilter.size());
-            CAns = artistFilter.get(artistNumFilter);
-            List<Song> songs = DB_songs.FilterSong(CAns);
-
-            Random randS = new Random();
-            //choose random song from the list.
-            int songNumFilter = randS.nextInt(songs.size());
-            //check if exist this num song , else return the second song
-            if (songs.get(songNumFilter).getTitle() == null) {
-                //if to current artist don't enough songs
-                songNumFilter = 1;
+            if(i % 2 == 0){
+                System.out.println("createQustion WHO_SINGS");
+                question =  createQustion(QuestionType.WHO_SINGS,artistFilter);
             }
-            questionSong = songs.get(songNumFilter);
-            //DB_songs.getListOfSimilarSongs(questionSong, genres);
-            wrongAnswer = getThreeConfusionAns(CAns);
-            questionsForGame[i] = new Question(questionSong, CAns.getArtistName(),
-                    wrongAnswer.get(0).getArtistName(),wrongAnswer.get(1).getArtistName(),wrongAnswer.get(2).getArtistName());
+
+            else{
+                System.out.println("createQustion SONG_NAME");
+                question =  createQustion(QuestionType.SONG_NAME,artistFilter);
+            }
+
+            questionsForGame[i] = question;
         }
+
         this.questions =  questionsForGame;
     }
 
-    private List<Artist> getThreeConfusionAns (Artist artist) {
+
+    private Question createQustion(QuestionType type,List<Artist> artistFilter){
+        Artist CAns;
+        Song questionSong;
+        Random randA = new Random();
+        Random randS = new Random();
+        List<String> wrongAnswer;
+        Question question = null;
+
+        //choose random artist from the list.
+        int artistNumFilter = randA.nextInt(artistFilter.size());
+        CAns = artistFilter.get(artistNumFilter);
+        List<Song> songs = DB_songs.FilterSong(CAns);
+
+        //choose random song from the list.
+        int songNumFilter = randS.nextInt(songs.size());
+        questionSong = songs.get(songNumFilter);
+
+        if(type == QuestionType.WHO_SINGS){
+            wrongAnswer = getThreeArtistConfusionAns(CAns);
+            question = new Question(questionSong, CAns.getArtistName(),
+                    wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.WHO_SINGS);
+        }
+        else if(type == QuestionType.SONG_NAME){
+            wrongAnswer = getThreeSongConfusionAns(questionSong);
+            question = new Question(questionSong, CAns.getArtistName(),
+                    wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.SONG_NAME);
+        }
+
+       return question;
+    }
+
+    private List<String> getThreeSongConfusionAns (Song song) {
+        List<Song> confusionSongs =  DB_songs.getListOfSimilarSongs(song, this.genres);
+        List<String> confusionAnsSongs = new ArrayList<>();
+
+        for(int i = 0 ; i<confusionSongs.size(); i++){
+            confusionAnsSongs.add(confusionSongs.get(i).getTitle());
+        }
+
+        return createConfusionAns(confusionAnsSongs);
+    }
+
+    private List<String> getThreeArtistConfusionAns (Artist artist) {
         List<Artist> confusionArtists = DB_artists.CreateConfusionAns(artist);
-        List<Artist> ansArt = new LinkedList<>();
-        String ans[] = new String[3];
+        List<String> confusionAnsArtists  = new ArrayList<>();
 
         if (confusionArtists.size() < 3){
             confusionArtists = DB_artists.FilterArtistDifferent(artist,confusionArtists,genres);
         }
 
+        for(int i = 0 ; i<confusionArtists.size(); i++){
+            confusionAnsArtists.add(confusionArtists.get(i).getArtistName());
+
+        }
+        return createConfusionAns(confusionAnsArtists);
+    }
+
+    private List<String> createConfusionAns (List<String> list){
+        List<String> ans = new LinkedList<>();
 
         Random rand = new Random();
-        System.out.println("confusionArtists.size()" + confusionArtists.size());
-        int x = rand.nextInt(confusionArtists.size());
-        while (confusionArtists.get(x).getArtistName() == null)
-            x = rand.nextInt(confusionArtists.size());
-        ansArt.add(0,  confusionArtists.get(x));
-        int y = rand.nextInt(confusionArtists.size());
-        while ((x == y) || ((confusionArtists.get(y).getArtistName() == null)))
-            y = rand.nextInt(confusionArtists.size());
-        ansArt.add(1, confusionArtists.get(y));
-        int z = rand.nextInt(confusionArtists.size());
-        while ((z == y) || (z == x) || (confusionArtists.get(z).getArtistName() == null))
-            z = rand.nextInt(confusionArtists.size());
-        ansArt.add(2, confusionArtists.get(z));
+        System.out.println("confusionArtists.size()" + list.size());
 
+        int x = rand.nextInt(list.size());
+        while (list.get(x) == null)
+            x = rand.nextInt(list.size());
+        ans.add(0,  list.get(x));
 
-        return ansArt;
+        int y = rand.nextInt(list.size());
+        while ((x == y) || ((list.get(y) == null)))
+            y = rand.nextInt(list.size());
+        ans.add(1, list.get(y));
+
+        int z = rand.nextInt(list.size());
+        while ((z == y) || (z == x) || (list.get(z)== null))
+            z = rand.nextInt(list.size());
+        ans.add(2, list.get(z));
+
+        return ans;
     }
 
 }
