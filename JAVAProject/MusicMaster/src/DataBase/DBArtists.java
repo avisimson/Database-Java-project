@@ -45,7 +45,7 @@ public class DBArtists {
             }
             artistsId += artists.get(j).getArtistId();
         }
-        String str = "where artistid not in("+artistsId+")";
+        String str = " and artistid not in("+artistsId+")";
         if(artists.size() == 0 ){
             str = "";
         }
@@ -53,9 +53,9 @@ public class DBArtists {
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select distinct artistid,ArtistName from artists,(select distinct artistid as newar from genreartists as a,"+
                                 "(select distinct genreID as newgen from genreartists  where ArtistID="+artistId+ " and " +
-                                "genreID in("+genresId+")) as b) as c " +str + "LIMIT 3")) {
+                                "genreID in("+genresId+")) as b) as c where artistid !=" +artist.getArtistId() +str + " LIMIT 50")) {
 
-            while (rs.next() && list.size() <3){
+            while (rs.next()){
                 list.add( new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")
                         ,-1)) ;
             }
@@ -119,7 +119,7 @@ public class DBArtists {
         System.out.println("--------------ConfuseAns---------------");
         //search in the first col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select  artists.ArtistID, ArtistName from similarartists,artists " +
+                ("select  distinct artists.ArtistID, ArtistName from similarartists,artists " +
                         "where artists.ArtistID = similarArtists.similarToArtistID " +
                         "and similarArtists.ArtistID =" + artist.getArtistId() +" limit 10")) {
             while (rs.next()){
@@ -132,7 +132,7 @@ public class DBArtists {
         }
         //search in the second col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
-                ("select artists.ArtistID, ArtistName from similarartists,artists " +
+                ("select distinct artists.ArtistID, ArtistName from similarartists,artists " +
                         "where artists.ArtistID = similarArtists.ArtistID " +
                         "and similarToArtistID =" + artist.getArtistId() +" limit 10")) {
             while (rs.next()){

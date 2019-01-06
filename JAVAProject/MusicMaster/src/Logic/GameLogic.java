@@ -311,7 +311,7 @@ public class GameLogic {
         }
         else if(type == QuestionType.SONG_NAME){
             wrongAnswer = getThreeSongConfusionAns(questionSong);
-            question = new Question(questionSong, CAns.getArtistName(),
+            question = new Question(questionSong, questionSong.getTitle(),
                     wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.SONG_NAME);
         }
 
@@ -321,6 +321,10 @@ public class GameLogic {
     private List<String> getThreeSongConfusionAns (Song song) {
         List<Song> confusionSongs =  DB_songs.getListOfSimilarSongs(song, this.genres);
         List<String> confusionAnsSongs = new ArrayList<>();
+
+        if (confusionSongs.size() < 3) {
+            confusionSongs = DB_songs.getDiffrentSongsByGenre(song, confusionSongs, genres);
+        }
 
         for(int i = 0 ; i<confusionSongs.size(); i++){
             confusionAnsSongs.add(confusionSongs.get(i).getTitle());
@@ -350,20 +354,14 @@ public class GameLogic {
         Random rand = new Random();
         System.out.println("confusionArtists.size()" + list.size());
 
-        int x = rand.nextInt(list.size());
-        while (list.get(x) == null)
-            x = rand.nextInt(list.size());
-        ans.add(0,  list.get(x));
-
-        int y = rand.nextInt(list.size());
-        while ((x == y) || ((list.get(y) == null)))
-            y = rand.nextInt(list.size());
-        ans.add(1, list.get(y));
-
-        int z = rand.nextInt(list.size());
-        while ((z == y) || (z == x) || (list.get(z)== null))
-            z = rand.nextInt(list.size());
-        ans.add(2, list.get(z));
+       while(ans.size() != 3){
+            int x = rand.nextInt(list.size());
+            String s = list.get(x);
+            if (!ans.contains(s)) {
+                ans.add(s);
+            }
+            list.remove(x);
+        }
 
         return ans;
     }

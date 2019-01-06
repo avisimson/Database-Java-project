@@ -25,7 +25,7 @@ public class DBSongs {
         //query that returns 5 songs of the artist
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select distinct SongID,year,Title,EndOfFadeIn from songinfo" +
-                        " where ArtistID = " + artist.getArtistId() +" limit 5;")) {
+                        " where ArtistID = " + artist.getArtistId() +" limit 10;")) {
             while (rs.next()) {
                 songFilter.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
                         artist.getArtistId(),-1,rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
@@ -63,8 +63,52 @@ public class DBSongs {
                  ",(select distinct genreID as newgen from genreartists where ArtistID=" + song.getArtistId() +
                         " and genreID in("+genresId+ ")) as b" +
                          " where b.newgen=a.genreid) as n" +
-                          " where n.newar=songinfo.artistid and year=(select year from songinfo where" +
-                        " SongID= " + song.getSongId() +")" + " order by songid;")) {
+                          " where n.newar=songinfo.artistid and year=" + song.getYear() +
+                        " and songid != " + song.getSongId() + " order by songid limit 50;")) {
+            while (rs.next()) {
+                songList.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
+                        rs.getInt("artistID"),-1,rs.getInt("year"),-1));
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR executeQuery - " + e.getMessage());
+        }
+        return songList;
+    }
+
+    public List<Song> getDiffrentSongsByGenre(Song song, List<Song> songs, List<Genre> genres) {
+        List<Song> songList =  new LinkedList<>();
+        //create string
+        String genresId = "";
+        for(int j = 0; j < genres.size(); j++) {
+            if ( j != 0 ){
+                genresId += ",";
+            }
+            genresId += genres.get(j).getGenreId();
+        }
+        String songsId =  "";
+        //create string for other song id
+        for(int j = 0; j < songs.size(); j++) {
+
+            if ( j != 0 ){
+                songsId += ",";
+            }
+            songsId += songs.get(j).getSongId();
+        }
+        String str = " and songid not in("+songsId+")";
+        if(songs.size() == 0 ){
+            str = "";
+        }
+        int i = 0;
+        //query returns songs that are from artists that sing in the same genre as the artist of the current song
+        // and chosen genres
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
+                ("select distinct songid, title,year,artistid from songinfo ," +
+                        "(select distinct artistid as newar from genreartists as a" +
+                        ",(select distinct genreID as newgen from genreartists where ArtistID=" + song.getArtistId() +
+                        " and genreID in("+genresId+ ")) as b" +
+                        " where b.newgen=a.genreid) as n" +
+                        " where n.newar=songinfo.artistid and songid != "+ song.getSongId() + str + " order by songid limit 50;")) {
             while (rs.next()) {
                 songList.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
                         rs.getInt("artistID"),-1,rs.getInt("year"),-1));
