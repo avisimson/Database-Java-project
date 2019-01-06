@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -16,25 +15,28 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 /**
- * class that manage the table of high score
+ * This class manages the high score table
  */
 public class HighScoreController implements Initializable {
     //members
     @FXML
     private AnchorPane anchorPane;
+
     private Stage prevStage;
     private List<HighScores> highScoresList = new LinkedList<>();
     private HighScoreLogic highScoreLogic = new HighScoreLogic();
+
     /**
-     * function that initialize the screen of High score table
+     * This function initializes the screen of High score table
      * @param location is parameter of this function
      * @param resources is parameter of this function
      */
     public void initialize(URL location, ResourceBundle resources) {
-        //get the 10 best results of players that play in the game
+        // get the highest ten score in the table
         highScoresList = highScoreLogic.getList10BestScores();
-        //order in screen
+        // design the screen
         int col = 100;
         int row = 200;
         for(int i = 0; i < highScoresList.size(); i++) {
@@ -59,7 +61,7 @@ public class HighScoreController implements Initializable {
         }
     }
     /**
-     * function that return the game to open screen
+     * This function returns the game to the main menu.
      */
     @FXML
     protected void goToMain() {
@@ -77,8 +79,8 @@ public class HighScoreController implements Initializable {
         }
     }
     /**
-     * function that update the stage that screen to user
-     * @param stage is update stage
+     * This function sets the previous stage.
+     * @param stage is the updated stage
      */
     public void setPrevStage(Stage stage){
         this.prevStage = stage;

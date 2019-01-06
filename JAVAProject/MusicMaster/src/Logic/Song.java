@@ -1,7 +1,7 @@
 package Logic;
 
 /**
- * class of Song object that contain the details about song table.
+ * Data class of Song object that contains the details about a song.
  */
 public class Song {
     //members
@@ -15,16 +15,17 @@ public class Song {
     private String songYoutubeId;
 
     /**
-     * constructor
-     * @param songId is id of song
-     * @param title is name of song
-     * @param albumId is id of album
-     * @param artistId is id of artist
-     * @param songHotess is hotness of song
-     * @param year is the year of song
-     * @param endOfFadeIn is end of date in of song
+     * Constructor
+     * @param songId is the id of the song
+     * @param title is the name of the song
+     * @param albumId is the id of the album of the song
+     * @param artistId is the id of the artist of the song
+     * @param songHotess is the hotness of the song
+     * @param year is the year of the song
+     * @param endOfFadeIn is the time of end of fade in of the song
      */
-    public Song(int songId, String title, int albumId, int artistId, double songHotess, int year, float endOfFadeIn) {
+    public Song(int songId, String title, int albumId, int artistId, double songHotess,
+                int year, float endOfFadeIn) {
         this.songId = songId;
         this.title = title;
         this.albumId = albumId;
@@ -34,72 +35,64 @@ public class Song {
         this.endOfFadeIn = endOfFadeIn;
     }
     /**
-     * function that get id of song
-     * @return id of song
+     * @return the id of the song
      */
     public int getSongId() {
         return songId;
     }
 
     /**
-     * function that get name of song
-     * @return name of song
+     * @return the name of the song
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * function that get id of album
-     * @return id of album
+     * @return the id of the album of the song
      */
     public int getAlbumId() {
         return albumId;
     }
 
     /**
-     * function that get id of artist
-     * @return id of artist
+     * @return the id of artist of the song
      */
     public int getArtistId() {
         return artistId;
     }
 
     /**
-     * function that get hotness of song
-     * @return hotness of song
+     * @return the hotness of the song
      */
     public double getSongHotess() {
         return songHotess;
     }
 
     /**
-     * function that get year of song
-     * @return year of song
+     * @return the year of the song
      */
     public int getYear() {
         return year;
     }
 
     /**
-     * function that get end of fade in of song
-     * @return end of fade in song
+     * @return the end of fade in the song
      */
     public float getEndOfFadeIn() {
         return endOfFadeIn;
     }
 
     /**
-     * function that get Song youtube id
-     * @return song youtube id
+     * @return the song youtube id
      */
     public String getSongYoutubeId() {
         return songYoutubeId;
     }
 
     /**
-     * function that update the id of song youtube
-     * @param value is the id of song youtube
+     * function that updates the id of song in youtube
+     * @param value is the id of the song in youtube
      */
     public void setSongYoutubeId(String value) {
         this.songYoutubeId = value;

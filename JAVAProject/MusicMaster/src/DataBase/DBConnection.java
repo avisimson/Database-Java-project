@@ -1,13 +1,8 @@
 package DataBase;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.sql.*;
-import java.util.Random;
 
 public class DBConnection {
     private java.sql.Connection conn; // DB connection
@@ -27,14 +22,14 @@ public class DBConnection {
     }
 
     /**
-     * function that get the state of connection to DB
-     * @return the state of connection to DB
+     * return the connection to sql object
+     * @return connection to sql object
      */
     public java.sql.Connection getConnection() {
         return conn;
     }
     /**
-     *
+     * Open the connection to the DB
      * @return true if the connection was successfully set
      */
     public boolean openConnection() {

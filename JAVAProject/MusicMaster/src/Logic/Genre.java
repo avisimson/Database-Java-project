@@ -1,31 +1,29 @@
 package Logic;
 /**
- * class of Genre object that contain the details about genre table.
+ * Data class of Genre object that contain the details about a genre.
  */
 public class Genre {
     //members
-    int genreId;
-    String genreName;
+    private int genreId;
+    private String genreName;
 
     /**
-     * constructor
-     * @param genreId is the id of genre
-     * @param genreName is the name of genre
+     * Constructor
+     * @param genreId is the id of the genre
+     * @param genreName is the name of the genre
      */
     public Genre(int genreId, String genreName) {
         this.genreId = genreId;
         this.genreName = genreName;
     }
     /**
-     * function that get id of genre
-     * @return id of genre
+     * @return the id of the genre
      */
     public int getGenreId() {
         return genreId;
     }
     /**
-     * function that get name of genre
-     * @return name of genre
+     * @return the name of the genre
      */
     public String getGenreName() {
         return genreName;

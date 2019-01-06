@@ -1,31 +1,33 @@
 package Logic;
 
 import DataBase.DBArtists;
-import DataBase.DBConnection;
 import DataBase.DBGenre;
 import java.util.List;
 
 /**
- * class that manage the logic of genre screen and the their connection to correct DB.
+ * This class manages the logic of the genre screen and the connection to the DB.
  */
 public class GenreLogic {
     //members
     private DBArtists conA = new DBArtists();
     private DBGenre conG = new DBGenre();
+
     /**
-     * function that return the list of genre that user choose in order to play
+     * This function returns the list of all the genres in the DB.
      * @return genre list
      */
     public List<Genre> getListOfGenres(){
         return conG.GenreList();
     }
+
     /**
-     * function that return the list of Artist that songs in one of selected genre
-     * @param s is the list of genre that player selected
-     * @return list of Artist that songs in one of selected genre
+     * This function gets the list of chosen genres by the player and return a list of
+     * artist that sing in those genres.
+     * @param genres is the list of genres that the player chose.
+     * @return a list of artists that sings in one of selected genres.
      */
-    public List<Artist> getArtistsByGenre(List<Genre> s){
-        return conA.FilterArtistByGenre(s);
+    public List<Artist> getArtistsByGenre(List<Genre> genres){
+        return conA.FilterArtistByGenre(genres);
     }
 
 }

@@ -1,6 +1,6 @@
 package Logic;
 /**
- * class of Artist object that contain the details about artist table.
+ * Data class of Artist object that contains the details about an artist.
  */
 public class Artist {
     //members
@@ -9,10 +9,10 @@ public class Artist {
     private double artistHotness;
 
     /**
-     * constructor
-     * @param artistId is the id of artist
-     * @param artistName is the name of artist
-     * @param artistHotness is hotness of artist
+     * Constructor
+     * @param artistId is the id of the artist
+     * @param artistName is the name of the artist
+     * @param artistHotness is hotness of the artist
      */
     public Artist(int artistId, String artistName, double artistHotness) {
         this.artistId = artistId;
@@ -21,23 +21,21 @@ public class Artist {
     }
 
     /**
-     * function that get id of artist
-     * @return id of artist
+     * @return the id of the artist
      */
     public int getArtistId() {
         return artistId;
     }
 
     /**
-     * function that get name of artist
-     * @return name of artist
+     * @return the name of the artist
      */
     public String getArtistName() {
         return artistName;
     }
+
     /**
-     * function that get the hotness of artist
-     * @return hotness of artist
+     * @return the hotness of the artist
      */
     public double getArtistHotness() {
         return artistHotness;

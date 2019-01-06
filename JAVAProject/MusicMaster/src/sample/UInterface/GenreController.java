@@ -1,7 +1,7 @@
 package sample.UInterface;
 
-import DataBase.DBConnection;
 import Logic.*;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,7 +34,13 @@ public class GenreController implements Initializable {
 
     private Question[] questions = new Question[20];
 
+    /**
+     * This function initializes the genre choosing screen.
+     * @param location
+     * @param resources
+     */
     public void initialize(URL location, ResourceBundle resources) {
+        // get the list of all the genres
         genreList = genreLogic.getListOfGenres();
         checkBoxes = new CheckBox[genreList.size()];
 
@@ -65,6 +71,7 @@ public class GenreController implements Initializable {
             }
         };
 
+        //place check boxes
         int col = 45;
         int row = 0;
         for(int i = 0; i < genreList.size(); i++) {
@@ -87,11 +94,15 @@ public class GenreController implements Initializable {
             }
         }
     }
+
+    /**
+     * This function happens when the player clicks the ok button.
+     */
     @FXML
     protected void ok() {
         List<Genre> genreChoose = new LinkedList<>();
         int j = 0;
-        //loop for get the selected genre
+        //get the selected genres
         for (int i = 0; i < genreList.size(); i++) {
             CheckBox cb = checkBoxes[i];
             if(cb.isSelected()) {
@@ -103,13 +114,14 @@ public class GenreController implements Initializable {
                 }
             }
         }
+        // the user didn't choose genres
         if(genreChoose.size() == 0) {
             error.setText("Please choose at least one genre");
             return;
         }
+        // get the artists that sing in those genres
         artistList = genreLogic.getArtistsByGenre(genreChoose);
-        //DBConnection.getInstance().demoExecuteUpdate();
-        //questions = genreLogic.Create20Questions(artistList);
+        // go to game screen
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
             myLoader.setController(new GameController(artistList,genreChoose));
@@ -125,6 +137,11 @@ public class GenreController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * set the previous stage.
+     * @param stage - previous stage.
+     */
     public void setPrevStage(Stage stage){
         this.prevStage = stage;
     }

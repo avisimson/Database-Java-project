@@ -1,6 +1,5 @@
 package DataBase;
 
-import Logic.Genre;
 import Logic.HighScores;
 
 import java.sql.ResultSet;
@@ -17,8 +16,8 @@ public class DBHighScores {
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
 
     /**
-     * function that execute query that return 10 best scores in table
-     * @return list of 10 best scores in the table
+     * This function executes a query and returns the highest ten scores in the highScore table.
+     * @return a list of 10 best scores in the table
      */
     public List<HighScores> TheBest10Score(){
         List<HighScores> highScoresList = new LinkedList<>();
@@ -33,8 +32,8 @@ public class DBHighScores {
         return highScoresList;
     }
     /**
-     * function that insert new values of player that finish to play
-     * @param highScores is the details about this player
+     * This function inserts new highScore to the table.
+     * @param highScores the highScore to insert.(player name and score)
      */
     public void UpdateHighScoresTable(HighScores highScores) {
         int result;

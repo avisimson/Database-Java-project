@@ -12,6 +12,10 @@ public class DBGenre {
 
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
 
+    /**
+     * This function creates a list of genres from the genre table in the DB.
+     * @return - list of genres
+     */
     public List<Genre> GenreList() {
         List<Genre> genreList = new LinkedList<>();
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery

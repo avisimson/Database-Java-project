@@ -1,7 +1,7 @@
 package Logic;
 
 /**
- * class of High Score object that contain the details about high score table.
+ * Data class of High Score object that contains the details about a high score.
  */
 public class HighScores {
 
@@ -10,35 +10,33 @@ public class HighScores {
     private int score;
 
     /**
-     * constructor of high score
-     * @param userName is the name of user that played
-     * @param score is the score of the user in the game
+     * Constructor
+     * @param userName is the name of the user that played
+     * @param score is the score of the user
      */
     public HighScores(String userName, int score) {
         this.userName = userName;
         this.score = score;
     }
     /**
-     * function that return the user name
      * @return the user name.
      */
     public String getUserName() { return this.userName;}
 
     /**
-     * function get that return the score of user
-     * @return the score
+     * @return the user score
      */
     public int getScore() { return this.score; }
 
     /**
-     * function that update the name of user name
-     * @param userName is the name of user
+     * function that updates the user name
+     * @param userName is the username
      */
     public void setUserName(String userName) {this.userName = userName;}
 
     /**
-     * function that update the score of user
-     * @param score is the score of user in game
+     * function that updates the score o
+     * @param score is the score
      */
     public void setScore(int score) {this.score = score;}
 }

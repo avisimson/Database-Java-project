@@ -1,26 +1,27 @@
 package Logic;
 
-
 import DataBase.DBHighScores;
 
 import java.util.List;
+
 /**
- * class that manage the logic of high score screen and the their connection to correct DB.
+ * This class manages the logic of the high score screen and the connection to the DB.
  */
 public class HighScoreLogic {
     //members
     private DBHighScores DB_highscores = new DBHighScores();
 
     /**
-     * function that return list of 10 best results from high score table
-     * @return list of 10 best results from high score table
+     * This function returns the highest ten scores in the highScore table.
+     * @return a list of 10 best scores in the table
      */
     public List<HighScores> getList10BestScores(){
         return DB_highscores.TheBest10Score();
     }
+
     /**
-     * function that update the details of high score table(user , score)
-     * @param highScores is current user that finish to play in game
+     * This function inserts a new high score to the table.
+     * @param highScore is the current user score that we insert to the table.
      */
-    public void setHighScoreTable(HighScores highScores) {DB_highscores.UpdateHighScoresTable(highScores);}
+    public void setHighScoreTable(HighScores highScore) {DB_highscores.UpdateHighScoresTable(highScore);}
 }
