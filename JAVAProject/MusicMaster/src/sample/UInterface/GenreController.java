@@ -108,7 +108,7 @@ public class GenreController implements Initializable {
             return;
         }
         artistList = genreLogic.getArtistsByGenre(genreChoose);
-        DBConnection.getInstance().demoExecuteUpdate();
+        //DBConnection.getInstance().demoExecuteUpdate();
         //questions = genreLogic.Create20Questions(artistList);
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));

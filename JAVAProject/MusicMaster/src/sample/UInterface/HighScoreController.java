@@ -26,26 +26,25 @@ public class HighScoreController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         highScoresList = highScoreLogic.getList10BestScores();
-        if(highScoresList.size() != 0) {
-            System.out.println("OKAY");
-        }
         //order in screen
-        int col = 200;
-        int row = 90;
+        int col = 100;
+        int row = 200;
         for(int i = 0; i < highScoresList.size(); i++) {
-            Label username = new Label();
-            username.setText(highScoresList.get(i).getUserName());
-         /*   anchorPane.getChildren().add(i,username);
+            Label username = new Label(highScoresList.get(i).getUserName());
+            anchorPane.getChildren().add(i,username);
             anchorPane.getChildren().get(i).setLayoutX(row);
             anchorPane.getChildren().get(i).setLayoutY(col);
+            anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12.5px;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: black;");
             Label score = new Label();
-            username.setText(""+ highScoresList.get(i).getScore());
+            score.setText(""+ highScoresList.get(i).getScore());
             anchorPane.getChildren().add(i,score);
             anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12.5px;" +
                     "-fx-font-weight: bold;" +
                     "-fx-text-fill: black;");
             anchorPane.getChildren().get(i).setLayoutX(row + 100);
-            anchorPane.getChildren().get(i).setLayoutY(col);*/
+            anchorPane.getChildren().get(i).setLayoutY(col);
             col = col + 30;
         }
     }

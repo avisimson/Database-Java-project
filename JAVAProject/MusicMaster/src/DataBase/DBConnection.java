@@ -74,20 +74,4 @@ public class DBConnection {
         }
 
     }
-    /**
-     * Shows executeUpdate
-     */
-    public void demoExecuteUpdate() {
-        int result;
-
-        try (Statement stmt = conn.createStatement();) {
-            result = stmt.executeUpdate("INSERT INTO highscores(UserName, Score) " + "VALUES('Yakir', 2500)");
-           // result = stmt.executeUpdate("INSERT INTO demo(fname, lname) " + "VALUES('Ryan','Gosling')");
-            // result = stmt.executeUpdate("DELETE FROM demo");
-            System.out.println("Success - executeUpdate, result = " + result);
-
-        } catch (SQLException e) {
-            System.out.println("ERROR executeUpdate - " + e.getMessage());
-        }
-    }
 }

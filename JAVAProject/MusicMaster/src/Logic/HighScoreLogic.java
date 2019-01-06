@@ -10,4 +10,5 @@ public class HighScoreLogic {
     public List<HighScores> getList10BestScores(){
         return DB_highscores.TheBest10Score();
     }
+    public void setHighScoreTable(HighScores highScores) {DB_highscores.UpdateHighScoresTable(highScores);}
 }

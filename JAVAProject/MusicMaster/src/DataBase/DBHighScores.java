@@ -23,4 +23,18 @@ public class DBHighScores {
         }
         return highScoresList;
     }
+    /**
+     * Shows executeUpdate
+     */
+    public void UpdateHighScoresTable(HighScores highScores) {
+        int result;
+        try (Statement stmt = con.createStatement();) {
+            result = stmt.executeUpdate("INSERT INTO highscores(UserName, Score) " +
+                    "VALUES('" + highScores.getUserName() +"', " + highScores.getScore() + ")");
+            System.out.println("Success - executeUpdate, result = " + result);
+
+        } catch (SQLException e) {
+            System.out.println("ERROR executeUpdate - " + e.getMessage());
+        }
+    }
 }

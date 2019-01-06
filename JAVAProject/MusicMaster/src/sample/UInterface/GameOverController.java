@@ -1,5 +1,6 @@
 package sample.UInterface;
 
+import Logic.HighScoreLogic;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ public class GameOverController {
     @FXML
     private Label score;
     private Stage prevStage;
+    private HighScoreLogic highScoreLogic = new HighScoreLogic();
 
 
     @FXML
