@@ -18,9 +18,11 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * class that manage the game when he is finish
+ */
 public class GameOverController implements Initializable {
-
+    //members
     @FXML
     private Label score;
     private Stage prevStage;
@@ -30,12 +32,16 @@ public class GameOverController implements Initializable {
     @FXML
     private TextField username;
     private HighScores newHighScore;
-
-
+    /**
+     * function that return the game to open screen
+     */
     @FXML
     protected void goToMain() {
+        //update the name of user that played
         newHighScore.setUserName(username.getText());
+        //send the details about the user to table in DB of High Score.
         highScoreLogic.setHighScoreTable(newHighScore);
+        //load the main screen
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
             GridPane root = myLoader.load();
@@ -49,14 +55,30 @@ public class GameOverController implements Initializable {
         }
 
     }
+
+    /**
+     * function that update the score of user that played
+     * @param finalScore is the score of player in this game
+     */
     public void setGameScore(int finalScore) {
+        //present the score in screen
         score.setText("Final Score: " + finalScore);
+        //update the score of user in object high score
         newHighScore = new HighScores("",finalScore);
     }
+    /**
+     * function that update the stage that screen to user
+     * @param stage is update stage
+     */
     public void setPrevStage(Stage stage){
         this.prevStage = stage;
     }
 
+    /**
+     * function that initialize the screen of game over
+     * @param location is parameter of this function
+     * @param resources is parameter of this function
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //disable button until name entered.
@@ -77,7 +99,10 @@ public class GameOverController implements Initializable {
             }
         });
     }
-
+    /**
+     * function that check is user name contain name or not
+     * @return true if user name is null , else false.
+     */
     private boolean checkIfNull() {
         if(username.getText().isEmpty()){ return true;}
         return false;

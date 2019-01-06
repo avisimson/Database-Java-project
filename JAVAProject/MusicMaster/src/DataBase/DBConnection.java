@@ -15,8 +15,8 @@ public class DBConnection {
 
     private DBConnection() { }
     /**
-     *
-     * @return
+     * singleton function
+     * @return the instance of DBconnection
      */
     public static DBConnection getInstance() {
         if (instance == null) {
@@ -25,6 +25,11 @@ public class DBConnection {
         }
         return instance;
     }
+
+    /**
+     * function that get the state of connection to DB
+     * @return the state of connection to DB
+     */
     public java.sql.Connection getConnection() {
         return conn;
     }
@@ -35,6 +40,7 @@ public class DBConnection {
     public boolean openConnection() {
 
         System.out.print("Trying to connect... ");
+        //reading the details of url, username and password of my schema from configuration connection file
         String url = null , username = null , password = null;
         BufferedReader br;
         String fileName = "src/DataBase/dbconnectionconfig.txt";
@@ -61,7 +67,6 @@ public class DBConnection {
         System.out.println("Connected!");
         return true;
     }
-
     /**
      * close the connection
      */

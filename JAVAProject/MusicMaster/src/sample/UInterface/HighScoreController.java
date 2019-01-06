@@ -16,20 +16,29 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * class that manage the table of high score
+ */
 public class HighScoreController implements Initializable {
+    //members
     @FXML
     private AnchorPane anchorPane;
     private Stage prevStage;
     private List<HighScores> highScoresList = new LinkedList<>();
     private HighScoreLogic highScoreLogic = new HighScoreLogic();
-
+    /**
+     * function that initialize the screen of High score table
+     * @param location is parameter of this function
+     * @param resources is parameter of this function
+     */
     public void initialize(URL location, ResourceBundle resources) {
+        //get the 10 best results of players that play in the game
         highScoresList = highScoreLogic.getList10BestScores();
         //order in screen
         int col = 100;
         int row = 200;
         for(int i = 0; i < highScoresList.size(); i++) {
+            //get the name of user
             Label username = new Label(highScoresList.get(i).getUserName());
             anchorPane.getChildren().add(i,username);
             anchorPane.getChildren().get(i).setLayoutX(row);
@@ -37,6 +46,7 @@ public class HighScoreController implements Initializable {
             anchorPane.getChildren().get(i).setStyle("-fx-font-size: 12.5px;" +
                     "-fx-font-weight: bold;" +
                     "-fx-text-fill: black;");
+            //get the score of user
             Label score = new Label();
             score.setText(""+ highScoresList.get(i).getScore());
             anchorPane.getChildren().add(i,score);
@@ -48,8 +58,12 @@ public class HighScoreController implements Initializable {
             col = col + 30;
         }
     }
+    /**
+     * function that return the game to open screen
+     */
     @FXML
     protected void goToMain() {
+        //load the main screen
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
             GridPane root = myLoader.load();
@@ -62,7 +76,10 @@ public class HighScoreController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    /**
+     * function that update the stage that screen to user
+     * @param stage is update stage
+     */
     public void setPrevStage(Stage stage){
         this.prevStage = stage;
     }
