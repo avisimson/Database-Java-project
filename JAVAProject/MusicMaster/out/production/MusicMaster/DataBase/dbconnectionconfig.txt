@@ -1,3 +1,0 @@
-url: musicmaster
-username: root
-password: LINOY1234c
