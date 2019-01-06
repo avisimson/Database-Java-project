@@ -2,22 +2,32 @@ package sample.UInterface;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import java.io.*;
+import java.net.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class MenuController {
+public class MenuController implements Initializable {
 
     private Stage prevStage;
-
+    @FXML
+    private Button startButton;
     @FXML
     private Button settingsButton;
     @FXML
     private Button highScoreButton;
     @FXML
     private Button endButton;
+    @FXML
+    private Label WelcomeToMusicMaster;
 
     @FXML
     protected void highScoreTable() {
@@ -59,4 +69,33 @@ public class MenuController {
         this.prevStage = stage;
     }
 
+
+    //try to connect to wifi, if not cannot start game.
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(netIsAvailable()) {
+            startButton.setDisable(false);
+            return;
+        }
+        WelcomeToMusicMaster.setText("No Internet Connection");
+        WelcomeToMusicMaster.setStyle("-fx-font-size: 20px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-text-fill: red;");
+        startButton.setDisable(true);
+    }
+
+    //returns true if there is a network connection- false if there isn't.
+    private static boolean netIsAvailable() {
+        try {
+            final URL url = new URL("http://www.google.com");
+            final URLConnection conn = url.openConnection();
+            conn.connect();
+            conn.getInputStream().close();
+            return true;
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }
