@@ -113,10 +113,10 @@ public class GameLogic {
         }
         Question currentQuestion =  questions[turnNumber];
         if(currentQuestion.type == QuestionType.SONG_NAME){
-            this.question = "What's the name of the song?";
+            this.question = "What's the song's name?";
         }
         else if(currentQuestion.type == QuestionType.WHO_SINGS){
-            this.question = "Who is singing?";
+            this.question = "Who is singing the song?";
         }
         setQuestion(this.question);
 
