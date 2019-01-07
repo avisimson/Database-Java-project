@@ -2,17 +2,19 @@ package DataBase;
 
 import Logic.Artist;
 import Logic.Genre;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A class that handles all
+ * SQL queries that return an artist object.
+ */
 public class DBArtists {
 
-    private java.sql.Connection con = DBConnection.getInstance().getConnection();
-
+    private java.sql.Connection con = DBConnection.getInstance().getConnection(); // DB connection
 
     /**
      * This function finds similar artists to the given artist by his genre and the chosen genres that are not
@@ -63,8 +65,6 @@ public class DBArtists {
         return list;
     }
 
-
-
     /**
      * function that execute query that return list of artist in this genres
      * This function gets a list of genres, executes query and returns a list of artists
@@ -112,7 +112,7 @@ public class DBArtists {
      */
     public List<Artist> CreateConfusionAns (Artist artist) {
         List<Artist> confusionArtist = new LinkedList<>();
-        int idAnswer = artist.getArtistId();
+
         int j = 0;
         //search in the first col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
@@ -145,5 +145,4 @@ public class DBArtists {
         }
         return confusionArtist;
     }
-
 }

@@ -1,6 +1,6 @@
 package Logic;
 /**
- * Data class of Artist object that contains the details about an artist.
+ * A data class of artist object that contains the details about an artist.
  */
 public class Artist {
     //members

@@ -4,11 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
 
+/**
+ * A class that handles
+ * the connection to DataBase.
+ */
 public class DBConnection {
+
     private java.sql.Connection conn; // DB connection
     private static DBConnection instance;
 
+    /**
+     * constructor
+     */
     private DBConnection() { }
+
     /**
      * singleton function
      * @return the instance of DBconnection
@@ -62,6 +71,7 @@ public class DBConnection {
         System.out.println("Connected!");
         return true;
     }
+
     /**
      * close the connection
      */

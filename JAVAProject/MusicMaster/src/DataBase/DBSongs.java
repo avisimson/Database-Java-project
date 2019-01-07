@@ -11,9 +11,13 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A class that handles all
+ * SQL queries that return an song object.
+ */
 public class DBSongs {
 
-    private java.sql.Connection con = DBConnection.getInstance().getConnection();
+    private java.sql.Connection con = DBConnection.getInstance().getConnection();  // DB connection
 
     /**
      * This function gets an artist and return his songs.
@@ -128,7 +132,7 @@ public class DBSongs {
         List<Song> songFilter = new LinkedList<>();
 
         int i = 0;
-        //query that returns 5 songs of the artist
+        //query that returns 10 songs of the artist
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("SELECT Songid,Title,Year,ArtistID,EndOfFadeIn FROM " +
                         "musicmaster.songinfo where songinfo.AlbumID ="+ album.getAlbumId())) {

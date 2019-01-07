@@ -7,6 +7,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 
+/**
+ * A class that manage game logic.
+ */
 public class GameLogic {
     private final PropertyChangeSupport support;
     private final int timeOfTurn = 30;
@@ -33,9 +36,10 @@ public class GameLogic {
 
     /**
      * constructor.
-     * set support for handling events.
+     * @param genres - the genres that chosen by the user.
      */
     public GameLogic(List<Genre> genres){
+         //set support for handling events.
         this.support = new PropertyChangeSupport(this);
         this.genres =genres;
     }
@@ -49,13 +53,14 @@ public class GameLogic {
     }
 
     /**
-     * this function
-     * @param id
+     * The function is activated when the user selects an answer.
+     * @param id - id of the button that selected.
      */
     public void answer(String id) {
         timerTask.cancel();
         String correctId = "btnAnswer" + (correctAnswer+1);
 
+        //check answer
         if(correctId.equals(id)) {
             correctAnswer();
         } else {
@@ -68,7 +73,10 @@ public class GameLogic {
         } else { timer.cancel(); }
     }
 
-    //user picked correct answer.
+    /**
+     * this function is activated when the user
+     * selects the correct answer.
+     */
     public void correctAnswer() {
         System.out.println("correct answer");
         combo++;
@@ -81,7 +89,10 @@ public class GameLogic {
         }
     }
 
-    //user picked wrong answer.
+    /**
+     * this function is activated when the user
+     * selects a wrong answer.
+     */
     public void wrongAnswer() {
         if(score > 0) {
             setScore(score - 1);
@@ -96,6 +107,9 @@ public class GameLogic {
     }
 
 
+    /**
+     * play one turn of the game.
+     */
     private void playOneTurn(){
         System.out.println("playOneTurn");
 
@@ -111,7 +125,11 @@ public class GameLogic {
             informGameOver();
             return;
         }
+
+        //get currentQuestion
         Question currentQuestion =  questions[turnNumber];
+
+        //set string question
         if(currentQuestion.type == QuestionType.SONG_NAME){
             this.question = "What's the song's name?";
         }
@@ -120,6 +138,7 @@ public class GameLogic {
         }
         setQuestion(this.question);
 
+        //set song
         this.song = currentQuestion.song;
 
         //create array of answers
@@ -129,6 +148,7 @@ public class GameLogic {
         stack.push(currentQuestion.confAns2);
         stack.push(currentQuestion.confAns3);
 
+        //set answers
         for (int i=0;i< answers.length;i++){
             if (answers[i] == null)
                 answers[i] = stack.pop();
@@ -173,7 +193,7 @@ public class GameLogic {
 
     /**
      * add listener.
-     * @param listener
+     * @param listener - listener to be added.
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
@@ -181,15 +201,15 @@ public class GameLogic {
 
     /**
      * remove listener.
-     * @param listener
+     * @param listener - listener to be removed.
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         support.removePropertyChangeListener(listener);
     }
 
     /**
-     * send event of change in score value to listeners.
-     * @param value
+     * invoke an event on a change in score variable.
+     * @param value - the new value.
      */
     public void setScore(int value) {
         this.score = value;
@@ -197,8 +217,8 @@ public class GameLogic {
     }
 
     /**
-     * send event of change in life value to listeners.
-     * @param value
+     * invoke an event on a change in life variable.
+     * @param value - the new value.
      */
     public void setLife(int value) {
         this.life = value;
@@ -206,8 +226,8 @@ public class GameLogic {
     }
 
     /**
-     * send event of change in life value to listeners.
-     * @param value
+     * invoke an event on a change in question variable.
+     * @param value - the new value.
      */
     public void setQuestion(String value) {
         this.question = value;
@@ -215,22 +235,26 @@ public class GameLogic {
     }
 
     /**
-     * send event of change in song value to listeners.
-     * @param value
+     * invoke an event on a change in song variable.
+     * @param value - the new value.
      */
     public void setSong(Song value) {
         this.song = value;
         support.firePropertyChange("song", null, this.song);
     }
 
+    /**
+     * invoke an event on a change in answers variable.
+     * @param value - the new value.
+     */
     public void setAnswers(String[] value) {
         this.answers = value;
         support.firePropertyChange("answers", null, this.answers);
     }
 
     /**
-     * send event of change in timer value to listeners.
-     * @param value
+     * invoke an event on a change in timer variable.
+     * @param value - the new value.
      */
     public void setTimer(String value) {
         int temp = Integer.parseInt(value) + 1;
@@ -238,15 +262,18 @@ public class GameLogic {
         String oldValue = String.valueOf(temp);
         support.firePropertyChange("timer", oldValue, value);
     }
+
     /**
-     * send event of inform about Game Over to listeners.
+     * invoke an event of game over.
      */
     public void informGameOver() {
         String gameOver = "Game Over";
         support.firePropertyChange("game-over", "", gameOver);
     }
+
     /**
-     * send event of inform about show answer correct or not.
+     * invoke an event to inform about show answer correct or not.
+     * @param correct
      */
     public void sendResultAnswer(boolean correct) {
         String msg = "false";
@@ -254,37 +281,54 @@ public class GameLogic {
         support.firePropertyChange("AnswerResult", "", msg);
     }
 
+    /**
+     * @return timeOfTurn.
+     */
     public int getTimeOfTurn(){
         return this.timeOfTurn;
     }
 
+    /**
+     * @return score.
+     */
     public int getScore() {
         return this.score;
     }
 
 
+    /**
+     * Create 20 questions.
+     * @param artistFilter - list of artist.
+     */
     public void Create20Questions(List<Artist> artistFilter) {
         Question questionsForGame[] = new Question[20];
-        Question question = null;
         boolean byAlbum = false;
 
         for (int i = 0;i < 20;i = i+2) {
+
             System.out.println("--------------createQustion number " + i +"---------------");
-            questionsForGame[i] =  createQustion(QuestionType.WHO_SINGS,artistFilter,false);
+            questionsForGame[i] =  createQuestion(QuestionType.WHO_SINGS,artistFilter,false);
             System.out.println("--------------createQustion number " + (i+1) +"---------------");
-            questionsForGame[i+1] = createQustion(QuestionType.SONG_NAME,artistFilter,byAlbum);
+            questionsForGame[i+1] = createQuestion(QuestionType.SONG_NAME,artistFilter,byAlbum);
+
             if(byAlbum == false)
                 byAlbum = true;
             else
                 byAlbum = false;
 
         }
-
         this.questions =  questionsForGame;
     }
 
 
-    private Question createQustion(QuestionType type,List<Artist> artistFilter,boolean byAlbum){
+    /**
+     * Create a question.
+     * @param type - question type.
+     * @param artistFilter - list of artist.
+     * @param byAlbum - if true taking songs from the same album.
+     * @return Question object.
+     */
+    private Question createQuestion(QuestionType type,List<Artist> artistFilter,boolean byAlbum){
         Artist CAns;
         Song questionSong;
         Random randA = new Random();
@@ -306,17 +350,20 @@ public class GameLogic {
             if(type == QuestionType.WHO_SINGS){
                 System.out.println("createQustion WHO_SINGS");
                 wrongAnswer = getThreeArtistConfusionAns(CAns);
+                //create question
                 question = new Question(questionSong, CAns.getArtistName(),
                         wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.WHO_SINGS);
             }
             else if(type == QuestionType.SONG_NAME){
                 System.out.println("createQustion SONG_NAME");
                 wrongAnswer = getThreeSongConfusionAns(questionSong);
+                //create question
                 question = new Question(questionSong, questionSong.getTitle(),
                         wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.SONG_NAME);
             }
         }
 
+        //taking songs from the same album.
         else if(type == QuestionType.SONG_NAME && byAlbum == true){
             System.out.println("createQustion SONG_NAME (albums)");
 
@@ -340,13 +387,14 @@ public class GameLogic {
             questionSong = songs.get(randS.nextInt(songs.size()));
             songs.remove(questionSong);
 
-           while(wrongAnswer.size() < 3){
-
+            //get 3 wrong answer
+            while(wrongAnswer.size() < 3){
                Song song = songs.get(randS.nextInt(songs.size()));
                wrongAnswer.add(song.getTitle());
                songs.remove(song);
-           }
+            }
 
+            //create question
             question = new Question(questionSong, questionSong.getTitle(),
                     wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.SONG_NAME);
         }
@@ -355,6 +403,11 @@ public class GameLogic {
     }
 
 
+    /**
+     * this function return three wrong song answers.
+     * @param song - the song which is the correct answer.
+     * @return - list of three wrong answers.
+     */
     private List<String> getThreeSongConfusionAns (Song song) {
         List<Song> confusionSongs =  DB_songs.getListOfSimilarSongs(song, this.genres);
         List<String> confusionAnsSongs = new ArrayList<>();
@@ -370,6 +423,11 @@ public class GameLogic {
         return createConfusionAns(confusionAnsSongs);
     }
 
+    /**
+     * this function return three wrong artist answers.
+     * @param artist - the artist who is correct answer.
+     * @return - list of three wrong answers.
+     */
     private List<String> getThreeArtistConfusionAns (Artist artist) {
         List<Artist> confusionArtists = DB_artists.CreateConfusionAns(artist);
         List<String> confusionAnsArtists  = new ArrayList<>();
@@ -385,6 +443,11 @@ public class GameLogic {
         return createConfusionAns(confusionAnsArtists);
     }
 
+    /**
+     *this function return three wrong  answers.
+     * @param list - list of wrong answers.
+     * @return - list of three wrong answers.
+     */
     private List<String> createConfusionAns (List<String> list){
         List<String> ans = new LinkedList<>();
 

@@ -1,22 +1,30 @@
 package DataBase;
 
 import Logic.Album;
-import Logic.Song;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A class that handles all
+ * SQL queries that return an album object.
+ */
 public class DBAlbums {
 
-    private java.sql.Connection con = DBConnection.getInstance().getConnection();
+    private java.sql.Connection con = DBConnection.getInstance().getConnection(); // DB connection
 
+    /**
+     * this function return list of all albums that have more
+     * then 3 songs.
+     * @return - list of albums.
+     */
     public List<Album> getListOfAlbumsWithMoreThen3Songs() {
         List<Album> albumList =  new LinkedList<>();
         int i = 0;
 
+        //SQL query
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("SELECT distinct songinfo.AlbumID,albums.AlbumName FROM musicmaster.songinfo,albums," +
                         " (SELECT albumId,count(SongID) FROM musicmaster.songinfo group by albumId " +

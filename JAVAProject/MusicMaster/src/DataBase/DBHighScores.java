@@ -9,11 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * class that manage the data of High score table in DB
+ * A class that handles all
+ * SQL queries that return an HighScore object.
  */
 public class DBHighScores {
-    //connection to DB
-    private java.sql.Connection con = DBConnection.getInstance().getConnection();
+
+    private java.sql.Connection con = DBConnection.getInstance().getConnection(); // DB connection
 
     /**
      * This function executes a query and returns the highest ten scores in the highScore table.
@@ -31,6 +32,7 @@ public class DBHighScores {
         }
         return highScoresList;
     }
+
     /**
      * This function inserts new highScore to the table.
      * @param highScores the highScore to insert.(player name and score)
