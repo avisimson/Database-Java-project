@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `albums`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `albums` (
   `AlbumID` int(11) NOT NULL,
-  `SimilarToArtistID` varchar(256) DEFAULT NULL,
+  `AlbumName` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`AlbumID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -183,7 +183,7 @@ CREATE TABLE `songinfo` (
   PRIMARY KEY (`SongID`),
   KEY `fk_songartists` (`ArtistID`),
   KEY `fk_songalbums` (`AlbumID`),
-  CONSTRAINT `fk_songalbums` FOREIGN KEY (`AlbumID`) REFERENCES `albums` (`albumid`),
+  CONSTRAINT `fk_songalbums` FOREIGN KEY (`AlbumID`) REFERENCES `albums` (`AlbumID`),
   CONSTRAINT `fk_songartists` FOREIGN KEY (`ArtistID`) REFERENCES `artists` (`artistid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -207,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-06 10:35:11
+-- Dump completed on 2019-01-07 12:14:33
