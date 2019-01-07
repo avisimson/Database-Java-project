@@ -10,9 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DBArtists {
-    private List<Artist> artistFilter = new LinkedList<>();
+
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
-    private List<Artist> confusionArtist = new LinkedList<>();
 
 
     /**
@@ -74,6 +73,7 @@ public class DBArtists {
      * @return list of artist that sings in this genres
      */
     public List<Artist> FilterArtistByGenre(List<Genre> genreNames) {
+        List<Artist> artistFilter = new LinkedList<>();
         int i = 0;
 
         // create string
@@ -111,11 +111,9 @@ public class DBArtists {
      * @return the list of the similar artists
      */
     public List<Artist> CreateConfusionAns (Artist artist) {
-        confusionArtist.clear();
+        List<Artist> confusionArtist = new LinkedList<>();
         int idAnswer = artist.getArtistId();
-        System.out.println(idAnswer);
         int j = 0;
-        System.out.println("--------------ConfuseAns---------------");
         //search in the first col
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select  distinct artists.ArtistID, ArtistName from similarartists,artists " +

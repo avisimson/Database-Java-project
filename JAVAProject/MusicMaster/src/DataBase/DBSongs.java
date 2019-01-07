@@ -1,5 +1,6 @@
 package DataBase;
 
+import Logic.Album;
 import Logic.Artist;
 import Logic.Genre;
 import Logic.Song;
@@ -11,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DBSongs {
-    private List<Song> songFilter = new LinkedList<>();
+
     private java.sql.Connection con = DBConnection.getInstance().getConnection();
 
     /**
@@ -20,7 +21,7 @@ public class DBSongs {
      * @return the songs of the artist.
      */
     public List<Song> FilterSong(Artist artist) {
-        songFilter.clear();
+        List<Song> songFilter = new LinkedList<>();
         int i = 0;
         //query that returns 5 songs of the artist
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
@@ -118,6 +119,28 @@ public class DBSongs {
             System.out.println("ERROR executeQuery - " + e.getMessage());
         }
         return songList;
+    }
+
+
+
+
+    public List<Song> getListSognsByAlbum(Album album) {
+        List<Song> songFilter = new LinkedList<>();
+
+        int i = 0;
+        //query that returns 5 songs of the artist
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
+                ("SELECT Songid,Title,Year,ArtistID,EndOfFadeIn FROM " +
+                        "musicmaster.songinfo where songinfo.AlbumID ="+ album.getAlbumId())) {
+            while (rs.next()) {
+                songFilter.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),album.getAlbumId(),
+                        rs.getInt("ArtistId"),-1,rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR executeQuery - " + e.getMessage());
+        }
+        return songFilter;
     }
 
 }

@@ -32,6 +32,16 @@ public class Question {
         this.confAns2 = confAns2;
         this.confAns3 = confAns3;
         this.type = type;
+
+        System.out.println("\n");
+        System.out.println("***Question***");
+        System.out.println("type = " +  type);
+        System.out.println("song = " +  this.song.getTitle());
+        System.out.println("confAns1 = " +  confAns1);
+        System.out.println("confAns2 = " +  confAns2);
+        System.out.println("confAns3 = " +  confAns3);
+        System.out.println("***************");
+
     }
     /**
      * function that get the name of song
