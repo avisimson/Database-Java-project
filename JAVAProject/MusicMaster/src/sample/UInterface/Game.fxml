@@ -48,7 +48,7 @@
         <Label fx:id="timeLeft" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Time = 0" GridPane.columnIndex="9" GridPane.columnSpan="4" GridPane.rowIndex="1" />
         <Label fx:id="lifeLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Life = 3" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="0" />
         <Label fx:id="scoreLabel" alignment="CENTER" prefHeight="20.0" prefWidth="80.0" text="Score = 0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="1" />
-        <Label fx:id="question" alignment="CENTER" prefHeight="20.0" prefWidth="300.0" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+        <Label fx:id="question" alignment="CENTER" prefHeight="20.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="6" GridPane.rowIndex="1" />
         <HBox prefHeight="100.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="btnAnswer1" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="answer1">

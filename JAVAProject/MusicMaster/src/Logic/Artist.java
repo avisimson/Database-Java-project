@@ -40,4 +40,16 @@ public class Artist {
     public double getArtistHotness() {
         return artistHotness;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == this.getClass()) {
+            Artist a = (Artist)o;
+            if (a.getArtistId() == this.getArtistId()) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 }

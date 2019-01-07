@@ -51,9 +51,10 @@ public class MenuController {
             goToGenreScreen();
             return;
         }
-        NoInternet.setStyle("-fx-font-size: 13px;" +
+        NoInternet.setStyle("-fx-font-size: 14px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-text-fill: red;");
+                "-fx-text-fill: red;" +
+                "-fx-padding: 10 0 0 40;");
         NoInternet.setVisible(true);
 
     }
@@ -100,7 +101,7 @@ public class MenuController {
     }
 */
     //returns true if there is a network connection- false if there isn't.
-    private static boolean netIsAvailable() {
+    private boolean netIsAvailable() {
         try {
             final URL url = new URL("http://www.google.com");
             final URLConnection conn = url.openConnection();

@@ -27,7 +27,6 @@ public class DBArtists {
         List<Artist> list =  new LinkedList<>();
         String artistsId = "";
         String genresId = "";
-        String artistId = String.valueOf(artist.getArtistId());
 
         // create string for genres
         for(int j = 0; j < genres.size(); j++) {
@@ -52,7 +51,7 @@ public class DBArtists {
 
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select distinct artistid,ArtistName from artists,(select distinct artistid as newar from genreartists as a,"+
-                                "(select distinct genreID as newgen from genreartists  where ArtistID="+artistId+ " and " +
+                                "(select distinct genreID as newgen from genreartists  where ArtistID="+artist.getArtistId()+ " and " +
                                 "genreID in("+genresId+")) as b) as c where artistid !=" +artist.getArtistId() +str + " LIMIT 50")) {
 
             while (rs.next()){
@@ -136,8 +135,11 @@ public class DBArtists {
                         "where artists.ArtistID = similarArtists.ArtistID " +
                         "and similarToArtistID =" + artist.getArtistId() +" limit 10")) {
             while (rs.next()){
-                confusionArtist.add(j, new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"), -1));
-                j++;
+                Artist a = new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"), -1);
+                if(!confusionArtist.contains(a)) {
+                    confusionArtist.add(j, a);
+                    j++;
+                }
 
             }
         } catch (SQLException e) {
