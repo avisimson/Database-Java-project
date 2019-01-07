@@ -20,6 +20,9 @@ import java.util.List;
 
 import static javafx.fxml.FXMLLoader.load;
 
+/**
+ * JavaFX FXML Controller of Game.fxml.
+ */
 public class GameController implements PropertyChangeListener{
     private GameLogic gameLogic;
     private Stage prevStage;

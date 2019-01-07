@@ -18,21 +18,19 @@ import javafx.scene.control.CheckBox;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+/**
+ * JavaFX FXML Controller of Genre.fxml.
+ */
 public class GenreController implements Initializable {
-
+    private Stage prevStage;
+    private List<Artist> artistList = new LinkedList<>();
+    private List<Genre> genreList = new LinkedList<>();
+    private GenreLogic genreLogic = new GenreLogic();
+    private CheckBox checkBoxes[];
     @FXML
     private AnchorPane anchorPane;
     @FXML
     private Label error;
-
-    private Stage prevStage;
-    private List<Artist> artistList = new LinkedList<>();
-    private List<Genre> genreList = new LinkedList<>();
-
-    private GenreLogic genreLogic = new GenreLogic();
-    private CheckBox checkBoxes[];
-
-    private Question[] questions = new Question[20];
 
     /**
      * This function initializes the genre choosing screen.

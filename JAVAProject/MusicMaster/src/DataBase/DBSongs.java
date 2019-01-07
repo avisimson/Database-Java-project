@@ -33,7 +33,7 @@ public class DBSongs {
                         " where ArtistID = " + artist.getArtistId() +" limit 10;")) {
             while (rs.next()) {
                 songFilter.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
-                        artist.getArtistId(),-1,rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
+                        artist.getArtistId(),rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
                 i++;
             }
         } catch (SQLException e) {
@@ -72,7 +72,7 @@ public class DBSongs {
                         " and songid != " + song.getSongId() + " order by songid limit 50;")) {
             while (rs.next()) {
                 songList.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
-                        rs.getInt("artistID"),-1,rs.getInt("year"),-1));
+                        rs.getInt("artistID"),rs.getInt("year"),-1));
                 i++;
             }
         } catch (SQLException e) {
@@ -124,7 +124,7 @@ public class DBSongs {
                         " where n.newar=songinfo.artistid and songid != "+ song.getSongId() + str + " order by songid limit 50;")) {
             while (rs.next()) {
                 songList.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),-1,
-                        rs.getInt("artistID"),-1,rs.getInt("year"),-1));
+                        rs.getInt("artistID"),rs.getInt("year"),-1));
                 i++;
             }
         } catch (SQLException e) {
@@ -143,7 +143,7 @@ public class DBSongs {
                         "musicmaster.songinfo where songinfo.AlbumID ="+ album.getAlbumId())) {
             while (rs.next()) {
                 songFilter.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),album.getAlbumId(),
-                        rs.getInt("ArtistId"),-1,rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
+                        rs.getInt("ArtistId"),rs.getInt("year"),rs.getFloat("EndOfFadeIn")));
                 i++;
             }
         } catch (SQLException e) {

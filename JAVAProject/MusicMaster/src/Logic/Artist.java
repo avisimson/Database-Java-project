@@ -6,18 +6,14 @@ public class Artist {
     //members
     private int artistId;
     private String artistName;
-    private double artistHotness;
-
     /**
      * Constructor
      * @param artistId is the id of the artist
      * @param artistName is the name of the artist
-     * @param artistHotness is hotness of the artist
      */
-    public Artist(int artistId, String artistName, double artistHotness) {
+    public Artist(int artistId, String artistName) {
         this.artistId = artistId;
         this.artistName = artistName;
-        this.artistHotness = artistHotness;
     }
 
     /**
@@ -34,12 +30,6 @@ public class Artist {
         return artistName;
     }
 
-    /**
-     * @return the hotness of the artist
-     */
-    public double getArtistHotness() {
-        return artistHotness;
-    }
 
     @Override
     public boolean equals(Object o) {

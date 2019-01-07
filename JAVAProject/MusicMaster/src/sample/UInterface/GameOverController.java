@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 /**
- * class that controls the game over screen
+ * JavaFX FXML Controller of GameOver.fxml.
  */
 public class GameOverController implements Initializable {
     //members

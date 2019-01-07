@@ -130,23 +130,23 @@ public class GameLogic {
         Question currentQuestion =  questions[turnNumber];
 
         //set string question
-        if(currentQuestion.type == QuestionType.SONG_NAME){
+        if(currentQuestion.getType() == QuestionType.SONG_NAME){
             this.question = "What's the song's name?";
         }
-        else if(currentQuestion.type == QuestionType.WHO_SINGS){
+        else if(currentQuestion.getType() == QuestionType.WHO_SINGS){
             this.question = "Who is singing the song?";
         }
         setQuestion(this.question);
 
         //set song
-        this.song = currentQuestion.song;
+        this.song = currentQuestion.getSong();
 
         //create array of answers
-        answers[correctAnswer] = currentQuestion.currentAnswer;
+        answers[correctAnswer] = currentQuestion.getCorrectAnswer();
         Stack<String> stack = new Stack<>();
-        stack.push(currentQuestion.confAns1);
-        stack.push(currentQuestion.confAns2);
-        stack.push(currentQuestion.confAns3);
+        stack.push(currentQuestion.getConfAns1());
+        stack.push(currentQuestion.getConfAns2());
+        stack.push(currentQuestion.getConfAns3());
 
         //set answers
         for (int i=0;i< answers.length;i++){
@@ -156,7 +156,7 @@ public class GameLogic {
         setAnswers(answers);
 
         //get song youtube id
-        String forSearch = currentQuestion.song.getTitle() + " " + currentQuestion.currentAnswer;
+        String forSearch = currentQuestion.getSong().getTitle() + " " + currentQuestion.getCorrectAnswer();
         String songId = search.searchSong(forSearch);
         if (songId == null) {
             turnNumber++;
@@ -165,7 +165,7 @@ public class GameLogic {
         }
         this.song.setSongYoutubeId(songId);
         setSong(this.song);
-        System.out.println("correctAnswer is: " + currentQuestion.currentAnswer);
+        System.out.println("correctAnswer is: " + currentQuestion.getCorrectAnswer());
         System.out.println("correctAnswer is: " + correctAnswer);
 
         //set timer for turn.
@@ -413,7 +413,7 @@ public class GameLogic {
         List<String> confusionAnsSongs = new ArrayList<>();
 
         if (confusionSongs.size() < 3) {
-            confusionSongs = DB_songs.getDiffrentSongsByGenre(song, confusionSongs, genres);
+            confusionSongs = DB_songs.getDifferentSongsByGenre(song, confusionSongs, genres);
         }
 
         for(int i = 0 ; i<confusionSongs.size(); i++){

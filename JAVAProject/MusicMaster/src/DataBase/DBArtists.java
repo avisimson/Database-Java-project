@@ -56,8 +56,7 @@ public class DBArtists {
                                 "genreID in("+genresId+")) as b where b.newgen=a.genreid) as c where artistid !=" +artist.getArtistId() +str + " LIMIT 50")) {
 
             while (rs.next()){
-                list.add( new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")
-                        ,-1)) ;
+                list.add( new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"))) ;
             }
         } catch (SQLException e) {
             System.out.println("ERROR executeQuery - " + e.getMessage());
@@ -95,7 +94,7 @@ public class DBArtists {
                         genreNumberQuery + "limit 50;")) {
             while (rs.next()) {
                 artistFilter.add(i, new Artist(rs.getInt("ArtistID")
-                        ,rs.getString("ArtistName"), -1));
+                        ,rs.getString("ArtistName")));
                 i++;
             }
         } catch (SQLException e) {
@@ -120,7 +119,7 @@ public class DBArtists {
                         "where artists.ArtistID = similarArtists.similarToArtistID " +
                         "and similarArtists.ArtistID =" + artist.getArtistId() +" limit 10")) {
             while (rs.next()){
-                confusionArtist.add(j, new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"), -1));
+                confusionArtist.add(j, new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")));
                 j++;
 
             }
@@ -133,7 +132,7 @@ public class DBArtists {
                         "where artists.ArtistID = similarArtists.ArtistID " +
                         "and similarToArtistID =" + artist.getArtistId() +" limit 10")) {
             while (rs.next()){
-                Artist a = new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"), -1);
+                Artist a = new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName"));
                 if(!confusionArtist.contains(a)) {
                     confusionArtist.add(j, a);
                     j++;

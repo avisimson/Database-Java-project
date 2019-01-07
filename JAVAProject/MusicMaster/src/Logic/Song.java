@@ -9,7 +9,6 @@ public class Song {
     private String title;
     private int albumId;
     private int artistId;
-    private double songHotess;
     private int year;
     private float endOfFadeIn;
     private String songYoutubeId;
@@ -20,17 +19,15 @@ public class Song {
      * @param title is the name of the song
      * @param albumId is the id of the album of the song
      * @param artistId is the id of the artist of the song
-     * @param songHotess is the hotness of the song
      * @param year is the year of the song
      * @param endOfFadeIn is the time of end of fade in of the song
      */
-    public Song(int songId, String title, int albumId, int artistId, double songHotess,
+    public Song(int songId, String title, int albumId, int artistId,
                 int year, float endOfFadeIn) {
         this.songId = songId;
         this.title = title;
         this.albumId = albumId;
         this.artistId = artistId;
-        this.songHotess = songHotess;
         this.year = year;
         this.endOfFadeIn = endOfFadeIn;
     }
@@ -60,13 +57,6 @@ public class Song {
      */
     public int getArtistId() {
         return artistId;
-    }
-
-    /**
-     * @return the hotness of the song
-     */
-    public double getSongHotess() {
-        return songHotess;
     }
 
     /**

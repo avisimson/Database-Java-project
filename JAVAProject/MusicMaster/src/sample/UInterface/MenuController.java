@@ -14,7 +14,9 @@ import java.net.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * JavaFX FXML Controller of menu.fxml.
+ */
 public class MenuController {
 
     private Stage prevStage;
@@ -32,6 +34,10 @@ public class MenuController {
     private Label NoInternet;
 
     @FXML
+    /**
+     * this function is activated when the user press on
+     * highScoreTable button.
+     */
     protected void highScoreTable() {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("HighScores.fxml"));
@@ -45,7 +51,12 @@ public class MenuController {
             e.printStackTrace();
         }
     }
+
     @FXML
+    /**
+     * this function is activated when the user press on
+     * start game button.
+     */
     protected void startGame() {
         if (netIsAvailable()) {
             goToGenreScreen();
@@ -59,7 +70,9 @@ public class MenuController {
 
     }
 
-    //moving into genre pick before start the game.
+    /**
+     * moving into genre pick before start the game.
+     */
     private void goToGenreScreen() {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Genre.fxml"));
@@ -73,7 +86,12 @@ public class MenuController {
             e.printStackTrace();
         }
     }
+
     @FXML
+    /**
+     * this function is activated when the user press on
+     * exit button.
+     */
     private void closeButtonAction(){
         //get a handle of the stage
         Stage stage = (Stage) endButton.getScene().getWindow();
@@ -81,25 +99,14 @@ public class MenuController {
         stage.close();
     }
 
+    /**
+     * set prev sage.
+     * @param stage
+     */
     public void setPrevStage(Stage stage){
         this.prevStage = stage;
     }
 
-/*
-    //try to connect to wifi, if not cannot start game.
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        if(netIsAvailable()) {
-            startButton.setDisable(false);
-            return;
-        }
-        WelcomeToMusicMaster.setText("No Internet Connection");
-        WelcomeToMusicMaster.setStyle("-fx-font-size: 20px;" +
-                "-fx-font-weight: bold;" +
-                "-fx-text-fill: red;");
-        startButton.setDisable(true);
-    }
-*/
     //returns true if there is a network connection- false if there isn't.
     private boolean netIsAvailable() {
         try {

@@ -10,6 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * Main class.
+ */
 public class Main extends Application {
 
     @FXML
@@ -39,6 +42,11 @@ public class Main extends Application {
         }
 
     }
+
+    /**
+     * main function
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

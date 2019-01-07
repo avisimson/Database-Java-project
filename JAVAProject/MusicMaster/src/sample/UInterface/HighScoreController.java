@@ -17,16 +17,16 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * This class manages the high score table
+ * JavaFX FXML Controller of HighScores.fxml.
  */
 public class HighScoreController implements Initializable {
     //members
-    @FXML
-    private AnchorPane anchorPane;
-
     private Stage prevStage;
     private List<HighScores> highScoresList = new LinkedList<>();
     private HighScoreLogic highScoreLogic = new HighScoreLogic();
+    @FXML
+    private AnchorPane anchorPane;
+
 
     /**
      * This function initializes the screen of High score table
