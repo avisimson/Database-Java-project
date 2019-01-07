@@ -53,7 +53,7 @@ public class DBArtists {
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("select distinct artistid,ArtistName from artists,(select distinct artistid as newar from genreartists as a,"+
                                 "(select distinct genreID as newgen from genreartists  where ArtistID="+artist.getArtistId()+ " and " +
-                                "genreID in("+genresId+")) as b) as c where artistid !=" +artist.getArtistId() +str + " LIMIT 50")) {
+                                "genreID in("+genresId+")) as b where b.newgen=a.genreid) as c where artistid !=" +artist.getArtistId() +str + " LIMIT 50")) {
 
             while (rs.next()){
                 list.add( new Artist(rs.getInt("ArtistID"),rs.getString("ArtistName")

@@ -81,7 +81,15 @@ public class DBSongs {
         return songList;
     }
 
-    public List<Song> getDiffrentSongsByGenre(Song song, List<Song> songs, List<Genre> genres) {
+    /**
+     * This function finds similar songs to the given song by his artist genre and the chosen genres that are not
+     * already in the similarSong list.
+     * @param song - given song
+     * @param songs - other similar songs
+     * @param genres - the chosen genres by the player
+     * @return  a list of similar songs
+     */
+    public List<Song> getDifferentSongsByGenre(Song song, List<Song> songs, List<Genre> genres) { ;
         List<Song> songList =  new LinkedList<>();
         //create string
         String genresId = "";
@@ -124,9 +132,6 @@ public class DBSongs {
         }
         return songList;
     }
-
-
-
 
     public List<Song> getListSognsByAlbum(Album album) {
         List<Song> songFilter = new LinkedList<>();
