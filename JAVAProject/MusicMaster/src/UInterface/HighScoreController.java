@@ -1,4 +1,4 @@
-package sample.UInterface;
+package UInterface;
 
 import Logic.HighScoreLogic;
 import Logic.HighScores;
@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;

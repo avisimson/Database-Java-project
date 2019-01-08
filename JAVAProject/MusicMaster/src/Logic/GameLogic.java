@@ -80,7 +80,6 @@ public class GameLogic {
      * selects the correct answer.
      */
     public void correctAnswer() {
-        System.out.println("correct answer");
         combo++;
         setScore(score + timeLeft);
         if(combo < comboOfcorrectAnswersForExtraLife) {
@@ -116,8 +115,6 @@ public class GameLogic {
      * play one turn of the game.
      */
     private void playOneTurn(){
-        System.out.println("playOneTurn: turn number " + turnNumber);
-
         for (int i=0;i< answers.length;i++){
             answers[i] = null;
         }
@@ -173,7 +170,6 @@ public class GameLogic {
         this.song.setSongYoutubeId(songId);
         setSong(this.song);
         System.out.println("correctAnswer is: " + currentQuestion.getCorrectAnswer());
-        System.out.println("correctAnswer is: " + correctAnswer);
 
         //set timer for turn.
         timeLeft = timeOfTurn;
@@ -207,9 +203,7 @@ public class GameLogic {
 
         for (int i = 0;i < 20;i = i+2) {
 
-            System.out.println("--------------createQustion number " + i +"---------------");
             questionsForGame[i] =  createQuestion(QuestionType.WHO_SINGS,this.artistList,false);
-            System.out.println("--------------createQustion number " + (i+1) +"---------------");
             questionsForGame[i+1] = createQuestion(QuestionType.SONG_NAME,this.artistList,byAlbum);
 
             if(byAlbum == false)
@@ -248,14 +242,12 @@ public class GameLogic {
             questionSong = songs.get(randS.nextInt(songs.size()));
 
             if(type == QuestionType.WHO_SINGS){
-                System.out.println("createQustion WHO_SINGS");
                 wrongAnswer = getThreeArtistConfusionAns(CAns);
                 //create question
                 question = new Question(questionSong, CAns.getArtistName(),
                         wrongAnswer.get(0),wrongAnswer.get(1),wrongAnswer.get(2),QuestionType.WHO_SINGS);
             }
             else if(type == QuestionType.SONG_NAME){
-                System.out.println("createQustion SONG_NAME");
                 wrongAnswer = getThreeSongConfusionAns(questionSong);
                 //create question
                 question = new Question(questionSong, questionSong.getTitle(),
@@ -265,7 +257,6 @@ public class GameLogic {
 
         //taking songs from the same album.
         else if(type == QuestionType.SONG_NAME && byAlbum == true){
-            System.out.println("createQustion SONG_NAME (albums)");
 
             //create list of albums
             List<Album> albums = DB_albums.getListOfAlbumsWithMoreThen3Songs();
@@ -273,15 +264,8 @@ public class GameLogic {
             //choose random album from the list.
             Album album = albums.get(randS.nextInt(albums.size()));
 
-            System.out.println("album chosen " + album.getAlbumId() + " " + album.getAlbumName());
-
             //get list of songs
             songs = DB_songs.getListSongsByAlbum(album);
-
-            System.out.println("songs: ");
-            for(int i = 0 ; i <songs.size() ; i ++){
-                System.out.println(songs.get(i).getTitle());
-            }
 
             //choose random song from the list
             questionSong = songs.get(randS.nextInt(songs.size()));
@@ -351,7 +335,6 @@ public class GameLogic {
         List<String> ans = new LinkedList<>();
 
         Random rand = new Random();
-        System.out.println("confusionArtists.size:" + list.size());
 
         while(ans.size() != 3){
             int x = rand.nextInt(list.size());

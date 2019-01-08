@@ -1,4 +1,4 @@
-package sample.UInterface;
+package UInterface;
 import Logic.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -145,10 +144,7 @@ public class GameController implements PropertyChangeListener{
                 double seconds = endOfFadeIn - Math.floor(endOfFadeIn);
                 seconds = seconds + 60 * minutes;
 
-                System.out.println("song id in game controoler: " +songId);
-
                 String url = "https://www.youtube.com/watch?v="+ songId + "&autoplay=1" + "&t=" +seconds + "s";
-                System.out.println("url is: " + url);
                 youTubePlayer.getEngine().load(url);
                 break;
             }

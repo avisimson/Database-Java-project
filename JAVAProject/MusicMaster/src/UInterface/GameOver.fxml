@@ -6,7 +6,7 @@
 
 
 <?import javafx.scene.control.TextField?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UInterface.GameOverController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UInterface.GameOverController">
    <children>
       <Button fx:id="backToMenu" onAction="#goToMain" layoutX="200.0" layoutY="300.0" prefWidth="200" mnemonicParsing="false" text="Back To Menu" />
        <Label text="Game Over!" prefWidth="400.0" layoutX="160.0" layoutY="100" />
