@@ -68,7 +68,7 @@ public class HighScoreController implements Initializable {
         //load the main screen
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-            GridPane root = myLoader.load();
+            AnchorPane root = myLoader.load();
             MenuController menuController = myLoader.getController();
             menuController.setPrevStage(prevStage);
             Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());

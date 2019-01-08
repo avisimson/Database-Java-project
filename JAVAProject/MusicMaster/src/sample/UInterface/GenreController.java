@@ -123,7 +123,7 @@ public class GenreController implements Initializable {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
             myLoader.setController(new GameController(artistList,genreChoose));
-            GridPane root =  myLoader.load();
+            AnchorPane root =  myLoader.load();
             GameController gameController = myLoader.getController();
             gameController.setPrevStage(prevStage);
             Scene scene = new Scene(root,prevStage.getScene().getWidth(),prevStage.getScene().getHeight());
