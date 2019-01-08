@@ -43,7 +43,6 @@ public class DBHighScores {
         try (Statement stmt = con.createStatement();) {
             result = stmt.executeUpdate("INSERT INTO highscores(UserName, Score) " +
                     "VALUES('" + highScores.getUserName() +"', " + highScores.getScore() + ")");
-            System.out.println("Success - executeUpdate, result = " + result);
 
         } catch (SQLException e) {
             System.out.println("ERROR executeUpdate - " + e.getMessage());

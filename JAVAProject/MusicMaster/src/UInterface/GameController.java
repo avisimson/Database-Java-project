@@ -83,7 +83,6 @@ public class GameController implements PropertyChangeListener{
      */
     protected void answer(ActionEvent e){
         String id =((Button)e.getSource()).getId();
-        System.out.println("press answer " + id);
         gameLogic.answer(id);
     }
 
