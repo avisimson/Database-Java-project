@@ -178,7 +178,7 @@ public class GameLogic {
                 //check if turn time ended.
                 if (timeLeft == 0) {
                     //time of turn ended, treat like wrong answer.
-                    Platform.runLater(()->{answer("0");});
+                    Platform.runLater(()->{answer("-1");});
                     return;
                 }
                 //lowers timer in one second.
