@@ -54,9 +54,9 @@ public class GameController implements PropertyChangeListener{
     /**
      * constructor
      */
-    public GameController( List<Artist> artistList, List<Genre> genres){
-        gameLogic = new GameLogic(genres);
-        gameLogic.Create20Questions(artistList);
+    public GameController(List<Artist> artistList, List<Genre> genres){
+        gameLogic = new GameLogic(genres,artistList);
+        gameLogic.Create20Questions();
         gameLogic.addPropertyChangeListener(this);
         progressBar = new ProgressBar(0);
     }
@@ -65,7 +65,6 @@ public class GameController implements PropertyChangeListener{
      * starts the game from game logic.
      */
     public void startGame(){
-
         this.gameLogic.startGame();
     }
 

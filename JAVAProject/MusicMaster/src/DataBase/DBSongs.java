@@ -133,14 +133,19 @@ public class DBSongs {
         return songList;
     }
 
-    public List<Song> getListSognsByAlbum(Album album) {
+    /**
+     * This function return a list of songs that the specific album contain.
+     * @param album - the album which the songs are contained.
+     * @return a list of songs.
+     */
+    public List<Song> getListSongsByAlbum(Album album) {
         List<Song> songFilter = new LinkedList<>();
 
         int i = 0;
         //query that returns 10 songs of the artist
         try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery
                 ("SELECT Songid,Title,Year,ArtistID,EndOfFadeIn FROM " +
-                        "musicmaster.songinfo where songinfo.AlbumID ="+ album.getAlbumId())) {
+                        "songinfo where songinfo.AlbumID ="+ album.getAlbumId())) {
             while (rs.next()) {
                 songFilter.add(i,new Song(rs.getInt("SongID"),rs.getString("Title"),album.getAlbumId(),
                         rs.getInt("ArtistId"),rs.getInt("year"),rs.getFloat("EndOfFadeIn")));

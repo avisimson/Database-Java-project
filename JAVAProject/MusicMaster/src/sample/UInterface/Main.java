@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -20,11 +21,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
-            GridPane root = myLoader.load();
+            AnchorPane root = myLoader.load();
             MenuController menuController = myLoader.getController();
             menuController.setPrevStage(primaryStage);
             Scene scene = new Scene(root,600,400);
             scene.getStylesheets().add(getClass().getResource("menu.css").toExternalForm());
+            primaryStage.resizableProperty().setValue(Boolean.FALSE);
             primaryStage.setTitle("MusicMaster");
             primaryStage.setScene(scene);
             primaryStage.show();
