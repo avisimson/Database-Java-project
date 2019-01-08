@@ -180,7 +180,11 @@ public class GameController implements PropertyChangeListener{
                 break;
             }
             case "AnswerResult": {
-                if(newValue.equals("true")) {
+                if(newValue.equals("true with life inc")) {
+                    answerResult.setText("Correct Answer ! LIFE + 1");
+                    answerResult.setTextFill(Paint.valueOf("blue"));
+                }
+                else if(newValue.equals("true")) {
                     answerResult.setText("Correct Answer !");
                     answerResult.setTextFill(Paint.valueOf("green"));
                 } else {

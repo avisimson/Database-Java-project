@@ -13,7 +13,7 @@ import java.util.*;
 public class GameLogic {
     private final PropertyChangeSupport support;
     private final int timeOfTurn = 30;
-    private static final int comboOfcorrectAnswersForExtraLife = 10;
+    private static final int comboOfcorrectAnswersForExtraLife = 5;
     private Timer timer = new Timer();
     private int timeLeft;
     private TimerTask timerTask;
@@ -81,10 +81,13 @@ public class GameLogic {
         System.out.println("correct answer");
         combo++;
         setScore(score + timeLeft);
-        sendResultAnswer(true);
+        if(combo < comboOfcorrectAnswersForExtraLife) {
+            sendResultAnswer(true, false);
+        }
         if(combo == comboOfcorrectAnswersForExtraLife) {
             //User reached combo of correct answers in a row- life increments.
             setLife(life + 1);
+            sendResultAnswer(true, true);
             combo = 0;
         }
     }
@@ -97,7 +100,7 @@ public class GameLogic {
         if(score > 0) {
             setScore(score - 1);
         }
-        sendResultAnswer(false);
+        sendResultAnswer(false, false);
         setLife(life - 1);
         if(life <= 0) {
             //no more life - Game Over.
@@ -275,10 +278,18 @@ public class GameLogic {
      * invoke an event to inform about show answer correct or not.
      * @param correct
      */
-    public void sendResultAnswer(boolean correct) {
+    public void sendResultAnswer(boolean correct, boolean lifeInc) {
         String msg = "false";
         if(correct) { msg = "true"; }
+        if(lifeInc) { msg = "true with life inc"; }
         support.firePropertyChange("AnswerResult", "", msg);
+    }
+
+    /**
+     * invoke an event to inform about increment in life.
+     */
+    public void sendLifeIncrement() {
+        support.firePropertyChange("LifeInc", "", "");
     }
 
     /**
